@@ -1,0 +1,12 @@
+$default-animation-time: 0.25s;
+
+$small-viewport-maximum: 575px;
+$medium-viewport-minimum: 576px;
+$medium-viewport-maximum: 991px;
+$large-viewport-minimum: 992px;
+
+$logo-aspect-ratio: 0.72; // Ratio of logo height to width; constant for all media
+$logo-large-viewport: 5vw; // Logo standard size in large viewport
+$logo-medium-viewport: 10vw; // Logo standard size in medium viewport
+
+$header-height: 4rem;

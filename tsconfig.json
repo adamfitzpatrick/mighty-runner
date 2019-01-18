@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": false,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "baseUrl": "./",
+        "paths": {
+          "@components/*": [ "./src/components/*" ],
+          "@assets/*": [ "./src/assets/*" ],
+          "@services/*": [ "./src/services/*" ]
+        },
+        "target": "es5",
+        "lib": [
+            "dom",
+            "es6"
+        ]
+    },
+    "exclude": [
+        "./jest-modules.d.ts"
+    ]
+}
