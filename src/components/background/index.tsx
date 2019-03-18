@@ -2,22 +2,24 @@ import { h, Component } from 'preact'
 import * as THREE from 'three'
 
 import * as styles from './background.scss'
-import * as smoke from '@assets/Smoke-Element.png'
+import * as smoke from '@assets/smoke-256x128.png'
 
 export default class Background extends Component<{}, {}> {
   static COLOR = 0x102030
   static LIGHT_COLOR = 0xffffff
-  static PARTICLE_COUNT = 150
+  static SMOKE_COLOR = 0x14283d
+  static PARTICLE_COUNT = 20
   static CAMERA_FOV = 75
   static CAMERA_NEAR = 1
   static CAMERA_FAR = 1000
   static CAMERA_Z = 1000
   static MATERIAL_COLOR = 0xffffff
-  static PLANE_SIZE = 300
+  static PLANE_SIZE = 400
   static LATERAL_RANGE = 500
   static AZIMUTH_RANGE = 1000
-  static ROTATION_INCREMENT = 0.1
+  static MOVEMENT_RATE = 0.1
 
+  webGLAvailable = false
   cubeSineDriver: number
   clock: THREE.Clock
   delta: number
@@ -29,9 +31,17 @@ export default class Background extends Component<{}, {}> {
 
   constructor () {
     super()
-    this.cubeSineDriver = 0
-    this.clock = new THREE.Clock()
-    this.smokeParticles = []
+    this.checkForWebGL()
+    if (this.webGLAvailable) {
+      this.cubeSineDriver = 0
+      this.clock = new THREE.Clock()
+      this.smokeParticles = []
+    }
+  }
+
+  checkForWebGL () {
+    const canvas = document.createElement('canvas')
+    this.webGLAvailable = !!(( (window as any).WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) ))
   }
 
   initializeScene () {
@@ -60,10 +70,11 @@ export default class Background extends Component<{}, {}> {
   }
 
   generateParticles () {
-    const smokeTexture = new THREE.TextureLoader().load(smoke)
-    const smokeMaterial = new THREE.MeshLambertMaterial({color: Background.MATERIAL_COLOR, map: smokeTexture, transparent: true})
-    const smokeGeometry = new THREE.PlaneGeometry(300,300)
-    for (let count = 0; count < 150; count++) {
+    THREE.ImageUtils.crossOrigin = ''
+    const smokeTexture = new THREE.TextureLoader().load(smoke) // 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/quickText.png')
+    const smokeMaterial = new THREE.MeshLambertMaterial({color: Background.SMOKE_COLOR, map: smokeTexture, transparent: true })
+    const smokeGeometry = new THREE.PlaneGeometry(Background.PLANE_SIZE, Background.PLANE_SIZE)
+    for (let count = 0; count < Background.PARTICLE_COUNT; count++) {
       var particle = this.generateMesh(smokeGeometry, smokeMaterial);
       particle.position.set(
         (Math.random() - 0.5) * Background.LATERAL_RANGE,
@@ -81,7 +92,11 @@ export default class Background extends Component<{}, {}> {
   }
 
   evolveSmoke = () => {
-    this.smokeParticles.forEach(particle => particle.rotation.z += (this.delta * Background.ROTATION_INCREMENT), this)
+    this.smokeParticles.forEach(particle => {
+      particle.rotation.z += (this.delta * Background.MOVEMENT_RATE)
+      particle.position.x += (this.delta * Background.MOVEMENT_RATE)
+      particle.position.y += (this.delta * Background.MOVEMENT_RATE)
+    }, this)
   }
 
   animate = () => {
@@ -96,9 +111,11 @@ export default class Background extends Component<{}, {}> {
   }
 
   componentDidMount () {
-    this.initializeScene()
-    this.generateLight()
-    this.generateParticles()
-    this.animate()
+    if (this.webGLAvailable) {
+      this.initializeScene()
+      this.generateLight()
+      this.generateParticles()
+      this.animate()
+    }
   }
 }
