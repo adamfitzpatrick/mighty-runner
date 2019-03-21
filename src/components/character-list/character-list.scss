@@ -1,0 +1,7 @@
+@import '../../assets/layout';
+
+.characterList {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  height: calc(100vh - #{$header-height});
+}

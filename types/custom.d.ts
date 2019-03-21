@@ -8,4 +8,9 @@ declare module '*.png' {
   export = content;
 }
 
+declare module '*.jpg' {
+  const content: string;
+  export = content;
+}
+
 declare module 'classnames'

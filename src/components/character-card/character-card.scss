@@ -1,16 +1,19 @@
 @import '../../assets/colors';
+@import '../../assets/typography';
 
 .characterCard {
   border: 1px solid $color-white;
-  width: 80%;
+  border-radius: 0.25rem;
+  width: 90%;
   height: 9rem;
-  margin: 1rem 10%;
+  margin: 1rem 5%;
   padding: 0.5rem 1rem;
   color: $color-white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  font-family: $title-font;
 
   .data {
     height: 100%;

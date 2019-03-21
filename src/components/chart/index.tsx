@@ -1,6 +1,8 @@
 import { h } from 'preact'
 
-const attributeLabels: { [key: string]: string } = {
+import { AttributeList, Attributes } from '@assets/models'
+
+const attributeLabels: { [key in Attributes]: string } = {
   body: 'B',
   agility: 'A',
   reaction: 'R',
@@ -11,27 +13,19 @@ const attributeLabels: { [key: string]: string } = {
   charisma: 'C'
 }
 
-const attributes: { [key: string]: number } = {
-  body: 5,
-  agility: 6,
-  reaction: 5,
-  strength: 3,
-  willpower: 3,
-  logic: 3,
-  intuition: 5,
-  charisma: 7
-}
-
 import * as styles from './chart.scss'
 
+interface ChartProps {
+  attributes: AttributeList
+}
 
-export default function Chart () {
-  const maxVal = Object.keys(attributes).reduce((running: number, key: string) => {
+export default function Chart ({ attributes }: ChartProps) {
+  const maxVal = Object.keys(attributes).reduce((running: number, key: Attributes) => {
     return Math.max(attributes[key], running)
   }, 0)
 
 
-  function getDataPoint (key: string): JSX.Element {
+  function getDataPoint (key: Attributes): JSX.Element {
     /*`calc(${attributes[key] / maxVal} * ${MIN_CHART_HEIGHT} - 1rem)` }}/>*/
     return (
       <div className={styles.dataPoint} key={key}>

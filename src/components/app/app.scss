@@ -2,11 +2,13 @@
 @import '../../assets/layout';
 
 .main {
+  position: relative;
   display: block;
-  background-color: $color-darkest;
-  height: calc(100vh - #{$header-height});
-  box-sizing: border-box;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  color: $text-light;
+}
+
+.background {
+  z-index: 0;
 }

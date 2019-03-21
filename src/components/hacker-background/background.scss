@@ -1,0 +1,121 @@
+@import '../../assets/colors';
+@import '../../assets/typography';
+
+$MAX_LINES: 10;
+$ROLLING_DURATION: 3s;
+
+@for $i from 0 to $MAX_LINES {
+  $increment: $i * 5% + 20%;
+
+  @keyframes rolling#{$i} {
+    0% { opacity: 0; }
+
+    #{$increment - 1%} { opacity: 0; }
+
+    #{$increment}, 100% { opacity: 1; }
+  }
+
+  .rolling#{$i} {
+    opacity: 0;
+    animation: rolling#{$i} $ROLLING_DURATION linear infinite;
+  }
+}
+
+.terminal {
+  color: $text-light;
+  border: 1px solid $color-red;
+  border-left: 3px solid $color-red;
+  border-radius: 0.5rem;
+  font-size: 0.5rem;
+  font-family: $code-font;
+  background-color: $color-black;
+  padding: 2rem;
+  overflow: hidden;
+
+  .terminalHeader {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  &.terminalFullBleedRight {
+    margin: 0;
+    padding-right: 0;
+  }
+
+  .reverse {
+    color: $text-dark;
+    background-color: $color-light-grey;
+  }
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-darkest;
+
+  .backgroundContent {
+    filter: blur(1px);
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.1;
+  }
+
+  .redline {
+    position: absolute;
+    top: 15vh;
+    left: 5vw;
+    color: $color-red;
+
+    .redlineReverse {
+      background-color: $color-red;
+      color: $text-light;
+      text-transform: uppercase;
+    }
+  }
+
+  .rightWindow {
+    position: absolute;
+    width: 60vw;
+    top: 60vh;
+    right: 0;
+  }
+
+  .leftWindow {
+    position: absolute;
+    width: 60vw;
+    top: 45vh;
+    left: 10vw;
+  }
+
+  .objectWindow {
+    position: absolute;
+    width: 70vw;
+    top: 25vh;
+    left: 10vw;
+  }
+
+  .glitched1 {
+    background-color: adjust-hue($color-darkest, 45%);
+
+    .terminal {
+      color: #f0f;
+      border-left-color: #f0f;
+
+      .reverse { background-color: #f0f; }
+    }
+  }
+
+  .glitched2 {
+    background-color: adjust-hue($color-darkest, 90%);
+
+    .terminal {
+      color: #0ff;
+      border-left-color: #0ff;
+
+      .reverse { background-color: #0ff; }
+    }
+  }
+}
