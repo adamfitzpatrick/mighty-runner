@@ -1,0 +1,46 @@
+@import '../../assets/layout';
+@import '../../assets/colors';
+
+.transformImage {
+  position: relative;
+  height: calc(100vh - #{$ios-navbar});
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-items: center;
+  overflow: hidden;
+  color: $text-light;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  .hexReference {
+    position: relative;
+    width: 50%;
+  }
+
+  .image {
+    position: absolute;
+    overscroll-behavior: 'contain';
+    height: 50vw;
+  }
+
+  .hex {
+    position: relative;
+    pointer-events: none;
+    height: 50vw;
+  }
+
+  .button {
+    -webkit-appearance: none;
+    position: relative;
+    border: 1px solid $color-white;
+    border-radius: 0.25rem;
+    background-color: $color-green;
+    color: $text-light;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    margin-top: 2rem;
+  }
+}

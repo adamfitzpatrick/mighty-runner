@@ -3,12 +3,7 @@
 
 .main {
   position: relative;
-  display: block;
   display: flex;
   flex-direction: column;
   color: $text-light;
-}
-
-.background {
-  z-index: 0;
 }

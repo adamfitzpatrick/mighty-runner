@@ -2,11 +2,12 @@
 @import '../../assets/typography';
 
 .characterCard {
+  position: relative;
   border: 1px solid $color-white;
   border-radius: 0.25rem;
   width: 90%;
   height: 9rem;
-  margin: 1rem 5%;
+  margin: 0 5% 1rem;
   padding: 0.5rem 1rem;
   color: $color-white;
   display: flex;
@@ -14,6 +15,10 @@
   align-items: center;
   box-sizing: border-box;
   font-family: $title-font;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 48%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 50%),
+    linear-gradient(rgba(255, 255, 255, 0) 48%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 50%);
+  background-size: 8% 100%, 100% 20%;
+  background-position: 0 1rem;
 
   .data {
     height: 100%;
@@ -22,8 +27,11 @@
     flex-direction: column;
 
     .descriptor {
-      color: $color-red;
-      font-size: 0.9rem;
+      color: $text-light;
+      background-color: $color-red;
+      border-radius: 0.25rem;
+      padding: 0.1rem 0.25rem;
+      font-size: 0.8rem;
       flex-grow: 1;
     }
 

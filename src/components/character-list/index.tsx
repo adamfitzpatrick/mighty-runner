@@ -16,7 +16,13 @@ const characters: CharacterModel[] = [{
   name: 'Melodium Flynn',
   metatype: 'Dwarf',
   brief: 'Infiltrator',
-  imageUrl: flynn,
+  image: {
+    url: flynn,
+    thumbnailTransform: {
+      x: 0,
+      y: 0
+    }
+  },
   description: '',
   attributes: {
     body: 5,
@@ -33,7 +39,13 @@ const characters: CharacterModel[] = [{
   name: 'Gorvesh Divaughn',
   metatype: 'Troll',
   brief: 'Tank',
-  imageUrl: gorvesh,
+  image: {
+    url: gorvesh,
+    thumbnailTransform: {
+      x: 0,
+      y: 0
+    },
+  },
   description: '',
   attributes: {
     body: 7,
@@ -50,7 +62,13 @@ const characters: CharacterModel[] = [{
   name: 'Lido Corvam',
   metatype: 'Human',
   brief: 'Shaman',
-  imageUrl: lido,
+  image: {
+    url: lido,
+    thumbnailTransform: {
+      x: 0,
+      y: 0
+    },
+  },
   description: '',
   attributes: {
     body: 2,
@@ -67,7 +85,13 @@ const characters: CharacterModel[] = [{
   name: 'Murain Kilpatrick',
   metatype: 'Elf',
   brief: 'Decker',
-  imageUrl: murain,
+  image: {
+    url: murain,
+    thumbnailTransform: {
+      x: 0,
+      y: 0
+    },
+  },
   description: '',
   attributes: {
     body: 3,

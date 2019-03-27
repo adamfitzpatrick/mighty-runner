@@ -14,9 +14,7 @@
         "lib": [
             "dom",
             "es6"
-        ]
-    },
-    "exclude": [
-        "./jest-modules.d.ts"
-    ]
+        ],
+        "skipLibCheck": true
+    }
 }

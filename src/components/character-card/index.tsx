@@ -14,15 +14,17 @@ interface CharacterCardProps {
 export default function CharacterCard ({ character }: CharacterCardProps) {
   return (
     <div className={styles.characterCard}>
+
       <div className={styles.data}>
-        <div className={styles.descriptor}>{ character.metatype } { character.brief}</div>
+        <div><span className={styles.descriptor}>{ character.metatype } { character.brief}</span></div>
         <div className={styles.name}>{ character.name }</div>
         <div className={styles.chart}>
           <Chart attributes={character.attributes}/>
         </div>
       </div>
+
       <div className={styles.image}>
-        <HexImage image={character.imageUrl}/>
+        <HexImage image={character.image.url} showGradient={true}/>
       </div>
     </div>
   )

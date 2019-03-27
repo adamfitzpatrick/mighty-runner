@@ -1,36 +1,17 @@
-import { h, Component } from 'preact'
-import classnames from 'classnames'
+import { h, Component, FunctionalComponent } from 'preact'
 
-import { CharacterModel } from '@assets/models'
-import CRT from '@components/crt';
-import HackerBackground from '@components/hacker-background'
+import DigiGridBackground from '@components/digi-grid-background'
 import Header from '@components/header'
-import CharacterList from '@components/character-list';
-import CharacterCard from '@components/character-card'
-
-import * as image from '@assets/images/melodium_flynn.png'
+import CharacterList from '@components/character-list'
+import { Router, Route, Link } from '@components/router'
 import * as styles from './app.scss'
 
-interface AppState {
-  showTopCrt: boolean
+export default function App () {
+  return (
+    <div>
+      <DigiGridBackground clear={true} />
+    </div>
+  )
 }
 
-export default class App extends Component<{}, AppState> {
-  constructor () {
-    super()
-    this.state = { showTopCrt: true }
-  }
 
-  render () {
-    return (
-      <div>
-        <HackerBackground />
-        <CRT />
-        <main className={styles.main}>
-          <Header />
-          <CharacterList />
-        </main>
-      </div>
-    )
-  }
-}
