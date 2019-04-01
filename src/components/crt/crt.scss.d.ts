@@ -1,0 +1,1 @@
+export const crt: string;

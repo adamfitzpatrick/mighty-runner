@@ -2,15 +2,34 @@
 @import '../../assets/typography';
 
 .loader {
-  position: relative;
-  color: $text-light;
-  background-color: $color-darkest;
-  font-family: $code-font;
-  border: 1px solid white;
-  margin: 1rem 10vw;
-  padding: 0.5rem;
-  width: 80vw;
-  font-size: 2px;
+  padding-top: 15vh;
+  overflow: hidden;
 
-  .skull { }
+  .terminal {
+    color: $text-light;
+    background-color: $color-darkest;
+    font-family: $code-font;
+    border: 1px solid white;
+    margin: 0 10vw;
+    padding: 0.5rem;
+    width: 80vw;
+    height: 60vh;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .title {
+    font-family: $title-font;
+    text-align: center;
+  }
+
+  .standby {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .tinyCode {
+    margin-top: 2rem;
+    font-size: 3px;
+  }
 }
