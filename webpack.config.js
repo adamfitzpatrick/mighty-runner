@@ -83,7 +83,7 @@ module.exports = {
       '@services': path.resolve(__dirname, 'src/services')
     }
   },
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   devServer: {
     port: 7001,
     contentBase: path.join(__dirname, 'build'),

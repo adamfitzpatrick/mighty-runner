@@ -1,0 +1,16 @@
+@import '../../assets/colors';
+@import '../../assets/typography';
+
+.loader {
+  position: relative;
+  color: $text-light;
+  background-color: $color-darkest;
+  font-family: $code-font;
+  border: 1px solid white;
+  margin: 1rem 10vw;
+  padding: 0.5rem;
+  width: 80vw;
+  font-size: 2px;
+
+  .skull { }
+}

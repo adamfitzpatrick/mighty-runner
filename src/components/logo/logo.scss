@@ -1,0 +1,17 @@
+@import '../../assets/colors';
+
+
+.logo {
+  .filledAndOutlined {
+    stroke: $color-white;
+    stroke-width: 5;
+    stroke-miterlimit:4;
+    stroke-dasharray:none;
+    stroke-opacity:1;
+    fill: $color-darkest;
+  }
+
+  .filled {
+    fill: $color-white;
+  }
+}

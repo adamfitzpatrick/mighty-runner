@@ -26,8 +26,8 @@ export default class Glitch extends Component<GlitchProps, GlitchState> {
       return (
         <div className={styles.glitch}>
           {this.props.children}
-          <div className={styles.scanGlitch1}>{this.props.children}</div>
-          <div className={styles.scanGlitch2}>{this.props.children}</div>
+          <div className={classnames(styles.scanGlitch, styles.scanGlitch1)}>{this.props.children}</div>
+          <div className={classnames(styles.scanGlitch, styles.scanGlitch2)}>{this.props.children}</div>
         </div>
       )
     }
