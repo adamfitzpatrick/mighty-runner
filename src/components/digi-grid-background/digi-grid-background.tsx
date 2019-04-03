@@ -2,10 +2,13 @@ import { h, Component } from 'preact'
 import classnames from 'classnames'
 import * as THREE from 'three'
 
-import LandGenerator from './land-generator';
-import { RouteCheck } from '@components/router'
+import LandGenerator from './land-generator'
 
 import * as styles from './digi-grid-background.scss'
+
+interface WebGLWindow extends Window {
+  WebGLRenderingContext: boolean
+}
 
 class SpeedVector extends THREE.Vector3 {
   speed: number
@@ -16,11 +19,15 @@ class SpeedVector extends THREE.Vector3 {
   }
 }
 
-interface DigiGridProps {
-  clear?: boolean
+interface Props {
+  clear: boolean
 }
 
-export default class DigiGridBackground extends Component<DigiGridProps, {}> {
+interface State {
+  glReady: boolean
+}
+
+export default class DigiGridBackground extends Component<Props, State> {
   static LAND_WIDTH = 10
   static LAND_DEPTH = 15
   static LAND_RESOLUTION = 150
@@ -45,37 +52,58 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
   private stars: SpeedVector[]
   private starPoints: THREE.Points[]
 
-  constructor(props: DigiGridProps) {
+  state = {
+    glReady: false
+  }
+
+  constructor(props: Props) {
     super(props)
-    this.landGenerator = new LandGenerator(
-      DigiGridBackground.LAND_GENERATOR_FREQS,
-      DigiGridBackground.LAND_GENERATOR_AMPS
-    )
-    this.initialize()
-    this.setCamera()
-    this.lighting()
-    this.generateLand()
-    this.initializeStars()
-    this.animate()
+    this.setupDelayedGl()
   }
 
   render () {
     return (
-      <div
-        id='digibackground'
-        className={classnames(
-          styles.digiGrid,
-          { [styles.obscured]: !this.props.clear }
-        )}
-      />
+      <div className={styles.digiGrid}>
+        <div id='digibackground' className={classnames(
+          styles.glContainer,
+          { [styles.glContainerVisible]: this.state.glReady }
+        )} />
+        { !this.props.clear ? <div className={styles.obscured} /> : null }
+      </div>
     )
   }
 
-  componentDidMount () {
-    document.getElementById('digibackground').appendChild(this.renderer.domElement)
+  private setupDelayedGl () {
+    setTimeout(this.runGl, 0)
   }
 
-  private initialize () {
+  private runGl = () => {
+    if (this.compatibilityCheck()) {
+      this.landGenerator = new LandGenerator(
+        DigiGridBackground.LAND_GENERATOR_FREQS,
+        DigiGridBackground.LAND_GENERATOR_AMPS
+      )
+      this.initialize()
+      this.setCamera()
+      this.lighting()
+      this.generateLand()
+      this.initializeStars()
+      this.animate()
+      document.getElementById('digibackground').appendChild(this.renderer.domElement)
+      this.setState({ glReady: true })
+    }
+  }
+
+  private compatibilityCheck = (): boolean => {
+    try {
+      var canvas = document.createElement('canvas');
+      return !! ((window as WebGLWindow).WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+    } catch (e) {
+      return false;
+    }
+  }
+
+  private initialize = () => {
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x102030)
     this.renderer = new THREE.WebGLRenderer()
@@ -84,7 +112,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     this.renderer.sortObjects = false
   }
 
-  private setCamera () {
+  private setCamera = () => {
     this.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 )
     this.camera.position.x = DigiGridBackground.CAMERA_X
     this.camera.position.z = DigiGridBackground.CAMERA_Z
@@ -96,7 +124,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
 
-  private lighting () {
+  private lighting = () => {
     // No lighting is required for this render
   }
 
@@ -110,7 +138,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     target.set( x, y, z );
   };
 
-  private generateLand () {
+  private generateLand = () => {
     const geometry = new THREE.ParametricGeometry(
       this.landParametric,
       DigiGridBackground.LAND_RESOLUTION,
@@ -128,7 +156,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     this.scene.add(this.glLandGroup)
   }
 
-  private initializeStars () {
+  private initializeStars = () => {
     const geometry = this.initializeStarPositions()
     const material = new THREE.PointsMaterial({ color: 0xffffff, size: DigiGridBackground.STAR_SIZE })
     this.starPoints = [ new THREE.Points(geometry, material) ]
@@ -136,7 +164,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     this.starPoints.forEach(points => this.scene.add(points))
   }
 
-  private initializeStarPositions () {
+  private initializeStarPositions = () => {
     this.stars = new Array(30).fill(null).map(() => {
       const x = THREE.Math.randFloat(-1 * DigiGridBackground.LAND_WIDTH / 4, DigiGridBackground.LAND_WIDTH / 4)
       const y = THREE.Math.randFloat(0, DigiGridBackground.LAND_WIDTH / 2)
@@ -148,7 +176,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     return geometry
   }
 
-  private initializeStarTrails (geometry: THREE.Geometry) {
+  private initializeStarTrails = (geometry: THREE.Geometry) => {
     DigiGridBackground.TRAIL_TRANSPARENCIES.forEach((trail, index) => {
       const trailMaterial = new THREE.PointsMaterial({
         color: 0xffffff,
@@ -162,7 +190,7 @@ export default class DigiGridBackground extends Component<DigiGridProps, {}> {
     })
   }
 
-  private renderStars () {
+  private renderStars = () => {
     this.stars.forEach(star => {
       star.y += star.speed
       if (star.y > DigiGridBackground.LAND_WIDTH / 2) {

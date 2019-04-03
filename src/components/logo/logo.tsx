@@ -1,18 +1,23 @@
 import { h } from 'preact'
+import classnames from 'classnames'
 
 import * as styles from './logo.scss'
 
 interface Props {
   fill?: string
   stroke?: string
+  header?: boolean
 }
 
-export default function Logo ({ fill, stroke} : Props) {
+export default function Logo ({ fill, stroke, header }: Props) {
   return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox='0 0 747 430'
-        className={styles.logo}
+        className={classnames(
+          styles.logo,
+          { [styles.header ]: header }
+        )}
       >
         <g>
           <path

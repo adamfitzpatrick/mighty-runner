@@ -1,10 +1,13 @@
 @import '../../assets/layout';
 @import '../../assets/colors';
+@import '../../assets/typography';
 
 .header {
   position: relative;
   color: $text-light;
   height: $header-height;
+  line-height: $header-height;
   margin: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 5rem;
+  font-family: $title-font;
 }

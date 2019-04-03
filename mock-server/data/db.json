@@ -1,30 +1,97 @@
 {
-  "5ZBbOZJtFNs2esIVciyJ": [
-    {
-      "id": "600aaf06-19c7-4e25-ba5b-e1d2edc3ea5d",
-      "name": "Melodium Flynn",
-      "metatype": "Dward",
-      "brief": "Face/Infiltrator",
-      "imageUrl": "https://i.pinimg.com/originals/37/bb/3e/37bb3e307b352aeebe093fd6d01fe1f4.png",
-      "description": ""
+  "5ZBbOZJtFNs2esIVciyJ": [{
+    "id":"1",
+    "name":"Melodium Flynn",
+    "metatype":"Dwarf",
+    "brief":"Infiltrator",
+    "image":{
+      "url":"http://localhost:3002/melodium_flynn.png",
+      "thumbnailTransform":{
+        "x": 0,
+        "y": 0
+      }
     },
-    {
-      "name": "Bob",
-      "metatype": "Orc",
-      "brief": "Rigger",
-      "id": "5fc3e7e8-497a-483c-80cf-c986806ffe16",
-      "imageUrl": "https://66.media.tumblr.com/6cbf66853681584e770f89c5968bef3b/tumblr_nrhag3c3ch1sdb0jzo7_250.png",
-      "description": "Amet aliquam id diam maecenas ultricies mi. Facilisis mauris sit amet massa vitae tortor condimentum. Dignissim convallis aenean et tortor at risus viverra adipiscing at. Integer vitae justo eget magna fermentum. Non quam lacus suspendisse faucibus interdum. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus."
-    },
-    {
-      "id": "a70b1069-1b3b-4ab9-9f18-2e61c5f3eb65",
-      "name": "Fergus Allard",
-      "metatype": "Troll",
-      "brief": "Tank",
-      "imageUrl": "https://d1u5p3l4wpay3k.cloudfront.net/shadowrun_wikickstart/thumb/1/12/Backer_trollmale_ericeccher.png/200px-Backer_trollmale_ericeccher.png?version=18889a32ed8d9e7cadd01927521bf0d6",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi cras fermentum odio eu feugiat. Consequat interdum varius sit amet mattis. Purus non enim praesent elementum facilisis leo. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum."
+    "description":"",
+    "attributes":{
+      "body":5,
+      "agility":6,
+      "reaction":5,
+      "strength":3,
+      "willpower":3,
+      "logic":3,
+      "intuition":5,
+      "charisma":7
     }
-  ],
+  }, {
+    "id":"2",
+    "name":"Gorvesh Divaughn",
+    "metatype":"Troll",
+    "brief":"Tank",
+    "image":{
+      "url":"http://localhost:3002/gorvesh_divaughn.jpg",
+      "thumbnailTransform":{
+        "x": 0,
+        "y": 0
+      }
+    },
+    "description":"",
+    "attributes":{
+      "body":7,
+      "agility":4,
+      "reaction":5,
+      "strength":8,
+      "willpower":2,
+      "logic":1,
+      "intuition":3,
+      "charisma":3
+    }
+  }, {
+    "id":"3",
+    "name":"Lido Corvam",
+    "metatype":"Human",
+    "brief":"Shaman",
+    "image":{
+      "url":"http://localhost:3002/lido_corvam.jpg",
+      "thumbnailTransform":{
+        "x": 0,
+        "y": 0
+      }
+    },
+    "description":"",
+    "attributes":{
+      "body":2,
+      "agility":3,
+      "reaction":4,
+      "strength":1,
+      "willpower":7,
+      "logic":6,
+      "intuition":5,
+      "charisma":2
+    }
+  }, {
+    "id":"4",
+    "name":"Murain Kilpatrick",
+    "metatype":"Elf",
+    "brief":"Decker",
+    "image":{
+      "url":"http://localhost:3002/murain_kilpatrick.jpg",
+      "thumbnailTransform":{
+        "x": 0,
+        "y": 0
+      }
+    },
+    "description":"",
+    "attributes":{
+      "body":3,
+      "agility":4,
+      "reaction":3,
+      "strength":3,
+      "willpower":6,
+      "logic":7,
+      "intuition":6,
+      "charisma":2
+    }
+  }],
   "SqtZgvlZtUT0s94FvTnx": [
     {
       "metatype": "Elf",

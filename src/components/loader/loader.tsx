@@ -26,12 +26,11 @@ export default class Loader extends Component<{}, State> {
         <div className={styles.loader}>
           <Glitch>
             <div className={ styles.terminal }>
-              <Logo fill={Colors.colorRed} />
               <h1 className={styles.title}>
                 Mighty<br />Runner
               </h1>
               <h2 className={styles.standby}>
-                Standby...Loading...
+                // Standby // Loading //
               </h2>
               <div className={styles.tinyCode}>
                 { this.getContentMarkup() }

@@ -11,7 +11,7 @@ const logo = null
 const mode = yargs.argv.p ? 'production' : 'development'
 
 const hbsUse = [{ loader: 'handlebars-loader' }]
-if (mode === 'production') { hbsUse.push({ loader: 'prerender-loader' }) }
+// if (mode === 'production') { hbsUse.push({ loader: 'prerender-loader' }) }
 
 if (yargs.argv['$0'].search('webpack-dev-server') !== -1) {
   require(path.resolve(process.cwd(), './mock-server/server'))
@@ -20,6 +20,10 @@ if (yargs.argv['$0'].search('webpack-dev-server') !== -1) {
 module.exports = {
   mode,
   entry: path.join(__dirname, 'src', 'index.tsx'),
+  externals: {
+    three: 'THREE',
+    'simplex-noise': 'SimplexNoise'
+  },
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].bundle.js',

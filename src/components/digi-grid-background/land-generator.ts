@@ -1,5 +1,5 @@
-import OpenSimplexNoise from 'open-simplex-noise'
-const openSimplex  = new OpenSimplexNoise(Date.now())
+import * as SimplexNoise from 'simplex-noise'
+const simplex  = new SimplexNoise(Date.now().toString())
 
 export default class LandGenerator {
   frequencies: number[]
@@ -15,7 +15,7 @@ export default class LandGenerator {
 
   calculateHeight (u: number, v: number): number {
     return this.frequencies.reduce((noise: number, frequency: number, index: number) => {
-      return noise + openSimplex.noise2D(u * frequency, v * frequency) * this.amplitudes[index]
+      return noise + simplex.noise2D(u * frequency, v * frequency) * this.amplitudes[index]
     }, 0)
   }
 }

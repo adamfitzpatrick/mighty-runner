@@ -46,6 +46,7 @@ describe('ApiService', () => {
           {  headers: expectedHeaders }
         )
         expect(data).toEqual([])
+        expect(localStorage.getItem(ApiService.CHARACTER_STORAGE_ITEM_NAME)).toBe('[]')
       })
     })
   })
