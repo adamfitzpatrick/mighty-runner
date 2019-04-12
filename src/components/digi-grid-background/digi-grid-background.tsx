@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import Match from 'preact-router/match'
 import classnames from 'classnames'
 import * as THREE from 'three'
 
@@ -19,15 +20,11 @@ class SpeedVector extends THREE.Vector3 {
   }
 }
 
-interface Props {
-  clear: boolean
-}
-
 interface State {
   glReady: boolean
 }
 
-export default class DigiGridBackground extends Component<Props, State> {
+export default class DigiGridBackground extends Component<{}, State> {
   static LAND_WIDTH = 10
   static LAND_DEPTH = 15
   static LAND_RESOLUTION = 150
@@ -56,8 +53,8 @@ export default class DigiGridBackground extends Component<Props, State> {
     glReady: false
   }
 
-  constructor(props: Props) {
-    super(props)
+  constructor() {
+    super()
     this.setupDelayedGl()
   }
 
@@ -68,9 +65,15 @@ export default class DigiGridBackground extends Component<Props, State> {
           styles.glContainer,
           { [styles.glContainerVisible]: this.state.glReady }
         )} />
-        { !this.props.clear ? <div className={styles.obscured} /> : null }
+        <Match path='/characters'>
+          { this.renderObscurer }
+        </Match>
       </div>
     )
+  }
+
+  private renderObscurer = ({ matches }: { matches: boolean }) => {
+    return matches ? <div className={styles.obscured} /> : null
   }
 
   private setupDelayedGl () {

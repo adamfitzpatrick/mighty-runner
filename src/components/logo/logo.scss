@@ -5,8 +5,8 @@
   position: fixed;
   z-index: 1000;
   top: 10vh;
-  left: 10vw;
-  width: 80vw;
+  left: 20vw;
+  width: 60vw;
   transition: top 0.25s ease-in-out, left 0.25s ease-in-out, width 0.25s ease-in-out;
 
   &.header {

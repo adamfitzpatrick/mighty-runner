@@ -2,7 +2,6 @@ import { h, Component } from 'preact'
 
 import { ImageTransform } from '@assets/models'
 import HexImage from '@components/hex-image'
-import * as flynn from '@assets/images/melodium_flynn.png'
 import * as styles from './transform-image.scss'
 
 interface TransformImageProps {
@@ -69,7 +68,7 @@ export default class TransformImage extends Component<TransformImageProps, Image
 
         <div className={ styles.hexReference }>
           <img
-            src={flynn}
+            src=''
             className={ styles.image }
             style={{ top: this.state.y, left: this.state.x, transform: `scale(${this.state.scale})` }}
             onTouchStart={this.touchStart}

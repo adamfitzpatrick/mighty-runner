@@ -1,0 +1,52 @@
+@import '../../assets/layout';
+@import '../../assets/typography';
+@import '../../assets/colors';
+
+.setToken {
+  margin-top: $large-logo-top-space;
+  font-family: $code-font;
+  position: relative;
+
+  .terminal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: $text-light;
+    background-color: $color-darkest;
+    font-family: $code-font;
+    border: 1px solid white;
+    margin: 0 10vw;
+    padding: 1rem;
+    width: 80vw;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .title {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .error {
+    font-size: 1rem;
+    color: $text-alert;
+    text-align: center;
+  }
+
+  .explanationHeader {
+    font-size: 1rem;
+  }
+
+  .explanationParagraph {
+    text-align: justify;
+  }
+
+  .input {
+    text-transform: uppercase;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

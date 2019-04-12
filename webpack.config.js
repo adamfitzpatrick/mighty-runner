@@ -82,9 +82,12 @@ module.exports = {
   resolve: {
     extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
     alias: {
-      '@components': path.resolve(__dirname, 'src/components'),
       '@assets': path.resolve(__dirname, 'src/assets'),
-      '@services': path.resolve(__dirname, 'src/services')
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@containers': path.resolve(__dirname, 'src/containers'),
+      '@routes': path.resolve(__dirname, 'src/routes'),
+      '@services': path.resolve(__dirname, 'src/services'),
+      '@state': path.resolve(__dirname, 'src/state')
     }
   },
   devtool: 'inline-source-map',

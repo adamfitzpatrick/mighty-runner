@@ -5,7 +5,7 @@
     "metatype":"Dwarf",
     "brief":"Infiltrator",
     "image":{
-      "url":"http://localhost:3002/melodium_flynn.png",
+      "url":"https://s3-us-west-2.amazonaws.com/mighty-runner-image-share/melodium_flynn.png",
       "thumbnailTransform":{
         "x": 0,
         "y": 0
@@ -28,7 +28,7 @@
     "metatype":"Troll",
     "brief":"Tank",
     "image":{
-      "url":"http://localhost:3002/gorvesh_divaughn.jpg",
+      "url":"https://s3-us-west-2.amazonaws.com/mighty-runner-image-share/gorvesh_divaughn.jpg",
       "thumbnailTransform":{
         "x": 0,
         "y": 0
@@ -51,7 +51,7 @@
     "metatype":"Human",
     "brief":"Shaman",
     "image":{
-      "url":"http://localhost:3002/lido_corvam.jpg",
+      "url":"https://s3-us-west-2.amazonaws.com/mighty-runner-image-share/lido_corvam.jpg",
       "thumbnailTransform":{
         "x": 0,
         "y": 0
@@ -74,7 +74,7 @@
     "metatype":"Elf",
     "brief":"Decker",
     "image":{
-      "url":"http://localhost:3002/murain_kilpatrick.jpg",
+      "url":"https://s3-us-west-2.amazonaws.com/mighty-runner-image-share/murain_kilpatrick.jpg",
       "thumbnailTransform":{
         "x": 0,
         "y": 0

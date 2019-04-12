@@ -14,3 +14,9 @@ declare module '*.jpg' {
 }
 
 declare module 'classnames'
+
+declare module 'mobx-preact'
+
+interface InputEvent extends Event {
+  target: HTMLInputElement
+}

@@ -6,15 +6,19 @@
         "jsxFactory": "h",
         "baseUrl": "./",
         "paths": {
-          "@components/*": [ "./src/components/*" ],
-          "@assets/*": [ "./src/assets/*" ],
-          "@services/*": [ "./src/services/*" ]
+            "@assets/*": [ "./src/assets/*" ],
+            "@components/*": [ "./src/components/*" ],
+            "@containers/*": [ "./src/containers/*" ],
+            "@routes/*": [ "./src/routes/*" ],
+            "@services/*": [ "./src/services/*" ],
+            "@state/*": [ "./src/state/*" ]
         },
         "target": "es5",
         "lib": [
             "dom",
             "es6"
         ],
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "experimentalDecorators": true
     }
 }

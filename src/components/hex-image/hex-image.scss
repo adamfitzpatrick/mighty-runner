@@ -4,3 +4,8 @@
   height: 100%;
   max-width: 50vw;
 }
+
+.clippedHexImage {
+  clip-path: url(#hex-clip-path);
+  -webkit-clip-path: url(#hex-clip-path);
+}
