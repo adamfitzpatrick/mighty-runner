@@ -29,6 +29,8 @@ export default class TransformImage extends Component<TransformImageProps, Image
   }
 
   touchMove = (event: TouchEvent) => {
+    this.positionAtTouchStart.scale = this.positionAtTouchStart.scale || 1
+    this.touchStartCoordinates.scale = this.touchStartCoordinates.scale || 1
     const newState: ImageTransform = {
       x: this.positionAtTouchStart.x + event.touches[0].clientX - this.touchStartCoordinates.x,
       y: this.positionAtTouchStart.y + event.touches[0].clientY - this.touchStartCoordinates.y
@@ -53,7 +55,7 @@ export default class TransformImage extends Component<TransformImageProps, Image
       x: this.state.x,
       y: this.state.y
     }
-    event.target.addEventListener('touchmove', this.touchMove)
+    event.target!.addEventListener('touchmove', this.touchMove)
   }
 
   render () {

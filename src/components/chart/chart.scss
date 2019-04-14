@@ -1,4 +1,5 @@
 @import '../../assets/colors';
+@import '../../assets/layout';
 
 .chart {
   display: flex;
@@ -11,6 +12,18 @@
     justify-content: end;
     height: 100%;
     margin: 0 0.4rem;
+
+    @media screen and (max-width: $tiny-viewport-width-minimum) {
+      margin: 0 0.2rem;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     .label {
       text-transform: uppercase;

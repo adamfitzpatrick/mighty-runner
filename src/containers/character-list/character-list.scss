@@ -1,7 +1,33 @@
 @import '../../assets/layout';
 
 .characterList {
-  overflow-y: scroll;
+  $column-gap: 1rem;
+
+  position: relative;
+  margin: 0 auto;
+  display: grid;
+  width: 90vw;
+  max-width: 400px;
+  grid-column-gap: $column-gap;
+  max-height: calc(100vh - #{$header-height} - #{$safari-bottom-buffer});
+  overflow-y: auto;
+  box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
-  max-height: calc(100vh - #{$header-height});
+
+  @media screen and (min-width: $small-viewport-width-minimum) {
+    max-height: calc(100vh - #{$header-height});
+  }
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    width: calc(100vw - 2 * #{$column-gap});
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: $large-viewport-width-minimum) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  div:last-child {
+    margin-bottom: 0;
+  }
 }

@@ -14,12 +14,13 @@ interface Props extends CharacterProps {}
 export default class CharacterList extends Component<Props, {}> {
   constructor(props: Props) {
     super(props)
-    console.log(props)
   }
+
   render () {
+    const characters = this.props.character!.list || []
     return (
-      <div className={styles.characterList}>
-        { this.getCharacterCards(this.props.character.list) }
+      <div className={styles.characterList} id='foofoo'>
+        { this.getCharacterCards(characters) }
       </div>
     )
   }

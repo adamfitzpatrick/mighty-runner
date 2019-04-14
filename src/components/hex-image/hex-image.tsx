@@ -8,7 +8,7 @@ export interface HexImageProps {
   center?: boolean
 }
 
-function renderImage (image: string) {
+function renderImage (image?: string) {
   if (image) {
     return <image
       xlinkHref={image}

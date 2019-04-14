@@ -1,14 +1,15 @@
 $default-animation-time: 0.25s;
 
-$small-viewport-maximum: 575px;
-$medium-viewport-minimum: 576px;
-$medium-viewport-maximum: 991px;
-$large-viewport-minimum: 992px;
+$tiny-viewport-width-minimum: 350px;
+$small-viewport-width-minimum: 450px;
+$small-viewport-width-maximum: 768px;
+$medium-viewport-width-minimum: 769px;
+$medium-viewport-width-maximum: 1024;
+$large-viewport-width-minimum: 1025px;
+$short-viewport-maximum: 641px;
 
-$logo-aspect-ratio: 0.72; // Ratio of logo height to width; constant for all media
-$logo-large-viewport: 5vw; // Logo standard size in large viewport
-$logo-medium-viewport: 10vw; // Logo standard size in medium viewport
+$safari-bottom-buffer: 112px;
 
 $large-logo-top-space: 30vh;
 $header-height: 5rem;
-$ios-navbar: 110px;
+$hex-image-width: 107px;

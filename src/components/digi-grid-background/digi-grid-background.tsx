@@ -25,6 +25,9 @@ interface State {
 }
 
 export default class DigiGridBackground extends Component<{}, State> {
+  static RENDER_DELAY = 0
+  static BASE_WIDTH = 375
+  static WIDTH_POWER = 0.5
   static LAND_WIDTH = 10
   static LAND_DEPTH = 15
   static LAND_RESOLUTION = 150
@@ -49,11 +52,18 @@ export default class DigiGridBackground extends Component<{}, State> {
   private stars: SpeedVector[]
   private starPoints: THREE.Points[]
 
+  static getScaledWidth = () => {
+    return Math.pow(
+      window.innerWidth / DigiGridBackground.BASE_WIDTH,
+      DigiGridBackground.WIDTH_POWER
+    ) * DigiGridBackground.LAND_WIDTH
+  }
+
   state = {
     glReady: false
   }
 
-  constructor() {
+  constructor () {
     super()
     this.setupDelayedGl()
   }
@@ -77,7 +87,7 @@ export default class DigiGridBackground extends Component<{}, State> {
   }
 
   private setupDelayedGl () {
-    setTimeout(this.runGl, 0)
+    setTimeout(this.runGl, DigiGridBackground.RENDER_DELAY)
   }
 
   private runGl = () => {
@@ -92,7 +102,7 @@ export default class DigiGridBackground extends Component<{}, State> {
       this.generateLand()
       this.initializeStars()
       this.animate()
-      document.getElementById('digibackground').appendChild(this.renderer.domElement)
+      document.getElementById('digibackground')!.appendChild(this.renderer.domElement)
       this.setState({ glReady: true })
     }
   }
@@ -132,12 +142,13 @@ export default class DigiGridBackground extends Component<{}, State> {
   }
 
   private landParametric = (u: number, v: number, target: THREE.Vector3) => {
+    const widthFactor = Math.pow(window.innerWidth / 375, 0.5)
     const y = this.landGenerator.calculateHeight(
-      u * DigiGridBackground.LAND_WIDTH,
+      u * DigiGridBackground.getScaledWidth(),
       v * DigiGridBackground.LAND_DEPTH
     )
-    const x = u * DigiGridBackground.LAND_WIDTH;
-    const z = v * DigiGridBackground.LAND_DEPTH;
+    const x = u * DigiGridBackground.getScaledWidth()
+    const z = v * DigiGridBackground.LAND_DEPTH
     target.set( x, y, z );
   };
 
@@ -169,8 +180,11 @@ export default class DigiGridBackground extends Component<{}, State> {
 
   private initializeStarPositions = () => {
     this.stars = new Array(30).fill(null).map(() => {
-      const x = THREE.Math.randFloat(-1 * DigiGridBackground.LAND_WIDTH / 4, DigiGridBackground.LAND_WIDTH / 4)
-      const y = THREE.Math.randFloat(0, DigiGridBackground.LAND_WIDTH / 2)
+      const x = THREE.Math.randFloat(
+        -1 * DigiGridBackground.getScaledWidth() / 4,
+        DigiGridBackground.getScaledWidth() / 4
+      )
+      const y = THREE.Math.randFloat(0, DigiGridBackground.getScaledWidth() / 2)
       const z = THREE.Math.randFloatSpread(DigiGridBackground.LAND_DEPTH / 3)
       return new SpeedVector(x, y, z, THREE.Math.randFloat(DigiGridBackground.MIN_STAR_SPEED, DigiGridBackground.MAX_STAR_SPEED))
     })

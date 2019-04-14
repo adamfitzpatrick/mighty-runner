@@ -1,5 +1,5 @@
 import { observable, reaction } from 'mobx'
-import ApiService from '@services/api-service';
+import ApiService from '@services/api-service'
 
 export interface TokenProps {
   token?: TokenStore
@@ -8,7 +8,7 @@ export interface TokenProps {
 class TokenStore {
   static LOCAL_STORAGE_KEY = ApiService.TOKEN_LOCAL_STORAGE_KEY
 
-  @observable token: string
+  @observable token: string | null
 
   constructor () {
     reaction(
@@ -19,15 +19,12 @@ class TokenStore {
   }
 
   private retrieveLocalToken = () => {
-    try {
-      this.token = localStorage.getItem(TokenStore.LOCAL_STORAGE_KEY)
-    } catch (e) {
-      this.token = null
-    }
+    this.token = localStorage.getItem(TokenStore.LOCAL_STORAGE_KEY)
+    if (this.token === 'null') { this.token = null }
   }
 
   private setToken = () => {
-    localStorage.setItem(TokenStore.LOCAL_STORAGE_KEY, this.token)
+    localStorage.setItem(TokenStore.LOCAL_STORAGE_KEY, this.token!)
   }
 }
 

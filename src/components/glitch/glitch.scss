@@ -130,7 +130,7 @@
 
 .scanGlitch {
 
-  &>* {
+  &>div {
     position: absolute;
     top: 0;
     filter: hue-rotate(90deg);

@@ -1,26 +1,17 @@
 import { h, Component } from 'preact'
-import { route } from 'preact-router'
-import { inject } from 'mobx-preact'
 
-import { CharacterModel } from '@assets/models'
-import ApiService, { MissingTokenError, UnauthorizedError } from '@services/api-service'
-import { TokenProps } from '@state/token-store'
-import { CharacterProps } from '@state/character-store'
 import Glitch from '@components/glitch'
 import Crt from '@components/crt'
 import { infoGenerator, constantGenerator } from './content-generators'
 
 import * as styles from './loader.scss'
 
-type Props = TokenProps & CharacterProps
-
 interface State {
   lines: string[]
   markingTime: number
 }
 
-@inject('token', 'character')
-export default class Loader extends Component<Props, State> {
+export default class Loader extends Component<{}, State> {
   static MAX_LINES = 25
   static MARK_TIME_FRAMES = 120
 
@@ -39,40 +30,8 @@ export default class Loader extends Component<Props, State> {
     )
   }
 
-  componentWillMount () {
-    const valid = this.checkToken()
-    if (valid) { this.loadCharacters() }
-  }
-
   componentDidMount () {
     this.updateLines()
-  }
-
-  private checkToken () {
-    if (!this.props.token.token) {
-      route('/set-token')
-      return
-    }
-    return true
-  }
-
-  private loadCharacters () {
-    ApiService.getCharacterList().then(
-      this.storeCharacters,
-      this.handleDataLoadError)
-  }
-
-  private storeCharacters = (data: CharacterModel[]) => {
-    this.props.character!.list = data
-    route('/characters')
-  }
-
-  private handleDataLoadError (err: Error) {
-    if (err instanceof MissingTokenError) {
-      route('/set-token')
-    } else if (err instanceof UnauthorizedError) {
-      route('/bad-token')
-    }
   }
 
   private renderLoadingTerminal () {
@@ -113,9 +72,10 @@ export default class Loader extends Component<Props, State> {
       case 1:
         return lines[lines.length - 1]
       case 2:
-      return constantGenerator(10)
+        return constantGenerator(10)
       case 3:
       case 4:
+      default:
         return infoGenerator(20)
     }
   }

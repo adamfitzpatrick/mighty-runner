@@ -8,6 +8,7 @@
 
 .title {
   display: flex;
+  align-items: center;
 }
 
 .icon {
@@ -16,6 +17,9 @@
   transform: rotateZ(0);
   background: none;
   border: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 0.5rem;
   -webkit-appearance: none;
 }
 

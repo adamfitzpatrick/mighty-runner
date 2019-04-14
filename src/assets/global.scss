@@ -2,29 +2,22 @@
 @import url('https://fonts.googleapis.com/css?family=Maven+Pro');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
+@import './layout';
+@import './colors';
 @import './constants';
+
+:root {
+  --large-logo-top-space: 40vh;
+}
+
+@media screen and (orientation: landscape) and (max-height: $short-viewport-maximum) {
+  :root {
+    --large-logo-top-space: 25vh;
+  }
+}
 
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-}
-
-.route-transition {
-  transition: opacity $transition-duration $transition-timing;
-}
-
-.route-transition-adding {
-  opacity: 1;
-}
-
-.route-transition-added {
-  opacity: 1;
-}
-
-.route-transition-removing {
-  opacity: 0;
-}
-
-.route-transition-removed {
-  opacity: 0;
+  background-color: $color-darkest;
 }

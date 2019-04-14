@@ -3,17 +3,26 @@
 @import '../../assets/layout';
 
 .loader {
-  padding-top: $large-logo-top-space;
+  padding-top: var(--large-logo-top-space);
   overflow: hidden;
+  width: 80vw;
+  margin: 0 10vw;
+
+  @media screen and (min-width: $large-viewport-width-minimum) {
+    width: 30vw;
+    margin: 0 35vw;
+
+    .terminal {
+      height: 40vh;
+    }
+  }
 
   .terminal {
     color: $text-light;
     background-color: $color-darkest;
     font-family: $code-font;
     border: 1px solid white;
-    margin: 0 10vw;
     padding: 0.5rem;
-    width: 80vw;
     height: 50vh;
     box-sizing: border-box;
     overflow: hidden;

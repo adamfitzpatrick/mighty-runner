@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && webpack -p",
-    "lint": "standard --verbose | snazzy",
+    "lint": "tslint src/**/*.{ts,tsx} --project tsconfig.json",
     "start": "webpack-dev-server --env local",
     "tdd": "jest --watch",
     "test": "jest"
@@ -44,6 +44,8 @@
     "style-loader": "0.23.0",
     "three": "0.102.1",
     "ts-jest": "24.0.0",
+    "tslint": "^5.15.0",
+    "tslint-config-standard": "^8.0.1",
     "typescript": "3.1.6",
     "typings-for-css-modules-loader": "1.7.0",
     "url-loader": "1.1.1",

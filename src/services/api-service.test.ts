@@ -16,7 +16,7 @@ describe('ApiService', () => {
 
   describe('getCharacterList', () => {
     test('returns a rejected promise if there is no token', () => {
-      expect(ApiService.getCharacterList()).rejects.toThrow(/token is missing/)
+      return expect(ApiService.getCharacterList()).rejects.toThrow(/token is missing/)
     })
 
     test('requests a list of characters', () => {

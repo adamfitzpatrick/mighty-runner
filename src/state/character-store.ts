@@ -9,15 +9,15 @@ class CharacterStore {
   static LIST_LOCAL_STORAGE_KEY = 'mighty_runner_character_list'
   static ACTIVE_LOCAL_STORAGE_KEY = 'mighty_runner_character_active'
 
-  @observable list: CharacterModel[] = []
-  @observable active: CharacterModel
+  @observable list: CharacterModel[] | null = []
+  @observable active: CharacterModel | null
 
   constructor () {
     reaction(
       () => this.list,
       this.setCharacterList
     )
-    reaction (
+    reaction(
       () => this.active,
       this.setActiveCharacter
     )
@@ -27,7 +27,7 @@ class CharacterStore {
 
   private retrieveLocalList = () => {
     try {
-      this.list = JSON.parse(localStorage.getItem(CharacterStore.LIST_LOCAL_STORAGE_KEY))
+      this.list = JSON.parse(localStorage.getItem(CharacterStore.LIST_LOCAL_STORAGE_KEY) as string)
     } catch (e) {
       this.list = null
     }
@@ -39,7 +39,7 @@ class CharacterStore {
 
   private retrieveLocalActiveCharacter = () => {
     try {
-      this.active = JSON.parse(localStorage.getItem(CharacterStore.ACTIVE_LOCAL_STORAGE_KEY))
+      this.active = JSON.parse(localStorage.getItem(CharacterStore.ACTIVE_LOCAL_STORAGE_KEY) as string)
     } catch (e) {
       this.active = null
     }

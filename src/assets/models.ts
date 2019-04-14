@@ -20,13 +20,14 @@ export interface AttributeList {
   charisma: number
 }
 
-export type Attributes = keyof AttributeList
+export type Attribute = keyof AttributeList
 
 export interface CharacterModel {
   id: string
   image: ImageDefinition
   name: string
   metatype: string
+  ethnicity: string
   brief: string
   description: string
   attributes: AttributeList

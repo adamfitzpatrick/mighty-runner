@@ -3,11 +3,10 @@
 @import '../../assets/typography';
 
 .header {
-  position: relative;
-  color: $text-light;
+  width: 100vw;
   height: $header-height;
   line-height: $header-height;
   margin: 0;
-  padding: 0.5rem 5rem;
+  color: $text-light;
   font-family: $title-font;
 }

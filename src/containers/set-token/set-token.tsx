@@ -22,7 +22,7 @@ interface State {
 @observer
 export default class SetToken extends Component<Props, State> {
   state = {
-    tokenInput: this.props.token.token,
+    tokenInput: this.props.token!.token || '',
     expanded: false
   }
 
@@ -36,7 +36,7 @@ export default class SetToken extends Component<Props, State> {
         <div className={styles.terminal}>
           <h1 className={styles.title}>// TOKEN REQUIRED //</h1>
           { this.props.badToken ? <h3 class={styles.error}>Invalid token was provided</h3> : null }
-          <ExpandableGroup exclusive>
+          <ExpandableGroup exclusive className={styles.explanations}>
             <Expandable>
               <h2 className={styles.explanationHeader}>What is a token?</h2>
               <p className={styles.explanationParagraph}>

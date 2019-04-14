@@ -27,8 +27,8 @@ export default class ApiService {
 
   static getCharacterList = async (): Promise<CharacterModel[]> => {
     const token = getAndValidateToken()
-    const headers = new Headers({ Authorization: `Bearer ${token}`})
-    return fetch(ApiService.HOST, { headers: headers }).then((response: TypedResponse<CharacterModel[]>)  => {
+    const headers = new Headers({ Authorization: `Bearer ${token}` })
+    return fetch(ApiService.HOST, { headers: headers }).then((response: TypedResponse<CharacterModel[]>) => {
       if (response.status === 401) {
         throw new UnauthorizedError()
       }

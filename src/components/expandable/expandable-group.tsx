@@ -2,7 +2,8 @@ import { h, Component, cloneElement } from 'preact'
 
 interface Props {
   exclusive?: boolean
-  children: JSX.Element[]
+  children: JSX.Element | JSX.Element[]
+  className?: string
 }
 
 interface State {
@@ -11,19 +12,19 @@ interface State {
 
 export class ExpandableGroup extends Component<Props, State> {
   state = {
-    childStates: new Array(this.props.children.length).fill(false)
+    childStates: new Array((this.props.children as JSX.Element[]).length).fill(false)
   }
 
   render () {
     return (
-      <div>
+      <div className={this.props.className}>
         { this.renderExpanders() }
       </div>
     )
   }
 
   private renderExpanders () {
-    return this.props.children.map((child, index) => {
+    return (this.props.children as JSX.Element[]).map((child, index) => {
       const attrs = {
         expanded: this.state.childStates[index],
         onClick: this.getClickHandler(index)

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import * as styles from './expandable.scss'
 
 interface Props {
+  titleClass?: string
   children: JSX.Element[]
   lightBackground?: boolean
   expanded?: boolean
@@ -23,7 +24,7 @@ export class Expandable extends Component<Props, State> {
   render () {
     return (
       <section>
-        <div className={styles.title} onClick={this.props.onClick}>
+        <div className={classnames(styles.title, this.props.titleClass)} onClick={this.props.onClick}>
           <button className={classnames(
             styles.icon,
             { [styles.iconLightBackground]: this.props.lightBackground },

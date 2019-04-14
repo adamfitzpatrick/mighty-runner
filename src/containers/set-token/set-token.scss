@@ -3,7 +3,9 @@
 @import '../../assets/colors';
 
 .setToken {
-  margin-top: $large-logo-top-space;
+  $max-width: 800px;
+
+  margin-top: var(--large-logo-top-space);
   font-family: $code-font;
   position: relative;
 
@@ -15,10 +17,12 @@
     background-color: $color-darkest;
     font-family: $code-font;
     border: 1px solid white;
-    margin: 0 10vw;
+    margin: 0 auto;
     padding: 1rem;
-    width: 80vw;
+    width: 90vw;
+    max-width: $max-width;
     box-sizing: border-box;
+    max-height: calc(100vh - var(--large-logo-top-space) - #{$safari-bottom-buffer});
     overflow: hidden;
   }
 
@@ -28,9 +32,14 @@
   }
 
   .error {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: $text-alert;
     text-align: center;
+    margin: 0;
+  }
+
+  .explanations {
+    overflow-y: scroll;
   }
 
   .explanationHeader {

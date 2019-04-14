@@ -1,0 +1,49 @@
+@import '../../assets/layout';
+@import '../../assets/colors';
+
+.characterDetail {
+  $side-padding: 1rem;
+
+  position: relative;
+  color: $text-light;
+  height: calc(100vh - #{$header-height} - #{$safari-bottom-buffer});
+  width: 100vw;
+
+  .sectionExpander {
+     box-shadow: 0 5px 5px 1px $color-black;
+     position: relative;
+  }
+
+  .sectionTitle {
+    padding: 0 $side-padding;
+  }
+
+  .detailSection {
+    padding: $side-padding;
+    background-color: $color-white;
+    color: $text-dark;
+  }
+
+  .detailLine {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.infoItem {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+
+  &+& { margin-left: 1rem; }
+
+  .label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  .data {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid $color-darkest;
+    height: 1.25rem;
+  }
+}

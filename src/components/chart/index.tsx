@@ -1,8 +1,8 @@
 import { h } from 'preact'
 
-import { AttributeList, Attributes } from '@assets/models'
+import { AttributeList, Attribute } from '@assets/models'
 
-const attributeLabels: { [key in Attributes]: string } = {
+const attributeLabels: { [key in Attribute]: string } = {
   body: 'B',
   agility: 'A',
   reaction: 'R',
@@ -20,12 +20,12 @@ interface ChartProps {
 }
 
 export default function Chart ({ attributes }: ChartProps) {
-  const maxVal = Object.keys(attributes).reduce((running: number, key: Attributes) => {
+  const maxVal = Object.keys(attributes).reduce((running: number, key: Attribute) => {
     return Math.max(attributes[key], running)
   }, 0)
 
 
-  function getDataPoint (key: Attributes): JSX.Element {
+  function getDataPoint (key: Attribute): JSX.Element {
     /*`calc(${attributes[key] / maxVal} * ${MIN_CHART_HEIGHT} - 1rem)` }}/>*/
     return (
       <div className={styles.dataPoint} key={key}>
