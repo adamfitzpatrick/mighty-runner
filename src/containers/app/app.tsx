@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { Router } from 'preact-router'
+import { Router, route } from 'preact-router'
 
 import Bootstrap from '@containers/bootstrap/bootstrap'
 import DigiGridBackground from '@components/digi-grid-background'
@@ -29,9 +29,5 @@ export default class App extends Component<{}, {}> {
       </MobxProvider>
     )
   }
-
-  componentWillMount () {}
-
-  componentDidMount () {}
 }
 

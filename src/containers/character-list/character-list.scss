@@ -7,7 +7,6 @@
   margin: 0 auto;
   display: grid;
   width: 90vw;
-  max-width: 400px;
   grid-column-gap: $column-gap;
   max-height: calc(100vh - #{$header-height} - #{$safari-bottom-buffer});
   overflow-y: auto;

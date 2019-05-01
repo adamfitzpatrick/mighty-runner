@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import { inject } from 'mobx-preact'
+import { inject, observer } from 'mobx-preact'
 
 import { CharacterModel } from '@assets/models'
 
@@ -11,8 +11,9 @@ import { CharacterProps } from '@state/character-store';
 interface Props extends CharacterProps {}
 
 @inject('character')
+@observer
 export default class CharacterList extends Component<Props, {}> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
   }
 

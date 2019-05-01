@@ -8,11 +8,12 @@ interface Props {
   characterId?: string
 }
 
+
 export default function CharacterDetailRoute (props: Props) {
   return (
     <div>
       <Header />
-      <CharacterDetail characterId={props.characterId!}/>
+      <CharacterDetail />
     </div>
   )
 }

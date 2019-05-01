@@ -10,7 +10,8 @@ const attributeLabels: { [key in Attribute]: string } = {
   willpower: 'W',
   logic: 'L',
   intuition: 'I',
-  charisma: 'C'
+  charisma: 'C',
+  edge: 'E'
 }
 
 import * as styles from './chart.scss'
@@ -26,7 +27,6 @@ export default function Chart ({ attributes }: ChartProps) {
 
 
   function getDataPoint (key: Attribute): JSX.Element {
-    /*`calc(${attributes[key] / maxVal} * ${MIN_CHART_HEIGHT} - 1rem)` }}/>*/
     return (
       <div className={styles.dataPoint} key={key}>
         <div className={styles.label}>{ attributeLabels[key] }</div>

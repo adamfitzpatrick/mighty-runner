@@ -4,16 +4,28 @@ interface Props {
   exclusive?: boolean
   children: JSX.Element | JSX.Element[]
   className?: string
+  onChildStateChange?: (childStates: boolean[]) => void
+  childStates?: boolean[]
+  lockAll?: boolean
 }
 
 interface State {
   childStates: boolean[]
 }
 
+interface ChildConfigurableProps {
+  expanded: boolean
+  onClick: () => void
+  locked?: boolean
+}
+
 export class ExpandableGroup extends Component<Props, State> {
   state = {
-    childStates: new Array((this.props.children as JSX.Element[]).length).fill(false)
+    childStates: this.props.childStates ||
+      new Array((this.props.children as JSX.Element[]).length).fill(false)
   }
+  onChildStateChange = this.props.onChildStateChange || (() => { /* no-op */ })
+  externalStateReceived: false
 
   render () {
     return (
@@ -25,10 +37,11 @@ export class ExpandableGroup extends Component<Props, State> {
 
   private renderExpanders () {
     return (this.props.children as JSX.Element[]).map((child, index) => {
-      const attrs = {
-        expanded: this.state.childStates[index],
+      const attrs: ChildConfigurableProps = {
+        expanded: this.state.childStates[index] || this.props.lockAll,
         onClick: this.getClickHandler(index)
       }
+      if (this.props.lockAll) { attrs.locked = true }
       return cloneElement(child, attrs)
     })
   }
@@ -41,7 +54,7 @@ export class ExpandableGroup extends Component<Props, State> {
         }
         return !childState
       })
-      this.setState({ childStates })
+      this.setState({ childStates }, () => this.onChildStateChange(this.state.childStates))
     }
   }
 }

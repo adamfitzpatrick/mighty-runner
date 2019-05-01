@@ -1,5 +1,6 @@
-import { observable, reaction } from 'mobx'
+import { observable, computed, reaction } from 'mobx'
 import { CharacterModel } from '@assets/models'
+import ApiService from '@services/api-service'
 
 export interface CharacterProps {
   character?: CharacterStore
@@ -8,21 +9,40 @@ export interface CharacterProps {
 class CharacterStore {
   static LIST_LOCAL_STORAGE_KEY = 'mighty_runner_character_list'
   static ACTIVE_LOCAL_STORAGE_KEY = 'mighty_runner_character_active'
+  static UPDATE_DELAY = 1000
 
   @observable list: CharacterModel[] | null = []
-  @observable active: CharacterModel | null
 
   constructor () {
     reaction(
       () => this.list,
       this.setCharacterList
     )
-    reaction(
-      () => this.active,
-      this.setActiveCharacter
-    )
     this.retrieveLocalList()
-    this.retrieveLocalActiveCharacter()
+  }
+
+  @computed get active (): CharacterModel | undefined {
+    return this.list!.find(character => character.id === this.getCharacterId())
+  }
+
+  set active (updated: CharacterModel | undefined) {
+    const index = this.list!.findIndex(character => character.id === this.getCharacterId())
+    if (updated) {
+      this.list![index] = updated
+      this.setCharacterList()
+    }
+  }
+
+  persistActive () {
+    const active = this.active
+    if (active) {
+      return ApiService.putCharacter(active.id, active)
+    }
+  }
+
+  private getCharacterId () {
+    const pathElements = window.location.pathname.split('/')
+    return pathElements[pathElements.length - 1]
   }
 
   private retrieveLocalList = () => {
@@ -35,18 +55,6 @@ class CharacterStore {
 
   private setCharacterList = () => {
     localStorage.setItem(CharacterStore.LIST_LOCAL_STORAGE_KEY, JSON.stringify(this.list))
-  }
-
-  private retrieveLocalActiveCharacter = () => {
-    try {
-      this.active = JSON.parse(localStorage.getItem(CharacterStore.ACTIVE_LOCAL_STORAGE_KEY) as string)
-    } catch (e) {
-      this.active = null
-    }
-  }
-
-  private setActiveCharacter = () => {
-    localStorage.setItem(CharacterStore.ACTIVE_LOCAL_STORAGE_KEY, JSON.stringify(this.active))
   }
 }
 

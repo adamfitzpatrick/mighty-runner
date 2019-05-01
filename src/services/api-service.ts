@@ -1,15 +1,23 @@
 import { CharacterModel } from '@assets/models'
 
+declare var API_HOST: string
+
+interface AcceptedMessage {
+  message: string
+}
+
 interface TypedResponse<T> extends Response {
   json: () => Promise<T>
 }
 
 class CustomError extends Error {
-  constructor (message?: string) {
+  /* istanbul ignore next */
+  constructor (message: string) {
     super(message)
     Object.setPrototypeOf(this, new.target.prototype)
   }
 }
+
 export class MissingTokenError extends CustomError {}
 export class UnauthorizedError extends CustomError {}
 
@@ -21,23 +29,53 @@ function getAndValidateToken () {
   return token
 }
 
-export default class ApiService {
-  static TOKEN_LOCAL_STORAGE_KEY: string = 'mighty_runner_api_access_token'
-  static HOST: string = `${window.location.protocol}//${window.location.hostname}:3001`
-
-  static getCharacterList = async (): Promise<CharacterModel[]> => {
-    const token = getAndValidateToken()
-    const headers = new Headers({ Authorization: `Bearer ${token}` })
-    return fetch(ApiService.HOST, { headers: headers }).then((response: TypedResponse<CharacterModel[]>) => {
-      if (response.status === 401) {
-        throw new UnauthorizedError()
-      }
-      if (response.status < 400) {
-        return response.json()
-      }
-      return Promise.reject(response)
-    }).then(characters => {
-      return characters
-    })
-  }
+function getAuthHeader () {
+  const token = getAndValidateToken()
+  return new Headers({ Authorization: `Bearer ${token}` })
 }
+
+function handleResponse<T> (response: TypedResponse<T>) {
+  if (response.status === 403) {
+    throw new Error()
+  }
+  if (response.status < 400) {
+    return response.json()
+  }
+  return Promise.reject(response)
+}
+
+const TOKEN_LOCAL_STORAGE_KEY = 'mighty_runner_api_access_token'
+const URL = `${API_HOST}/character`
+
+const getCharacterList = async (): Promise<CharacterModel[]> => {
+  const headers = getAuthHeader()
+  return fetch(ApiService.URL, { headers })
+    .then(response => handleResponse<CharacterModel[]>(response))
+}
+
+const getCharacter = async (characterId: string): Promise<CharacterModel> => {
+  const headers = getAuthHeader()
+  return fetch(`${ApiService.URL}/${characterId}`, { headers })
+    .then(response => handleResponse<CharacterModel>(response))
+}
+
+const putCharacter = async (characterId: string, character: CharacterModel): Promise<AcceptedMessage> => {
+  const headers = getAuthHeader()
+  const options = {
+    headers,
+    body: JSON.stringify(character),
+    method: 'PUT'
+  }
+  return fetch(`${ApiService.URL}/${characterId}`, options)
+    .then(response => handleResponse<AcceptedMessage>(response))
+}
+
+const ApiService = {
+  TOKEN_LOCAL_STORAGE_KEY,
+  URL,
+  getCharacterList,
+  getCharacter,
+  putCharacter
+}
+
+export default ApiService

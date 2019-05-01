@@ -6,9 +6,18 @@
   to { max-height: 100vh; }
 }
 
+.section { overflow-x: hidden; }
+
 .title {
+  position: relative;
   display: flex;
   align-items: center;
+  transition: box-shadow $transition-duration linear;
+  box-shadow: 0 0 0 0 $color-grey;
+}
+
+.titleExpanded {
+  box-shadow: 0 6px 5px 1px $color-black;
 }
 
 .icon {

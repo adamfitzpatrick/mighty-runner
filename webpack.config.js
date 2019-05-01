@@ -1,21 +1,20 @@
 const path = require('path')
 const fs = require('fs')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ResourceHintsWebpackPlugin = require('resource-hints-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const DefinePlugin = webpack.DefinePlugin
 const yargs = require('yargs')
 
 const { cdnResources, preload } = require(path.resolve(__dirname, 'webpack-config', 'template-resources'))
 const logo = null
 
 const mode = yargs.argv.p ? 'production' : 'development'
+const environmentConfig = require(path.resolve(__dirname, 'webpack-config', 'environment'))[mode]
 
 const hbsUse = [{ loader: 'handlebars-loader' }]
 // if (mode === 'production') { hbsUse.push({ loader: 'prerender-loader' }) }
-
-if (yargs.argv['$0'].search('webpack-dev-server') !== -1) {
-  require(path.resolve(process.cwd(), './mock-server/server'))
-}
 
 module.exports = {
   mode,
@@ -39,7 +38,10 @@ module.exports = {
       preload
     }),
     new ResourceHintsWebpackPlugin(),
-    new BundleAnalyzerPlugin({ analyzerMode: mode === 'production' ? 'static' : 'disabled' })
+    new BundleAnalyzerPlugin({ analyzerMode: mode === 'production' ? 'static' : 'disabled' }),
+    new DefinePlugin({
+      API_HOST: JSON.stringify(environmentConfig.API_HOST)
+    })
   ],
   module: {
     rules: [{

@@ -4,11 +4,12 @@ import classnames from 'classnames'
 import * as styles from './expandable.scss'
 
 interface Props {
-  titleClass?: string
+  shadow?: boolean
   children: JSX.Element[]
   lightBackground?: boolean
   expanded?: boolean
   onClick?: () => void
+  locked?: boolean
 }
 
 interface State {
@@ -23,15 +24,25 @@ export class Expandable extends Component<Props, State> {
 
   render () {
     return (
-      <section>
-        <div className={classnames(styles.title, this.props.titleClass)} onClick={this.props.onClick}>
-          <button className={classnames(
-            styles.icon,
-            { [styles.iconLightBackground]: this.props.lightBackground },
-            { [styles.iconExpanded]: this.props.expanded }
-          )}>
-            &#x25b7;
-          </button>
+      <section className={styles.section}>
+        <div
+          className={classnames(
+            styles.title,
+            { [styles.titleExpanded]: this.props.expanded && this.props.shadow }
+          )}
+          onClick={this.props.locked ? () => { /* no-op */ } : this.props.onClick}
+        >
+          {
+            this.props.locked ?
+            null :
+            <button className={classnames(
+              styles.icon,
+              { [styles.iconLightBackground]: this.props.lightBackground },
+              { [styles.iconExpanded]: this.props.expanded }
+            )}>
+              &#x25b7;
+            </button>
+          }
           { this.props.children[0] }
         </div>
         { this.renderExpander() }
@@ -39,7 +50,15 @@ export class Expandable extends Component<Props, State> {
     )
   }
 
+  componentDidMount () {
+    this.doExpandCollapse()
+  }
+
   componentDidUpdate () {
+    this.doExpandCollapse()
+  }
+
+  private doExpandCollapse = () => {
     if (this.props.expanded && this.state.expanderHeight === 0) {
       this.expand()
     } else if (!this.props.expanded && this.state.expanderHeight !== 0) {

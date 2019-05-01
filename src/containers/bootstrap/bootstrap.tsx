@@ -13,7 +13,7 @@ type Props = TokenProps & CharacterProps
 export default class Bootstrap extends Component<Props> {
   render () { return <span /> }
 
-  componentWillMount () {
+  componentDidMount () {
     const valid = this.checkToken()
     if (valid) { this.loadCharacters() }
   }

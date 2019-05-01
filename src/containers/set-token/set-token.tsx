@@ -59,12 +59,12 @@ export default class SetToken extends Component<Props, State> {
             <Input
               value={this.state.tokenInput}
               onInput={this.storeInputToken}
-              placeholder='access token'
+              label='Access Token'
               className={styles.input}
             />
             <div className={styles.actions}>
               <Button text='enter' primary onClick={this.setToken} type='submit' />
-              <Button text='Demo' onClick={() => {}} />
+              <Button text='Demo' onClick={() => { /* no-op */ }} />
             </div>
           </form>
         </div>

@@ -2,48 +2,47 @@
 @import '../../assets/colors';
 
 .characterDetail {
-  $side-padding: 1rem;
-
   position: relative;
+  /*
+  Webkit does not stack elements in a relative-positioned container correctly.
+  The following hack forces it to.
+  */
+  -webkit-transform: translateZ(0);
   color: $text-light;
   height: calc(100vh - #{$header-height} - #{$safari-bottom-buffer});
   width: 100vw;
 
   .sectionExpander {
-     box-shadow: 0 5px 5px 1px $color-black;
-     position: relative;
+    display: block;
   }
 
-  .sectionTitle {
-    padding: 0 $side-padding;
-  }
+  @media screen and (min-width: $small-viewport-width-minimum) {
+    max-width: 80vw;
+    margin: 0 auto;
 
-  .detailSection {
-    padding: $side-padding;
-    background-color: $color-white;
-    color: $text-dark;
-  }
-
-  .detailLine {
-    display: flex;
-    justify-content: space-between;
+    .sectionExpander {
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
   }
 }
 
-.infoItem {
-  margin-bottom: 1rem;
-  flex-grow: 1;
+.edit {
+  float: right;
+}
 
-  &+& { margin-left: 1rem; }
+.form { clear: both; }
 
-  .label {
-    text-transform: uppercase;
-    font-size: 0.7rem;
-  }
+.detailSection {
+  padding: 1rem;
+  background-color: $color-dark-grey;
+  color: $text-light;
+}
 
-  .data {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid $color-darkest;
-    height: 1.25rem;
-  }
+.detailLine {
+  clear: both;
+  height: 4.5rem;
+  display: grid;
+  grid-column-gap: 0.5rem;
 }

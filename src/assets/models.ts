@@ -18,6 +18,20 @@ export interface AttributeList {
   logic: number
   intuition: number
   charisma: number
+  edge: number
+}
+
+export interface OtherAttributes {
+  essence: number
+  'Magic/Resonance': number
+  initiative: string
+  matrixInitiative: string
+  astralInitiative: string
+  composure: number
+  judgeIntentions: number
+  memory: number
+  'Lift/Carry': number
+  movement: string
 }
 
 export type Attribute = keyof AttributeList
@@ -30,15 +44,15 @@ export interface CharacterModel {
   ethnicity: string
   brief: string
   description: string
+  age: number,
+  sex: string,
+  height: string,
+  weight: number | string,
+  streetCred: number,
+  notoriety: number,
+  publicAwareness: number,
+  karma: number,
+  lifetimeKarma: number,
+  personalNotes: string[],
   attributes: AttributeList
-}
-
-export const Colors = {
-  colorBlack: 'rgb(0, 0, 0)',
-  colorWhite: 'rgb(255, 255, 255)',
-  colorDarkest: 'rgb(16, 32, 48)',
-  colorDark: 'rgb(23, 45, 68)',
-  colorGreen: 'rgb(66, 158, 162)',
-  colorRed: 'rgb(167, 35, 26)',
-  colorLightGrey: 'rgb(200, 200, 200)'
 }

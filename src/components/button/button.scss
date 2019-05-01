@@ -35,4 +35,15 @@
 
     &:focus, &:active, &:hover { @include boxShadow($color-red); }
   }
+
+  &.icon {
+    font-size: 1.5rem;
+    text-transform: none;
+    color: $text-dark;
+    border: none;
+
+    &.dark {
+      color: $text-light;
+    }
+  }
 }

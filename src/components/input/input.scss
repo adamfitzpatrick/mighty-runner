@@ -1,28 +1,51 @@
 @import '../../assets/colors';
 @import '../../assets/typography';
+@import '../../assets/constants';
+
+.outerWrapper {
+  margin: 0.75rem 0;
+
+  &.lowProfile {
+    display: flex;
+    line-height: 3rem;
+
+    .label {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.label {
+  display: block;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.labelHidden {
+  visibility: hidden;
+}
 
 .inputWrapper {
   position: relative;
-  height: 2rem;
-  margin-bottom: 1rem;
 
   &:before {
     display: block;
     position: absolute;
     content: ' ';
     width: 100%;
-    height: 100%;
-    transition: background-color 0.25s ease-in-out,
-      box-shadow 0.25s ease-in-out;
+    height: 2rem;
+    transition: background-color $transition-duration $transition-timing,
+      box-shadow $transition-duration $transition-timing;
     box-shadow: none;
-    background-color: transparent;
+    background-color: transparentize($color-grey, 0.8);
   }
 
+  &.disabled:before { opacity: 0; }
+
   &.focused:before {
-    background-color: transparentize($color-green, 0.8);
-    box-shadow: 0 0 20px $color-green inset,
-      0 0 10px $color-green,
-      0 0 20px $color-green;
+    background-color: transparentize($color-green, 0.6);
   }
 
   .input {
@@ -30,12 +53,18 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     color: $text-light;
     background: none;
-    border: 1px solid $color-green;
+    border: none;
+    border-bottom: 1px solid $color-grey;
     border-radius: 0;
-    outline: none;
-    font-family: $code-font;
+    font-size: 1rem;
+    font-family: $body-font;
+  }
+
+  .inputDark {
+    border-bottom: 1px solid $color-dark;
+    color: $text-dark;
   }
 }
