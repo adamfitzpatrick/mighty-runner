@@ -4,7 +4,6 @@ import { Provider } from 'mobx-preact'
 
 import { TokenProps, token } from '@state/token-store'
 import { CharacterProps, character } from '@state/character-store'
-import { DetailViewProps, detailView } from './detail-view-store'
 
 interface Props {
   children?: JSX.Element[],
@@ -12,13 +11,11 @@ interface Props {
 
 type ProviderProps =
   Required<TokenProps> &
-  Required<CharacterProps> &
-  Required<DetailViewProps>
+  Required<CharacterProps>
 
 const stores: ProviderProps = {
   token,
-  character,
-  detailView
+  character
 }
 
 const MobxProvider = ({ children }: Props) => (

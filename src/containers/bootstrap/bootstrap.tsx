@@ -14,8 +14,8 @@ export default class Bootstrap extends Component<Props> {
   render () { return <span /> }
 
   componentDidMount () {
-    const valid = this.checkToken()
-    if (valid) { this.loadCharacters() }
+    // const valid = this.checkToken()
+    // if (valid) { this.loadCharacters() }
   }
 
   private checkToken () {
