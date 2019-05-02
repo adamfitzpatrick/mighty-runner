@@ -20,8 +20,10 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: $color-darkest;
+  /*
   background-image: radial-gradient(circle at center, rgba(230, 139, 100, 0.5), transparentize($color-darkest, 1)),
     radial-gradient(circle farthest-side at 0 100vh, rgba(230, 139, 100, 0.7), rgba(16, 32, 48, 0));
+  */
   height: 100vh;
   width: 100vw;
 }

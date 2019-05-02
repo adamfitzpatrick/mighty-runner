@@ -4,6 +4,7 @@ import { Provider } from 'mobx-preact'
 
 import { TokenProps, token } from '@state/token-store'
 import { CharacterProps, character } from '@state/character-store'
+import { AppStateProps, appState } from '@state/app-state-store'
 
 interface Props {
   children?: JSX.Element[],
@@ -11,11 +12,13 @@ interface Props {
 
 type ProviderProps =
   Required<TokenProps> &
-  Required<CharacterProps>
+  Required<CharacterProps> &
+  Required<AppStateProps>
 
 const stores: ProviderProps = {
   token,
-  character
+  character,
+  appState
 }
 
 const MobxProvider = ({ children }: Props) => (
