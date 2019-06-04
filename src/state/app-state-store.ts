@@ -4,10 +4,14 @@ export interface AppStateProps {
   appState?: AppStateStore
 }
 
-export type AppState = 'LOADING' | 'LOADED'
+export enum AppState {
+  LOADING,
+  LOADING_COMPLETE,
+  LOADING_ANIMATION_COMPLETE
+}
 
 class AppStateStore {
-  @observable currentState: AppState = 'LOADING'
+  @observable currentState: AppState = AppState.LOADING_COMPLETE
 }
 
 export const appState = new AppStateStore()

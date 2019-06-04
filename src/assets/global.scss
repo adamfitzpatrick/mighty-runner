@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
   background-color: $color-darkest;
   /*
   background-image: radial-gradient(circle at center, rgba(230, 139, 100, 0.5), transparentize($color-darkest, 1)),
@@ -26,4 +26,10 @@ body {
   */
   height: 100vh;
   width: 100vw;
+}
+
+table.striped {
+  & tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }

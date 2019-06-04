@@ -14,7 +14,7 @@ const mode = yargs.argv.p ? 'production' : 'development'
 const environmentConfig = require(path.resolve(__dirname, 'webpack-config', 'environment'))[mode]
 
 const hbsUse = [{ loader: 'handlebars-loader' }]
-// if (mode === 'production') { hbsUse.push({ loader: 'prerender-loader' }) }
+if (mode === 'production') { hbsUse.push({ loader: 'prerender-loader' }) }
 
 module.exports = {
   mode,

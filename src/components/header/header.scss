@@ -1,0 +1,12 @@
+@import '../../assets/typography';
+@import '../../assets/colors';
+
+.header {
+  position: fixed;
+  margin: 2rem 5rem;
+  display: flex;
+  align-items: center;
+  font-family: $title-font;
+  font-size: 2rem;
+  color: $text-light;
+}

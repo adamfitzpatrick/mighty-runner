@@ -1,20 +1,37 @@
 import { h, Component } from 'preact'
-import { Router, route } from 'preact-router'
+import { Router } from 'preact-router'
+import { Match } from 'preact-router/match'
 
 import Bootstrap from '@containers/bootstrap/bootstrap'
 import MobxProvider from '@state/mobx-provider'
 import BaseRoute from '@routes/base-route'
-import DigiGridBackground from '@containers/digi-grid-background'
+import Background from '@containers/background'
+import Header from '@components/header'
+import DetailRoute from '@routes/detail-route';
 
 export default class App extends Component<{}, {}> {
   render () {
     return (
       <MobxProvider>
-        <DigiGridBackground />
+        <Background />
         <Bootstrap />
         <Router>
-          <BaseRoute path='/' />
-          <div path='/home'>Home</div>
+          <Match path='/'>
+            {
+              () => <span>
+                <BaseRoute path='/' />
+                <Header />
+              </span>
+            }
+          </Match>
+          <Match path='/detail/:id'>
+            {
+              () => <span>
+                <DetailRoute id='1'/>
+                <Header showName />
+              </span>
+            }
+          </Match>
         </Router>
       </MobxProvider>
     )

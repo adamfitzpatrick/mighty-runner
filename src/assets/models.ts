@@ -7,6 +7,7 @@ export interface ImageTransform {
 export interface ImageDefinition {
   url: string
   thumbnailTransform: ImageTransform
+  fullViewTransform: ImageTransform
 }
 
 export interface AttributeList {
@@ -18,10 +19,10 @@ export interface AttributeList {
   logic: number
   intuition: number
   charisma: number
-  edge: number
 }
 
 export interface OtherAttributes {
+  edge: number
   essence: number
   'Magic/Resonance': number
   initiative: string
@@ -42,7 +43,7 @@ export interface CharacterModel {
   name: string
   metatype: string
   ethnicity: string
-  brief: string
+  role: string
   description: string
   age: number,
   sex: string,
@@ -52,7 +53,8 @@ export interface CharacterModel {
   notoriety: number,
   publicAwareness: number,
   karma: number,
-  lifetimeKarma: number,
-  personalNotes: string[],
-  attributes: AttributeList
+  totalKarma: number,
+  personalNotes?: string[],
+  attributes: AttributeList,
+  otherAttributes: OtherAttributes
 }
