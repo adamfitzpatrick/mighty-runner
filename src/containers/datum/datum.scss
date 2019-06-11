@@ -1,0 +1,59 @@
+.displayWrapper {
+  transition: padding 0.1s ease-in, background-color 0.1s ease-in;
+}
+
+.displayWrapperVisible {
+  position: relative;
+  background-color: #1d4d7d;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  padding: 1rem;
+  width: 412px;
+}
+
+.datum {
+  position: absolute;
+  left: 0;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  color: #fff;
+  transition: max-height 0.1s 0.1s ease-in, background-color 0.1s 0.1s ease-in, padding 0.1s 0.1s ease-in;
+  overflow: hidden;
+  max-height: 0vh;
+  margin-top: 1rem;
+  width: 444px;
+  box-sizing: border-box;
+}
+
+.datumVisible {
+  padding-top: 1rem;
+  background-color: #1d4d7d;
+}
+
+.title {
+  margin: 1rem;
+}
+
+.mod {
+  display: flex;
+  flex-basis: 1;
+  margin: 0 1rem 1rem;
+
+  input {
+    margin-right: 1rem;
+    flex-grow: 0;
+  }
+
+  *:nth-child(2) { flex-grow: 1; }
+
+  *:last-child {
+    margin-left: 1rem;
+    flex-grow: 0;
+  }
+}
+
+.editLink {
+  margin: 0 1rem 1rem;
+  color: #fff;
+  font-style: italic;
+}

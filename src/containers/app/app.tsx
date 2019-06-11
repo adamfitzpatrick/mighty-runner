@@ -7,7 +7,8 @@ import MobxProvider from '@state/mobx-provider'
 import BaseRoute from '@routes/base-route'
 import Background from '@containers/background'
 import Header from '@components/header'
-import DetailRoute from '@routes/detail-route';
+import DetailRoute from '@routes/detail-route'
+import DataTester from '@containers/data-tester'
 
 export default class App extends Component<{}, {}> {
   render () {
@@ -32,6 +33,7 @@ export default class App extends Component<{}, {}> {
               </span>
             }
           </Match>
+          <DataTester path='/data-tester' />
         </Router>
       </MobxProvider>
     )

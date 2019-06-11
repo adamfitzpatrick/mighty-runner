@@ -1,0 +1,30 @@
+{
+  "character": [
+    {
+      "id": 1,
+      "attributes": {
+        "body": {
+          "initial": 3,
+          "maximum": 8,
+          "creationPoints": 3
+        }
+      },
+      "gear": [
+        {
+          "name": "Cybereyes 3",
+          "type": "Cyberware",
+          "capacity": 12
+        }
+      ],
+      "effects": {
+        "1": {
+          "id": 1,
+          "name": "Cybereyes 3",
+          "effectPath": "otherAttributes.essence",
+          "active": "false",
+          "value": -0.4
+        }
+      }
+    }
+  ]
+}

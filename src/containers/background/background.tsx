@@ -77,7 +77,7 @@ export default class Background extends Component<Props, {}> {
   }
 
   componentDidMount () {
-    this.runGl()
+    // this.runGl()
   }
 
   private runGl = () => {

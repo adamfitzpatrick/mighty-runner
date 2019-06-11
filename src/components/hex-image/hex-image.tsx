@@ -47,7 +47,6 @@ function renderDead () {
 }
 
 export default function HexImage (props: HexImageProps) {
-  console.log(props.image, props.bold)
   const style = props.center ? { width: '100%' } : (props.width ? { width: props.width } : null)
   return (
     <svg viewBox='0 0 100 118' className={styles.hexImage} style={style}>

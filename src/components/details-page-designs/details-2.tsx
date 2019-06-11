@@ -1,6 +1,7 @@
-import { h } from 'preact'
-import HexImage from '@components/hex-image';
-import { CharacterModel } from '@assets/models';
+import { h, Component } from 'preact'
+import HexImage from '@components/hex-image'
+import { CharacterModel } from '@assets/models'
+import Datum from '@containers/datum'
 
 const character = {
   'id': '1',
@@ -99,42 +100,62 @@ function showPersonalData () {
         width: '40vw',
         top: '4.5rem',
         left: '45vw',
-        display: 'flex',
-        flexDirection: 'column',
-        flexWrap: 'wrap',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(6, 1fr)',
         height: '3rem'
       }}>
-        {dataLabel('metatype')}
-        {data(character.metatype)}
-        {dataLabel('ethnicity')}
-        {data(character.ethnicity)}
-        {dataLabel('age')}
-        {data(character.age)}
-        {dataLabel('sex')}
-        {data(character.sex)}
-        {dataLabel('height')}
-        {data(character.height)}
-        {dataLabel('weight')}
-        {data(character.weight)}
+        <div>
+          {dataLabel('metatype')}
+          {data(character.metatype)}
+        </div>
+        <div>
+          {dataLabel('ethnicity')}
+          {data(character.ethnicity)}
+        </div>
+        <div>
+          {dataLabel('age')}
+          {data(character.age)}
+        </div>
+        <div>
+          {dataLabel('sex')}
+          {data(character.sex)}
+        </div>
+        <div>
+          {dataLabel('height')}
+          {data(character.height)}
+        </div>
+        <div>
+          {dataLabel('weight')}
+          {data(character.weight)}
+        </div>
       </div>
       <div style={{
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 2fr 1fr 1fr',
         height: '3rem',
-        flexWrap: 'wrap',
         width: '40vw',
         marginTop: '-0.5rem'
       }}>
-        {dataLabel('street cred')}
-        {data(character.streetCred)}
-        {dataLabel('notoriety')}
-        {data(character.notoriety)}
-        {dataLabel('public awareness')}
-        {data(character.publicAwareness)}
-        {dataLabel('karma')}
-        {data(character.karma)}
-        {dataLabel('total karma')}
-        {data(character.totalKarma)}
+        <div>
+          {dataLabel('street cred')}
+          {data(character.streetCred)}
+        </div>
+        <div>
+          {dataLabel('notoriety')}
+          {data(character.notoriety)}
+        </div>
+        <div>
+          {dataLabel('public awareness')}
+          {data(character.publicAwareness)}
+        </div>
+        <div>
+          {dataLabel('karma')}
+          {data(character.karma)}
+        </div>
+        <div>
+          {dataLabel('total karma')}
+          {data(character.totalKarma)}
+        </div>
       </div>
     </div>
   )
@@ -264,50 +285,161 @@ function qualities () {
     }}>
       <table style={{
         tableLayout: 'fixed',
-        borderCollapse: 'collapse',
-      }} className='striped'>
+        borderCollapse: 'collapse'
+      }}>
         <tr>
-          <th>Qualities</th>
-          <th>Karma</th>
+          <th style={{ borderBottom: '1px solid white' }}>Qualities</th>
         </tr>
         <tr>
           <td>Mild addiction (alcohol)</td>
-          <td style={karmaColumnStyle}>4</td>
         </tr>
         <tr>
           <td>Mild common allergy (hayfever)</td>
-          <td style={karmaColumnStyle}>10</td>
         </tr>
         <tr>
           <td>Weak immune system</td>
-          <td style={karmaColumnStyle}>10</td>
         </tr>
         <tr>
           <td>Exceptional attribute</td>
-          <td style={karmaColumnStyle}>-14</td>
         </tr>
         <tr>
           <td>First impression</td>
-          <td style={karmaColumnStyle}>-11</td>
         </tr>
       </table>
     </div>
   )
 }
 
-export default function () {
+function activeSkills (close: JSX.EventHandler<MouseEvent>, open: JSX.EventHandler<MouseEvent>, modsVisible: boolean) {
   return (
     <div style={{
       position: 'absolute',
-      top: '0',
-      left: '0',
-      color: 'white',
-      textAlign: 'left'
+      top: '200px',
+      left: '360px'
     }}>
-      {showImage()}
-      {showPersonalData()}
-      {attributes()}
-      {qualities()}
+      <table style={{
+        tableLayout: 'fixed',
+        borderCollapse: 'collapse',
+        width: '300px'
+      }}>
+        <tr>
+          <th style={{
+            width: '250px'
+          }}>
+            <div style={{
+              borderBottom: '2px solid rgb(167,35, 26)',
+              height: '2rem',
+              marginRight: '0.5rem'
+            }}>
+              SKILL
+            </div>
+          </th>
+          <th style={{
+            width: '100px'
+          }}>
+            <div style={{
+              borderBottom: '2px solid rgb(167,35, 26)',
+              height: '2rem',
+              marginRight: '0.5rem'
+            }}>
+              ATTR
+            </div>
+          </th>
+          <th style={{
+            width: '100px'
+          }}>
+            <div style={{
+              borderBottom: '2px solid rgb(167,35, 26)',
+              height: '2rem',
+              marginRight: '0.5rem'
+            }}>
+              RATING
+            </div>
+          </th>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td onClick={open}><Datum close={close} visible={modsVisible}>Negotiation</Datum></td>
+          <th>CHA</th>
+          <td>5</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Con</td>
+          <th>CHA</th>
+          <td>6</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Impersonation</td>
+          <th>CHA</th>
+          <td>6</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Etiquette</td>
+          <th>CHA</th>
+          <td>3</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Automatics (assault)</td>
+          <th>AGI</th>
+          <td>6</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Pistols</td>
+          <th>AGI</th>
+          <td>4</td>
+        </tr>
+        <tr style={{
+          height: '2rem'
+        }}>
+          <td>Thrown Weapons</td>
+          <th>AGI</th>
+          <td>2</td>
+        </tr>
+      </table>
     </div>
   )
+}
+
+export default class Details2 extends Component<{}, { modsVisible: boolean }> {
+  state = { modsVisible: false }
+
+  close = (event: MouseEvent) => {
+    this.setState({ modsVisible: false })
+    event.stopPropagation()
+  }
+
+  open = () => {
+    if (!this.state.modsVisible) {
+      this.setState({ modsVisible: true })
+    }
+  }
+
+  render () {
+    return (
+      <div style={{
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        color: 'white',
+        textAlign: 'left'
+      }}>
+        {showImage()}
+        {showPersonalData()}
+        {attributes()}
+        {qualities()}
+        {activeSkills(this.close, this.open, this.state.modsVisible)}
+      </div>
+    )
+  }
 }
