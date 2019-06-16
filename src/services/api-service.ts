@@ -1,4 +1,4 @@
-import { CharacterModel } from '@assets/models'
+import { Character } from '@models'
 
 declare var API_HOST: string
 
@@ -47,19 +47,19 @@ function handleResponse<T> (response: TypedResponse<T>) {
 const TOKEN_LOCAL_STORAGE_KEY = 'mighty_runner_api_access_token'
 const URL = `${API_HOST}/character`
 
-const getCharacterList = async (): Promise<CharacterModel[]> => {
+const getCharacterList = async (): Promise<Character[]> => {
   const headers = getAuthHeader()
   return fetch(ApiService.URL, { headers })
-    .then(response => handleResponse<CharacterModel[]>(response))
+    .then(response => handleResponse<Character[]>(response))
 }
 
-const getCharacter = async (characterId: string): Promise<CharacterModel> => {
+const getCharacter = async (characterId: string): Promise<Character> => {
   const headers = getAuthHeader()
   return fetch(`${ApiService.URL}/${characterId}`, { headers })
-    .then(response => handleResponse<CharacterModel>(response))
+    .then(response => handleResponse<Character>(response))
 }
 
-const putCharacter = async (characterId: string, character: CharacterModel): Promise<AcceptedMessage> => {
+const putCharacter = async (characterId: string, character: Character): Promise<AcceptedMessage> => {
   const headers = getAuthHeader()
   const options = {
     headers,

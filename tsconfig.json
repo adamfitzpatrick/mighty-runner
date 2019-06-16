@@ -11,7 +11,8 @@
             "@containers/*": [ "./src/containers/*" ],
             "@routes/*": [ "./src/routes/*" ],
             "@services/*": [ "./src/services/*" ],
-            "@state/*": [ "./src/state/*" ]
+            "@state/*": [ "./src/state/*" ],
+            "@models": [ "./models" ]
         },
         "target": "es5",
         "lib": [

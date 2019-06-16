@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && webpack -p",
+    "generate": "node ./utils/generator.js",
     "lint": "tslint src/**/*.{ts,tsx} --project tsconfig.json",
-    "start": "webpack-dev-server --env local",
+    "start": "webpack-dev-server --env local --config config/webpack.config.js",
     "tdd": "jest --watch --coverage",
     "test": "jest --coverage"
   },

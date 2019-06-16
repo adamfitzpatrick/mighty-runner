@@ -6,18 +6,9 @@
 @import './colors';
 @import './constants';
 
-:root {
-  --large-logo-top-space: 40vh;
-}
-
-@media screen and (orientation: landscape) and (max-height: $short-viewport-maximum) {
-  :root {
-    --large-logo-top-space: 25vh;
-  }
-}
-
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  color: $text-light;
   background-color: $color-darkest;
 }
