@@ -1,6 +1,6 @@
 import ApiService from './api-service'
 import * as jestFetchMock from 'jest-fetch-mock'
-import { CharacterModel } from '@assets/models'
+import { Character } from '@models'
 
 describe('ApiService', () => {
   let token: string
@@ -83,12 +83,12 @@ describe('ApiService', () => {
   describe('putCharacter', () => {
     test('returns a rejected promise if there is no token', () => {
       removeToken()
-      return expect(ApiService.putCharacter('character-id', {} as CharacterModel)).rejects.toThrow(/token is missing/)
+      return expect(ApiService.putCharacter('character-id', {} as Character)).rejects.toThrow(/token is missing/)
     })
 
     test('returns a rejected promise if the request fails', () => {
       fetchMock.mockRejectOnce(new Error('error'))
-      return expect(ApiService.putCharacter('character-id', {} as CharacterModel)).rejects.toThrow(/error/)
+      return expect(ApiService.putCharacter('character-id', {} as Character)).rejects.toThrow(/error/)
     })
 
     test('returns the accepted response if the request succeeds', () => {
@@ -97,7 +97,7 @@ describe('ApiService', () => {
         Authorization: 'Bearer token'
       })
 
-      return ApiService.putCharacter('character-id', {} as CharacterModel).then((data: any) => {
+      return ApiService.putCharacter('character-id', {} as Character).then((data: any) => {
         expect(fetchMock).toHaveBeenCalledWith(
           'testing-url/character/character-id',
           {

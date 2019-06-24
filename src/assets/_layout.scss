@@ -11,3 +11,26 @@ $short-viewport-maximum: 641px;
 $safari-bottom-buffer: 112px;
 
 $large-logo-top-space: 30vh;
+
+@mixin focusIndicator {
+  /* width, height, border-radius and other rules will need to be specified on the implementing selector. */
+  position: absolute;
+  top: -0.25rem;
+  left: -0.25rem;
+  border: 1px solid $color-white;
+  box-sizing: border-box;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    width: calc(100% + 3px);
+    height: calc(100% + 3px);
+    top: -1.5px;
+    left: -1.5px;
+    display: block;
+    border: 3px solid $color-white;
+    border-radius: inherit;
+    box-sizing: border-box;
+    filter: blur(3px);
+  }
+}

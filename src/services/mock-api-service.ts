@@ -1,4 +1,4 @@
-import { Character } from '@models'
+import { Character, Attribute } from '@models'
 
 function getCharacter (...rest: any[]): Promise<Character> {
   return Promise.resolve({
@@ -35,5 +35,5 @@ function getCharacter (...rest: any[]): Promise<Character> {
       active: true,
       value: 2
     }]
-  })
+  } as any as Character)
 }

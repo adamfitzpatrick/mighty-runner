@@ -3,19 +3,22 @@ import { h } from 'preact'
 import { Provider } from 'mobx-preact'
 
 import { TokenProps, token } from '@state/token-store'
-import { CharacterProps, character } from '@state/characters-store'
+import { CharactersProps, characters } from '@state/characters-store'
+import { CharacterProps, character } from '@state/character-store'
 
 type Props = {
-  children: JSX.ElementChildrenAttribute
+  children: JSX.Element | JSX.Element[]
 }
 
 type ProviderProps =
   Required<TokenProps> &
+  Required<CharactersProps> &
   Required<CharacterProps>
 
 const stores: ProviderProps = {
   token,
-  character
+  characters: characters,
+  character: character
 }
 
 const MobxProvider = ({ children }: Props) => (

@@ -1,18 +1,27 @@
 import { observable, computed, reaction } from 'mobx'
 import ApiService from '@services/api-service'
-import { Character } from '@models/character'
+import { Character } from '@models'
 
-export interface CharacterProps {
-  character?: CharacterStore
+export interface CharactersProps {
+  characters?: CharactersStore
 }
 
-class CharacterStore {
+/**
+ * Class for management of all character data and state within the application.
+ * Static values of storage keys for the user's character list are maintained here.
+ * Additionally, this store provides the side effect of loading from and updating
+ * the character list to the browser's local storage.
+ */
+class CharactersStore {
   static LIST_LOCAL_STORAGE_KEY = 'mighty_runner_character_list'
-  static ACTIVE_LOCAL_STORAGE_KEY = 'mighty_runner_character_active'
   static UPDATE_DELAY = 1000
 
   @observable list: Character[] | null = []
 
+  /**
+   * Note that the constructor creates a reactive worker to update the local
+   * storage character list whenever the in-memory list is set or modified.
+   */
   constructor () {
     reaction(
       () => this.list,
@@ -21,41 +30,23 @@ class CharacterStore {
     this.retrieveLocalList()
   }
 
-  @computed get activeCharacter (): Character | undefined {
-    return this.list!.find(character => character.id === this.getCharacterId())
-  }
-
-  set activeCharacter (updated: Character | undefined) {
-    const index = this.list!.findIndex(character => character.id === this.getCharacterId())
-    if (updated) {
-      this.list![index] = updated
-      this.setCharacterList()
-    }
-  }
-
-  persistActive () {
-    const active = this.activeCharacter
-    if (active) {
-      return ApiService.putCharacter(active.id, active)
-    }
-  }
-
-  private getCharacterId () {
-    const pathElements = window.location.pathname.split('/')
-    return pathElements[pathElements.length - 1]
-  }
-
+  /**
+   * Retrieves a character list from local storage if one is available.
+   */
   private retrieveLocalList = () => {
     try {
-      this.list = JSON.parse(localStorage.getItem(CharacterStore.LIST_LOCAL_STORAGE_KEY) as string)
+      this.list = JSON.parse(localStorage.getItem(CharactersStore.LIST_LOCAL_STORAGE_KEY) as string)
     } catch (e) {
       this.list = null
     }
   }
 
+  /**
+   * Stores the in-memory character list to local storage.
+   */
   private setCharacterList = () => {
-    localStorage.setItem(CharacterStore.LIST_LOCAL_STORAGE_KEY, JSON.stringify(this.list))
+    localStorage.setItem(CharactersStore.LIST_LOCAL_STORAGE_KEY, JSON.stringify(this.list))
   }
 }
 
-export const character = new CharacterStore()
+export const characters = new CharactersStore()

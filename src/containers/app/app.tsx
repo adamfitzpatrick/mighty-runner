@@ -1,13 +1,14 @@
 import { h } from 'preact'
 
-import Stat from '@components/stat'
-import * as styles from './app.scss'
-import SmartStat from '@containers/smart-stat';
+import MobxProvider from '@state/mobx-provider'
+import SmartStat from '@containers/smart-stat'
 
 export default function App () {
   return (
-    <div className={styles.app}>
-      <SmartStat />
-    </div>
+    <MobxProvider>
+      <div style={{ position: 'fixed', top: '5rem', left: '5rem' }}>
+        <SmartStat attributePath={ [ 'attributes', 'agility' ] } round />
+      </div>
+    </MobxProvider>
   )
 }

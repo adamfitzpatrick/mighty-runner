@@ -12,3 +12,12 @@ body {
   color: $text-light;
   background-color: $color-darkest;
 }
+
+button {
+  -webkit-appearance: none;
+  background: 0;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
