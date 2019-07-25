@@ -1,4 +1,4 @@
-import { Character } from '@models'
+import { Character, PersistableCharacter } from '@models'
 
 declare var API_HOST: string
 
@@ -47,19 +47,19 @@ function handleResponse<T> (response: TypedResponse<T>) {
 const TOKEN_LOCAL_STORAGE_KEY = 'mighty_runner_api_access_token'
 const URL = `${API_HOST}/character`
 
-const getCharacterList = async (): Promise<Character[]> => {
+const getCharacterList = async (): Promise<PersistableCharacter[]> => {
   const headers = getAuthHeader()
   return fetch(ApiService.URL, { headers })
-    .then(response => handleResponse<Character[]>(response))
+    .then(response => handleResponse<PersistableCharacter[]>(response))
 }
 
-const getCharacter = async (characterId: string): Promise<Character> => {
+const getCharacter = async (characterId: string): Promise<PersistableCharacter> => {
   const headers = getAuthHeader()
   return fetch(`${ApiService.URL}/${characterId}`, { headers })
-    .then(response => handleResponse<Character>(response))
+    .then(response => handleResponse<PersistableCharacter>(response))
 }
 
-const putCharacter = async (characterId: string, character: Character): Promise<AcceptedMessage> => {
+const putCharacter = async (characterId: string, character: PersistableCharacter): Promise<AcceptedMessage> => {
   const headers = getAuthHeader()
   const options = {
     headers,
