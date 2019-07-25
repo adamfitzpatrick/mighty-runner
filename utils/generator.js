@@ -28,6 +28,17 @@ export default function ${thing} (props: Props) {
 }
 `
 
+const thingTestTs = `import { h } from 'preact'
+import deep from 'preact-render-spy'
+import ${thing} from '.'
+
+describe('${thing} ${ container ? 'container' : 'component'}', () => {
+  test('should do nothing', () => {
+    expect(true).toEqual(true)
+  })
+})
+`
+
 const indexTs = `export { default } from './${lower}'
 `
 
@@ -46,6 +57,7 @@ if (container) {
 
 fs.mkdirSync(dest)
 fs.writeFileSync(path.resolve(dest, `${lower}.tsx`), thingTs)
+fs.writeFileSync(path.resolve(dest, `${lower}.test.tsx`), thingTestTs)
 fs.writeFileSync(path.resolve(dest, 'index.ts'), indexTs)
 fs.writeFileSync(path.resolve(dest, `${lower}.scss`), scss)
 fs.writeFileSync(path.resolve(dest, `${lower}.scss.d.ts`), scssD)

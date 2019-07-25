@@ -10,15 +10,20 @@ $short-viewport-maximum: 641px;
 
 $safari-bottom-buffer: 112px;
 
-$large-logo-top-space: 30vh;
+$default-border-radius: 0.25rem;
+$focus-indicator-shift: -0.25rem;
+
 
 @mixin focusIndicator {
   /* width, height, border-radius and other rules will need to be specified on the implementing selector. */
   position: absolute;
-  top: -0.25rem;
-  left: -0.25rem;
+  top: $focus-indicator-shift;
+  left: $focus-indicator-shift;
   border: 1px solid $color-white;
+  border-radius: $default-border-radius;
   box-sizing: border-box;
+  width: calc(100% + -2 * #{$focus-indicator-shift});
+  height: calc(100% + -2 * #{$focus-indicator-shift});
 
   &::before {
     content: ' ';

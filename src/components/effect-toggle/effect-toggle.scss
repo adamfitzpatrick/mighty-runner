@@ -1,0 +1,64 @@
+@import '../../assets/layout';
+@import '../../assets/colors';
+@import '../../assets/constants';
+
+.effectToggle {
+  display: flex;
+  margin: 1rem 0;
+  height: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  position: relative;
+  padding: 0;
+
+  .effectInput {
+    position: absolute;
+    opacity: 0;
+
+    &:focus + .effectFocusIndicator {
+      @include focusIndicator;
+      width: 12rem;
+      height: 1.5rem;
+      border-radius: 0.75rem;
+    }
+  }
+
+  .effectIndicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    box-sizing: border-box;
+    border: 1px solid $color-accent;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    transition: border-color $transition-duration $transition-timing;
+
+    &.active::before {
+      content: ' ';
+      display: flex;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 0.3rem;
+      background: $color-accent;
+    }
+  }
+
+  .effectName {
+    width: 7.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .effectValue {
+    display: block;
+    width: 2rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+}

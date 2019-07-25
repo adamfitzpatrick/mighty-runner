@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditStat component renders the edit-stat modal with the provided statPath 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div class="editAttributeWrapper">
+  <div class="editAttribute">
+    <h1 class="statName"></h1>
+    <h2 class="effectsListName">Effected By</h2>
+    <h2 class="effectsListName">Generates Effects On</h2>
+    <div>
+      <div class="values">
+        <label class="wrapper">
+          <span class="label">initial</span>
+          <input
+            class="input"
+            value={1}
+            onChange={[Function onChange]}
+           />
+          <span class="focusIndicator"></span>
+        </label>
+        <label class="wrapper">
+          <span class="label">chargen</span>
+          <input
+            class="input"
+            value={5}
+            onChange={[Function onChange]}
+           />
+          <span class="focusIndicator"></span>
+        </label>
+      </div>
+      <div class="otherProps">
+        <label class="wrapper">
+          <span class="label">maximum</span>
+          <input
+            class="input"
+            onChange={[Function onChange]}
+           />
+          <span class="focusIndicator"></span>
+        </label>
+      </div>
+    </div>
+    <div>
+      <label
+        class="effectToggle"
+        aria-label="Effect 1, value 1, active"
+        aria-live={true}
+      >
+        <input
+          type="checkbox"
+          value="1"
+          onClick={[Function onClick]}
+          checked={true}
+          class="effectInput"
+         />
+        <span class="effectFocusIndicator"></span>
+        <span class="effectIndicator active"></span>
+        <span class="effectName">Effect 1</span>
+        <span class="effectValue">1</span>
+      </label>
+    </div>
+    <div></div>
+    <div class="stat round">
+      <div>7</div>
+      <div class="label"></div>
+    </div>
+    <div class="addEffect">
+      <button
+        class="button icon primary"
+        onClick={[Function onClick]}
+      >
+        <span class="buttonFocusIndicator"></span>
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+`;

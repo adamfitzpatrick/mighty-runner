@@ -2,17 +2,17 @@ import { h, Component } from 'preact'
 import { inject, observer } from 'mobx-preact'
 import classnames from 'classnames'
 
-import { CharactersProps } from '@state/characters-store'
 import Stat from '@components/stat'
 import * as styles from './smart-stat.scss'
-import { CharacterProps } from '@state/character-store'
-import { Effect } from '@models'
-import EditStat from '@containers/edit-stat'
+import { ActiveCharacterProps } from '@state/active-character-store'
+import SelectEffects from '@components/select-effects'
+import { Effectable, Attributes, Attribute, EffectableValue } from '@models'
+import characterDisplay from '@services/character-display-service'
 
-type Props = CharactersProps & CharacterProps & {
-  attributePath: string[]
+type Props = ActiveCharacterProps & {
+  statName: string
+  effectableGroup: any
   round?: boolean
-  standard?: boolean
 }
 
 interface State {
@@ -22,120 +22,24 @@ interface State {
   left: boolean
 }
 
-@inject('character')
+@inject('activeCharacter')
 @observer
-export default class SmartStat extends Component<Props> {
-  state = {
-    showEffects: false,
-    editStat: true,
-    top: false,
-    left: false
-  }
+export default class SmartStat extends Component<Props, State> {
+  statRef: HTMLElement
   element: HTMLElement
 
-  identifyExternalFocus = (event: Event) => {
-    if (!this.element.contains(event.target as Node)) {
-      this.setState({ showEffects: false })
+  constructor (props: Props) {
+    super(props)
+    this.state = {
+      showEffects: false,
+      editStat: true,
+      top: false,
+      left: false
     }
-  }
-
-  showEffectsHandler = () => {
-    this.setState((state: State) => ({ showEffects: !state.showEffects }))
-  }
-
-  showEffectsAriaLabel = () => {
-    return `${this.props.attributePath.slice(-1) }: Select active effects`
-  }
-
-  effectClickHandler = (effectId: string) => {
-    this.props.character!.toggleEffect(effectId)
-  }
-
-  effectAriaLabel = (effect: Effect) => {
-    return `${effect.name}, value ${effect.value}, ${effect.active ? 'active' : 'inactive'}`
-  }
-
-  editBlurHandler = () => {
-    this.setState({ showEffects: false })
-  }
-
-  renderEffectsButton () {
-    return (
-      <button
-        className={styles.button}
-        onClick={this.showEffectsHandler}
-        aria-label={this.showEffectsAriaLabel()}
-      >
-        <span className={styles.buttonFocusIndicator} />
-      </button>
-    )
-  }
-
-  renderStat () {
-    return <div className={styles.stat}>
-      <Stat
-        label='agi'
-        value={ this.props.character!.active!.getEffectiveValue(this.props.attributePath) }
-        round={ this.props.round }
-        standard={ this.props.standard }
-      />
-    </div>
-  }
-
-  renderEffect (effect: Effect, index: number, effects: Effect[]) {
-    if (!this.state.showEffects) {
-      return <div className={styles.effect} />
-    }
-
-    return (
-      <label
-        key={effect.id}
-        className={styles.effect}
-        aria-label={ this.effectAriaLabel(effect) }
-        aria-live
-      >
-        <input
-          type='checkbox'
-          value={effect.id}
-          onClick={() => this.effectClickHandler(effect.id)}
-          checked={effect.active}
-          className={styles.effectInput}
-        />
-        <span className={styles.effectFocusIndicator} />
-        <span className={classnames(
-          styles.effectIndicator,
-          { [styles.active]: effect.active }
-        )} />
-        <span className={styles.effectName}>{ effect.name }</span>
-        <span>{ effect.value }</span>
-      </label>
-    )
-  }
-
-  renderEffects () {
-    const effects = this.props.character!.active!.getEffectsForValue(this.props.attributePath)
-    return (
-      <div className={classnames(
-        styles.effects,
-        {
-          [ styles.visible ]: this.state.showEffects,
-          [ styles.left ]: this.state.left,
-          [ styles.top ]: this.state.top
-        }
-      )}>
-        { effects.map(this.renderEffect, this) }
-        <button
-          className={styles.editButton}
-          onBlur={this.editBlurHandler}
-          onClick={() => {}}
-        >
-          Edit {this.props.attributePath.slice(-1)} data...
-        </button>
-      </div>
-    )
   }
 
   render () {
+    const effects = characterDisplay.getRelatedEffects(this.getStat(), this.props.activeCharacter!.effects!)
     return (
       <div
         className={classnames(
@@ -146,8 +50,14 @@ export default class SmartStat extends Component<Props> {
       >
         { this.renderEffectsButton() }
         { this.renderStat() }
-        { this.renderEffects() }
-        { this.state.editStat ? <EditStat attributePath={this.props.attributePath} /> : null }
+        <SelectEffects
+          effects={effects}
+          toggleHandler={this.effectClickHandler}
+          top={this.state.top}
+          left={this.state.left}
+          visible={this.state.showEffects}
+          parentStat={this.statRef}
+        />
       </div>
     )
   }
@@ -170,5 +80,70 @@ export default class SmartStat extends Component<Props> {
 
   componentWillUnmount () {
     document.removeEventListener('click', this.identifyExternalFocus)
+  }
+
+  private getStat (): Attribute {
+    return ((this.props.activeCharacter as any)[this.props.effectableGroup])[this.props.statName]
+  }
+
+  private identifyExternalFocus = (event: Event) => {
+    if (!this.element.contains(event.target as Node)) {
+      this.setState({ showEffects: false })
+    }
+  }
+
+  private showEffectsHandler = () => {
+    this.setState((state: State) => ({ showEffects: !state.showEffects }))
+  }
+
+  private showEffectsAriaLabel = () => {
+    return `${this.props.statName }: Select active effects`
+  }
+
+  private effectClickHandler = (effectId: string) => {
+    this.props.activeCharacter!.toggleEffect(effectId)
+  }
+
+  private getBaseStatValue = (): number => {
+    const stat = this.getStat()
+    return Object.keys(stat.value).reduce((accum: number, key: string) => {
+      return accum + (stat.value as EffectableValue)[key]
+    }, 0)
+  }
+
+  private getEffectedStatValue = (): number => {
+    const effects = characterDisplay.getRelatedEffects(this.getStat(), this.props.activeCharacter!.effects!)
+    return this.getBaseStatValue() + effects.reduce((accum, effect) => {
+      return accum + (effect.active ? effect.value : 0)
+    }, 0)
+  }
+
+  private renderEffectsButton () {
+    return (
+      <button
+        className={styles.button}
+        onClick={this.showEffectsHandler}
+        aria-label={this.showEffectsAriaLabel()}
+      >
+        <span className={styles.buttonFocusIndicator} />
+      </button>
+    )
+  }
+
+  private renderStat () {
+    const stat = this.getStat()
+    const label = this.props.round ? stat.shortName : stat.name
+    return (
+      <div
+        ref={ref => this.statRef = ref}
+        className={styles.stat}
+      >
+        <Stat
+          label={label}
+          value={ this.getEffectedStatValue() }
+          round={ this.props.round }
+        />
+      </div>
+    )
   }
 }

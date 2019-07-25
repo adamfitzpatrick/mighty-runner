@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component should render with the provided label & value 1`] = `
+preact-render-spy (1 nodes)
+-------
+<label class="wrapper">
+  <span class="label">label</span>
+  <input
+    class="input"
+    value="value"
+    onChange={[Function onChange]}
+   />
+  <span class="focusIndicator"></span>
+</label>
+
+`;

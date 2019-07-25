@@ -2,11 +2,9 @@ import { h } from 'preact'
 import classnames from 'classnames'
 
 import * as styles from './stat.scss'
-
 interface Props {
   label: string
   value: string | number,
-  standard?: boolean,
   round?: boolean
 }
 

@@ -1,0 +1,54 @@
+@import '../../assets/colors';
+@import '../../assets/constants';
+@import '../../assets/layout';
+
+.effects {
+  position: absolute;
+  z-index: 1;
+  top: -1rem;
+  left: -1rem;
+  background: lighten($color-darkest, 10%);
+  border-radius: 0.25rem;
+  min-height: 6rem;
+  box-sizing: border-box;
+  font-size: 0.7rem;
+  overflow: hidden;
+  width: 0;
+  transition: width $transition-duration $transition-timing;
+
+  &.left {
+    right: -1rem;
+    left: auto;
+
+    .list {
+      margin: 1rem 6rem 1rem 1rem;
+    }
+  }
+
+  &.top {
+    bottom: -1rem;
+    top: auto;
+  }
+
+  &.visible {
+    box-shadow: 15px 8px 20px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .list {
+    margin-left: 5rem;
+  }
+
+  .editButton {
+    position: absolute;
+    bottom: 0;
+    margin: 1rem;
+    color: lighten($color-accent, 20%);
+    font-style: italic;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.left {
+      margin: 0 6rem 1rem 0;
+    }
+  }
+}
