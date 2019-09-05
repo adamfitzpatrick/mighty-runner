@@ -3,7 +3,6 @@
         "noImplicitAny": true,
         "removeComments": false,
         "jsx": "react",
-        "jsxFactory": "h",
         "baseUrl": "./",
         "paths": {
             "@assets/*": [ "./src/assets/*" ],

@@ -1,5 +1,4 @@
-import { h } from 'preact'
-import deep from 'preact-render-spy'
+import * as React from 'react'
 import DataMock from '.'
 
 describe('DataMock container', () => {

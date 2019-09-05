@@ -1,12 +1,16 @@
-import { h } from 'preact'
+import * as React from 'react'
+import { Provider } from 'react-redux'
 
-import MobxProvider from '@state/mobx-provider'
-import DataMock from '@containers/data-mock';
+import configureStore from '@state/store'
+
+const store = configureStore()
+
+import DataMock from '@containers/data-mock'
 
 export default function App () {
   return (
-    <MobxProvider>
+    <Provider store={store}>
       <DataMock />
-    </MobxProvider>
+    </Provider>
   )
 }

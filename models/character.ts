@@ -1,5 +1,3 @@
-import { ActiveCharacterStore } from '@state/active-character-store'
-
 export interface EffectableValue {
   [property: string]: number
 }
@@ -11,8 +9,6 @@ export interface Effectable {
   effects?: string[],
 }
 
-export type AttributeGroup = keyof Pick<ActiveCharacterStore, 'attributes' | 'otherAttributes'>
-
 export interface Attribute extends Effectable {
   shortName: string
   maximum: number
@@ -23,16 +19,22 @@ export interface Attribute extends Effectable {
 }
 
 export interface Attributes {
+  body: Attribute
   agility: Attribute
-}
-
-export type AttributeName = 'agility'
-
-export interface OtherAttributes {
+  reaction: Attribute
+  strength: Attribute
+  willpower: Attribute
+  logic: Attribute
+  intuition: Attribute
+  charisma: Attribute
   essence: Attribute
 }
 
-export type OtherAttributeName = 'essence'
+export interface SpecialAttributes {
+  edge: Attribute
+  magic: Attribute
+  resonance: Attribute
+}
 
 export interface Effect {
   id: string
@@ -46,10 +48,7 @@ export class Character {
   userId: string
   id: string
   name: string
-}
-
-export class PersistableCharacter extends Character {
   attributes: Attributes
-  otherAttributes: OtherAttributes
+  specialAttributes: SpecialAttributes
   effects: Effect[]
 }
