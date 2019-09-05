@@ -22,6 +22,14 @@ const character = {
     }
   },
   'specialAttributes': {},
+  'gear': [{
+    'id': 'gear-1',
+    'name': 'Cyberarm',
+    'description': 'with enhanced agility',
+    'cost': '2600',
+    'availability': '10R',
+    'effects': ['1']
+  }],
   'effects': [{
     'name': 'Effect 1',
     'active': true,
@@ -35,7 +43,7 @@ const character = {
     'value': 145,
     'target': ['target','1']
   }]
-} as Character
+} as any as Character
 
 const characters: Character[] = [ character ]
 

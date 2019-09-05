@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Character, Effect } from '@models'
+import { Character, Effect, Gear } from '@models'
 
 import * as styles from './data-mock.scss'
 import { AppState } from '@state/initial-state'
@@ -37,6 +37,10 @@ function DataMock (props: DataMockProps) {
         <li>edge: { JSON.stringify(character.specialAttributes.edge) }</li>
         <li>magic: { JSON.stringify(character.specialAttributes.magic) }</li>
         <li>resonance: { JSON.stringify(character.specialAttributes.resonance) }</li>
+      </ul>
+      <h2>Gear</h2>
+      <ul>
+        { character.gear.map((gear: Gear) => <li key={gear.id}>{ JSON.stringify(gear) }</li>)}
       </ul>
       <h2>Effects</h2>
       <ul>

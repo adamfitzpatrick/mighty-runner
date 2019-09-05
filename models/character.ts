@@ -18,6 +18,14 @@ export interface Attribute extends Effectable {
   }
 }
 
+export interface Effect {
+  id: string
+  name: string
+  target: string[]
+  active: boolean
+  value: number
+}
+
 export interface Attributes {
   body: Attribute
   agility: Attribute
@@ -36,12 +44,13 @@ export interface SpecialAttributes {
   resonance: Attribute
 }
 
-export interface Effect {
+export interface Gear {
   id: string
   name: string
-  target: string[]
-  active: boolean
-  value: number
+  description: string
+  cost: number
+  availability: string
+  effects: string[]
 }
 
 export class Character {
@@ -50,5 +59,6 @@ export class Character {
   name: string
   attributes: Attributes
   specialAttributes: SpecialAttributes
+  gear: Gear[]
   effects: Effect[]
 }
