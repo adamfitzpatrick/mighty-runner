@@ -2,7 +2,7 @@ import { Character } from '@models'
 
 export interface AppState {
   characters: Character[]
-  activeCharacter: Character
+  activeCharacter: Character | null
 }
 
 const character = {
@@ -49,7 +49,7 @@ const characters: Character[] = [ character ]
 
 const initialState: AppState = {
   characters,
-  activeCharacter: character
+  activeCharacter: null
 }
 
 export default initialState

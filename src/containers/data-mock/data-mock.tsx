@@ -1,17 +1,18 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Character, Effect, Gear } from '@models'
 
-import * as styles from './data-mock.scss'
 import { AppState } from '@state/initial-state'
+import { loadCharacterCreator } from '@state/actions'
 
-interface DataMockProps {
-  activeCharacter?: Character
-}
+function DataMock () {
+  const character = useSelector((state: AppState) => state.activeCharacter)
+  const dispatch = useDispatch()
 
-function DataMock (props: DataMockProps) {
-  const character = props.activeCharacter
-  if (!character) { return null }
+  if (!character) {
+    loadCharacterCreator(dispatch)({ id: '1' } as Character)
+    return <div>no data</div>
+  }
 
   return (
     <div>
@@ -50,8 +51,4 @@ function DataMock (props: DataMockProps) {
   )
 }
 
-function mapStateToProps (state: AppState): DataMockProps {
-  return { activeCharacter: state.activeCharacter }
-}
-
-export default connect<DataMockProps, {}, {}>(mapStateToProps)(DataMock)
+export default DataMock
