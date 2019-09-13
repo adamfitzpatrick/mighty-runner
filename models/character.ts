@@ -1,3 +1,5 @@
+import { PersonalData } from './personal-data'
+
 export interface EffectableValue {
   [property: string]: number
 }
@@ -53,10 +55,15 @@ export interface Gear {
   effects: string[]
 }
 
-export class Character {
+export class CharacterIdentifier {
   userId: string
   id: string
-  name: string
+}
+
+export class Character extends CharacterIdentifier {
+  userId: string
+  id: string
+  personalData: PersonalData
   attributes: Attributes
   specialAttributes: SpecialAttributes
   gear: Gear[]

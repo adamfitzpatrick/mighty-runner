@@ -7,6 +7,8 @@ import { AppState } from '@state/initial-state'
 import { setActiveCharacterCreator, saveCharacterCreator, loadCharacterCreator } from '@state/actions'
 import { RouteComponentProps } from 'react-router'
 
+import PersonalData from '@containers/personal-data'
+
 type CharacterFormMockProps = RouteComponentProps<{ characterId: string }>
 
 function immutablyCopyCharacter (character: Character): Character {
@@ -43,10 +45,10 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
   const dispatch = useDispatch()
 
   if (!activeCharacter) {
-    loadCharacterCreator(dispatch)({ id: props.match.params.characterId } as Character)
+    loadCharacterCreator(dispatch)(props.match.params.characterId)
     return <div>no data</div>
   }
-
+/*
   const updateCharacterCreator = (path: string | string[], isNumber?: boolean) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       let value: number | string | boolean = isNumber ? parseFloat(event.target.value) || 0 : event.target.value
@@ -184,6 +186,7 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
   }
 
   const renderSpecialAttributes = (specialAttributes: SpecialAttributes) => {
+    if (!specialAttributes) { return null }
     return (
       <div>
         <h2>Special Attributes</h2>
@@ -259,7 +262,7 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
         { effects.map(effect => renderEffect(effect, true)) }
       </div>
     )
-  }
+  } */
 
   return (
     <div className={styles.characterForm}>
@@ -271,18 +274,7 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
         <span>id</span>
         <strong>{activeCharacter.id}</strong>
       </div>
-      <label>
-        <span>name</span>
-        <input
-          value={activeCharacter.name}
-          onChange={updateCharacterCreator('name')}
-          onBlur={blurHandler}
-        />
-      </label>
-      { renderAttributes(activeCharacter.attributes) }
-      { renderSpecialAttributes(activeCharacter.specialAttributes) }
-      { renderGear(activeCharacter.gear) }
-      { renderEffects(activeCharacter.effects) }
+      <PersonalData />
     </div>
   )
 }

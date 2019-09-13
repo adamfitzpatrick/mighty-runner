@@ -5,15 +5,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import configureStore from '@state/store'
 
 const store = configureStore()
-
-import DataMock from '@containers/data-mock'
 import CharacterFormMock from '@containers/character-form-mock'
+import Bootstrap from '@containers/bootstrap'
 
 export default function App () {
   return (
     <Provider store={store}>
+      <Bootstrap />
       <Router>
-        <Route path='/' exact component={DataMock} />
         <Route path='/form/:characterId' exact component={CharacterFormMock} />
       </Router>
     </Provider>

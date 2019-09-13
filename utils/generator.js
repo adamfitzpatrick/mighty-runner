@@ -17,7 +17,7 @@ const lower = thing.replace(/^[A-Z]/, a => a.toLowerCase()).replace(/[A-Z]/g, a 
 thing = thing.replace(/^[a-z]/, a => a.toUpperCase()).replace(/-([A-Za-z0-9])/g, a => a.slice(1).toUpperCase())
 scssClass = thing.replace(/^[A-Z]/, a => a.toLowerCase())
 
-const thingTs = `import { h } from 'preact'
+const thingTs = `import * as React from 'react'
 
 import * as styles from './${lower}.scss'
 
@@ -28,7 +28,7 @@ export default function ${thing} (props: Props) {
 }
 `
 
-const thingTestTs = `import { h } from 'preact'
+const thingTestTs = `import * as React from 'peact'
 import deep from 'preact-render-spy'
 import ${thing} from '.'
 
