@@ -1,8 +1,9 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
 import ApiService from '@services/api-service'
-import { Action, CharactersAction, ActiveCharacterAction, PersonalDataAction } from '../actions'
+import { Action, CharactersAction, ActiveCharacterAction, PersonalDataAction, AttributesAction } from '../actions'
 import { Character } from '@models'
 import { AppState } from '@state/initial-state'
+import { EffectsAction } from '@state/actions/effects.actions'
 
 function assembleCharacter (state: AppState): Character {
   // TODO This data needs to come from the individual character element reducers
@@ -10,21 +11,29 @@ function assembleCharacter (state: AppState): Character {
   return {
     ...state.activeCharacter!,
     personalData: state.personalData!,
-    attributes: character.attributes,
+    attributes: state.attributes!,
     specialAttributes: character.specialAttributes,
     gear: character.gear,
-    effects: character.effects
+    effects: state.effects!
   }
 }
 
 function flattenCharacter (character: Character, dispatch: Dispatch<AnyAction>) {
   dispatch({
     type: ActiveCharacterAction.SET_ACTIVE_CHARACTER,
-    payload: {userId: character.userId, id: character.id }
+    payload: { userId: character.userId, id: character.id }
   })
   dispatch({
     type: PersonalDataAction.SET_PERSONAL_DATA,
     payload: character.personalData
+  })
+  dispatch({
+    type: AttributesAction.SET_ATTRIBUTES,
+    payload: character.attributes
+  })
+  dispatch({
+    type: EffectsAction.SET_EFFECTS,
+    payload: character.effects
   })
 }
 
@@ -33,7 +42,7 @@ function loadCharacters () {
     ApiService.getCharacterList()
       .then(characters => {
         dispatch({
-          type: CharactersAction.LOAD_CHARACTERS_SUCCESS,
+          type: CharactersAction.SET_CHARACTERS,
           payload: characters
         })
       }, err => {

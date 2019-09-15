@@ -1,8 +1,8 @@
-import initialState from '../initial-state'
+import initialState from '@state/initial-state'
 import { Action, ActiveCharacterAction } from '../actions'
 import { CharacterIdentifier } from '@models'
 
-export default function activeCharacter (
+export function activeCharacter (
   state: CharacterIdentifier | null = initialState.activeCharacter,
   action: Action<ActiveCharacterAction, CharacterIdentifier>
 ) {

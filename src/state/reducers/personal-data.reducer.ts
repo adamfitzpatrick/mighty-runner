@@ -2,7 +2,7 @@ import initialState from '../initial-state'
 import { PersonalData } from '@models'
 import { Action, PersonalDataAction } from '../actions'
 
-export default function personalData (
+export function personalData (
   state: PersonalData | null = initialState.personalData,
   action: Action<PersonalDataAction, PersonalData>
 ) {

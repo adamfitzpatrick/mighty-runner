@@ -1,17 +1,22 @@
 import { createStore, Store, combineReducers, applyMiddleware } from 'redux'
-import logger from 'redux-logger'
-import characters from './reducers/characters.reducer'
-import activeCharacter from './reducers/active-character.reducer'
-import personalData from './reducers/personal-data.reducer'
+import logger from './middleware/logger'
 import persistenceMiddleware from './middleware/persistence.middleware'
-
+import {
+  characters,
+  activeCharacter,
+  personalData,
+  attributes,
+  effects
+} from './reducers'
 import initialState, { AppState } from './initial-state'
 
 export default function configureStore (): Store<AppState> {
   const rootReducer = combineReducers({
     characters,
     activeCharacter,
-    personalData
+    personalData,
+    attributes,
+    effects
   })
 
   return createStore(

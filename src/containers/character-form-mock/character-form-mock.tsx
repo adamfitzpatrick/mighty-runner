@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Character, Attribute, Attributes, Effect, SpecialAttributes, Gear } from '@models'
+import { Character, Attribute, Effect, SpecialAttributes, Gear } from '@models'
 
 import * as styles from './character-form-mock.scss'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,6 +8,7 @@ import { setActiveCharacterCreator, saveCharacterCreator, loadCharacterCreator }
 import { RouteComponentProps } from 'react-router'
 
 import PersonalData from '@containers/personal-data'
+import Attributes from '@containers/attributes'
 
 type CharacterFormMockProps = RouteComponentProps<{ characterId: string }>
 
@@ -275,6 +276,7 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
         <strong>{activeCharacter.id}</strong>
       </div>
       <PersonalData />
+      <Attributes />
     </div>
   )
 }

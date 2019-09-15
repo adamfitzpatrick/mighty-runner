@@ -28,8 +28,8 @@ export default function ${thing} (props: Props) {
 }
 `
 
-const thingTestTs = `import * as React from 'peact'
-import deep from 'preact-render-spy'
+const thingTestTs = `import * as React from 'react'
+import * as renderer from 'react-test-renderer'
 import ${thing} from '.'
 
 describe('${thing} ${ container ? 'container' : 'component'}', () => {
