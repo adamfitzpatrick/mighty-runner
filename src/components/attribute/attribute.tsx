@@ -4,25 +4,15 @@ import * as styles from './attribute.scss'
 import * as Models from '@models'
 import { EditItemRenderProp } from '@components/edit-item'
 import Effect from '@components/effect'
+import { EffectsByTarget } from '@containers/effects'
+import EffectiveStat from '@containers/effective-stat'
 
 interface Props {
   attribute: Models.Attribute
-  relevantEffects: Models.Effect[]
-  updateEffect: (effect: Models.Effect) => void
   edit: () => void
 }
 
-export default function Attribute ({ attribute, relevantEffects, updateEffect, edit }: Props) {
-  const modifiers = relevantEffects
-    .filter(effect => effect.active)
-    .reduce((sum, effect) => sum + effect.value, 0)
-
-  const onToggleCreator = (effect: Models.Effect) => {
-    return (active: boolean) => {
-      const updated = { ...effect, active }
-      updateEffect(updated)
-    }
-  }
+export default function Attribute ({ attribute, edit }: Props) {
 
   return (
     <div>
@@ -30,23 +20,21 @@ export default function Attribute ({ attribute, relevantEffects, updateEffect, e
         <h3>{ attribute.name } ({attribute.shortName})</h3>
         <div>
           <span>
-            Effective Value: { attribute.value.initial + attribute.value.chargen + modifiers }
+            Effective Value:
+            <EffectiveStat
+              baseValue={attribute.value.chargen + attribute.value.initial}
+              target={attribute.asTarget}
+            />
           </span>
           <button onClick={edit}>Edit</button>
         </div>
-        <div>
-          {
-            relevantEffects.map(effect => (
-              <Effect effect={effect} onToggle={ onToggleCreator(effect) } key={effect.id} />
-            ))
-          }
-        </div>
+        <EffectsByTarget target={attribute.asTarget} />
       </div>
     </div>
   )
 }
 
-export const AttributeEditRender: EditItemRenderProp = (attribute, changeHandler) => {
+export const AttributeEditRender: EditItemRenderProp<Models.Attribute> = (attribute, changeHandler) => {
   const onValuePropertyChangeCreator = (property: keyof Models.EffectableValue) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const updated = {

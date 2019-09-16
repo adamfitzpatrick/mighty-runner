@@ -1,13 +1,4 @@
-import { Effect, Attributes, SpecialAttributes, PersonalData } from '.'
-
-export interface Gear {
-  id: string
-  name: string
-  description: string
-  cost: number
-  availability: string
-  effects: string[]
-}
+import { Effect, Attributes, SpecialAttributes, PersonalData, GearItem } from '.'
 
 export class CharacterIdentifier {
   userId: string
@@ -20,6 +11,6 @@ export class Character extends CharacterIdentifier {
   personalData: PersonalData
   attributes: Attributes
   specialAttributes: SpecialAttributes
-  gear: Gear[]
+  gear: GearItem[]
   effects: Effect[]
 }

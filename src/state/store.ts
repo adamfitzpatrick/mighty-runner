@@ -6,6 +6,7 @@ import {
   activeCharacter,
   personalData,
   attributes,
+  gear,
   effects
 } from './reducers'
 import initialState, { AppState } from './initial-state'
@@ -16,6 +17,7 @@ export default function configureStore (): Store<AppState> {
     activeCharacter,
     personalData,
     attributes,
+    gear,
     effects
   })
 

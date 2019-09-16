@@ -4,6 +4,7 @@ import { Action, CharactersAction, ActiveCharacterAction, PersonalDataAction, At
 import { Character } from '@models'
 import { AppState } from '@state/initial-state'
 import { EffectsAction } from '@state/actions/effects.actions'
+import { GearAction } from '@state/actions/gear.actions'
 
 function assembleCharacter (state: AppState): Character {
   // TODO This data needs to come from the individual character element reducers
@@ -13,7 +14,7 @@ function assembleCharacter (state: AppState): Character {
     personalData: state.personalData!,
     attributes: state.attributes!,
     specialAttributes: character.specialAttributes,
-    gear: character.gear,
+    gear: state.gear!,
     effects: state.effects!
   }
 }
@@ -34,6 +35,10 @@ function flattenCharacter (character: Character, dispatch: Dispatch<AnyAction>) 
   dispatch({
     type: EffectsAction.SET_EFFECTS,
     payload: character.effects
+  })
+  dispatch({
+    type: GearAction.SET_GEAR,
+    payload: character.gear
   })
 }
 

@@ -22,7 +22,6 @@ function effectFilterer (targetAttribute: string) {
 
 export default function Attributes () {
   const attributes = useSelector((state: AppState) => state.attributes)
-  const effects = useSelector((state: AppState) => state.effects) || []
 
   const [state, setState] = React.useState<State>({
     attributeToEditName: null,
@@ -32,14 +31,8 @@ export default function Attributes () {
   const dispatch = useDispatch()
   const updateAttribute = updateAttributeCreator(dispatch)
   const saveCharacter = saveCharacterCreator(dispatch)
-  const updateEffect = updateEffectCreator(dispatch)
 
   if (!attributes) { return null }
-
-  const toggleEffect = (effect: Models.Effect) => {
-    updateEffect(effect)
-    saveCharacter()
-  }
 
   const editAttributeCreator = (name: string, attribute: Models.Attribute) => {
     return () => setState({ attributeToEditName: name, attributeToEdit: attribute })
@@ -60,8 +53,6 @@ export default function Attributes () {
       <h2>Attributes</h2>
       <Attribute
         attribute={attributes.agility}
-        relevantEffects={effects.filter(effectFilterer('agility'))}
-        updateEffect={toggleEffect}
         edit={ editAttributeCreator('agility', attributes.agility) }
       />
       <EditItem

@@ -7,19 +7,23 @@ import { Effect } from '@models'
 
 interface Props {
   effect: Effect
-  onToggle: (active: boolean) => void
+  onToggle: (effect: Effect) => void
 }
 
 export default function Effect ({ effect, onToggle }: Props) {
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const updated = { ...effect, active: event.target.checked }
+    onToggle(updated)
+  }
   return (
     <div>
       <span>Name: { effect.name }</span>
       <label>
-        <span>Active</span>
+        Active
         <input
           type='checkbox'
           checked={effect.active}
-          onChange={event => onToggle(event.target.checked)}
+          onChange={onChangeHandler}
         />
       </label>
     </div>

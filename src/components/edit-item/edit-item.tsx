@@ -1,20 +1,19 @@
 import * as React from 'react'
 
 import * as styles from './edit-item.scss'
-import { Effectable } from '@models'
 
-export interface EditItemRenderProp {
-  (item: Effectable, changeHandler: (item: Effectable) => void): JSX.Element | null
+export interface EditItemRenderProp<T> {
+  (item: T, changeHandler: (item: T) => void): JSX.Element | null
 }
 
-interface Props {
-  item: Effectable | null
-  render: EditItemRenderProp
-  changeHandler: (item: Effectable) => void
+interface Props<T> {
+  item: T | null
+  render: EditItemRenderProp<T>
+  changeHandler: (item: T) => void
   done: () => void
 }
 
-export default function EditItem ({ item, render, changeHandler, done }: Props) {
+export default function EditItem<T> ({ item, render, changeHandler, done }: Props<T>) {
   if (!item) {
     return null
   }
