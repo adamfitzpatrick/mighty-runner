@@ -9,15 +9,8 @@ import {
 } from 'redux'
 import { Provider } from 'react-redux'
 import { render, RenderResult } from '@testing-library/react'
-import { AppState, defaultState } from '../src/state/default-state'
-import {
-  characters,
-  activeCharacter,
-  personalData,
-  attributes,
-  gear,
-  effects
-} from '../src/state/reducers'
+import * as Models from '@models'
+import { AppState } from '../src/state/default-state'
 
 export type RenderWithRedux =
   RenderResult &
@@ -27,12 +20,12 @@ export type RenderWithRedux =
   }
 
 const reducer = combineReducers({
-  characters,
-  activeCharacter,
-  personalData,
-  attributes,
-  gear,
-  effects
+  characters: (state: Models.Character[] | null = null) => state,
+  activeCharacter: (state: Models.CharacterIdentifier | null = null) => state,
+  personalData: (state: Models.PersonalData | null = null) => state,
+  attributes: (state: Models.Attributes | null = null) => state,
+  gear: (state: Models.GearItem[] | null = null) => state,
+  effects: (state: Models.Effect[] | null = null) => state
 })
 
 const getSpyMiddleware = (dispatchSpy: jest.Mock<Dispatch<AnyAction>>) => () => {
@@ -44,7 +37,7 @@ const getSpyMiddleware = (dispatchSpy: jest.Mock<Dispatch<AnyAction>>) => () => 
 
 export function renderWithRedux (
   ui: JSX.Element,
-  initialState: AppState,
+  initialState: AppState
 ): RenderWithRedux {
   const dispatchSpy: jest.Mock<Dispatch<AnyAction>> = jest.fn()
   const spyMiddleware = getSpyMiddleware(dispatchSpy)
