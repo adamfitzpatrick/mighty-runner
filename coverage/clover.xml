@@ -1,50 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1568396193807" clover="3.2.0">
-  <project timestamp="1568396193807" name="All files">
-    <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10" elements="40" coveredelements="40" complexity="0" loc="30" ncloc="30" packages="2" files="3" classes="3"/>
-    <package name="containers.attributes">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="attributes.tsx" path="/Users/adam.fitzpatrick/play/mighty-runner/src/containers/attributes/attributes.tsx">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
+<coverage generated="1568750677413" clover="3.2.0">
+  <project timestamp="1568750677413" name="All files">
+    <metrics statements="105" coveredstatements="85" conditionals="51" coveredconditionals="36" methods="23" coveredmethods="19" elements="179" coveredelements="140" complexity="0" loc="105" ncloc="105" packages="5" files="11" classes="11"/>
+    <package name="src.components.input">
+      <metrics statements="11" coveredstatements="11" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+      <file name="index.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/components/input/index.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
       </file>
-      <file name="index.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/containers/attributes/index.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+      <file name="input.tsx" path="/Users/adam.fitzpatrick/play/mighty-runner/src/components/input/input.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="15" count="90" type="stmt"/>
+        <line num="16" count="90" type="stmt"/>
+        <line num="17" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="26" count="90" type="stmt"/>
       </file>
     </package>
-    <package name="services">
-      <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
-      <file name="api-service.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/services/api-service.ts">
-        <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+    <package name="src.containers.personal-data">
+      <metrics statements="18" coveredstatements="18" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <file name="personal-data.tsx" path="/Users/adam.fitzpatrick/play/mighty-runner/src/containers/personal-data/personal-data.tsx">
+        <metrics statements="18" coveredstatements="18" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
+        <line num="16" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="84" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="29" count="84" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.state">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="default-state.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/default-state.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.state.reducers">
+      <metrics statements="59" coveredstatements="39" conditionals="35" coveredconditionals="20" methods="10" coveredmethods="6"/>
+      <file name="active-character.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/active-character.reducer.ts">
+        <metrics statements="7" coveredstatements="6" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="11" type="stmt"/>
+      </file>
+      <file name="attributes.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/attributes.reducer.ts">
+        <metrics statements="10" coveredstatements="6" conditionals="5" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+      </file>
+      <file name="characters.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/characters.reducer.ts">
+        <metrics statements="7" coveredstatements="6" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="11" type="stmt"/>
+      </file>
+      <file name="effects.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/effects.reducer.ts">
+        <metrics statements="14" coveredstatements="7" conditionals="7" coveredconditionals="3" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="25" count="11" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="29" count="8" type="stmt"/>
-        <line num="33" count="11" type="stmt"/>
-        <line num="34" count="8" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="42" count="3" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="51" count="5" type="stmt"/>
-        <line num="52" count="4" type="stmt"/>
-        <line num="53" count="3" type="stmt"/>
-        <line num="57" count="3" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="63" count="3" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
+      </file>
+      <file name="gear.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/gear.reducer.ts">
+        <metrics statements="14" coveredstatements="7" conditionals="7" coveredconditionals="3" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="11" type="stmt"/>
+      </file>
+      <file name="personal-data.reducer.ts" path="/Users/adam.fitzpatrick/play/mighty-runner/src/state/reducers/personal-data.reducer.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="testing-render-with-redux.tsx" path="/Users/adam.fitzpatrick/play/mighty-runner/utils/testing-render-with-redux.tsx">
+        <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="49" count="7" type="stmt"/>
+        <line num="50" count="7" type="stmt"/>
+        <line num="51" count="7" type="stmt"/>
+        <line num="53" count="7" type="stmt"/>
       </file>
     </package>
   </project>

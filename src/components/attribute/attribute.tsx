@@ -23,19 +23,19 @@ export default function Attribute ({ attribute, edit }: Props) {
             Effective Value:
             <EffectiveStat
               baseValue={attribute.value.chargen + attribute.value.initial}
-              target={attribute.asTarget}
+              target={attribute.asEffectTarget}
             />
           </span>
           <button onClick={edit}>Edit</button>
         </div>
-        <EffectsByTarget target={attribute.asTarget} />
+        <EffectsByTarget target={attribute.asEffectTarget} />
       </div>
     </div>
   )
 }
 
 export const AttributeEditRender: EditItemRenderProp<Models.Attribute> = (attribute, changeHandler) => {
-  const onValuePropertyChangeCreator = (property: keyof Models.EffectableValue) => {
+  const onValuePropertyChangeCreator = (property: keyof Models.StatValue) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const updated = {
         ...attribute,

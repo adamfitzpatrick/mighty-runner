@@ -3,7 +3,7 @@ export interface PersonalData {
   metatype: string
   ethnicity: string
   gender: string
-  age: string
+  age: number
   height: string
   weight: string
   karma: number

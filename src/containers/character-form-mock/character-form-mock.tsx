@@ -3,7 +3,7 @@ import { Character } from '@models'
 
 import * as styles from './character-form-mock.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 import { loadCharacterCreator } from '@state/actions'
 import { RouteComponentProps } from 'react-router'
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import * as styles from './gear.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 import GearItem, { GearItemEditRender } from '@components/gear-item'
 import * as Models from '@models'
 import EditItem from '@components/edit-item'

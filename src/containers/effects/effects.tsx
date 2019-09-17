@@ -2,12 +2,11 @@ import * as React from 'react'
 
 import * as styles from './effects.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 import Effect from '@components/effect'
 import { updateEffectCreator, saveCharacterCreator } from '@state/actions'
 import * as Models from '@models'
 import { AnyAction } from 'redux'
-
 
 interface EffectsBaseProps {
   effects: Models.Effect[]

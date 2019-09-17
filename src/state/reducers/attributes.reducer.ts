@@ -1,9 +1,9 @@
 import { Action, AttributesAction, UpdateAttributePayload } from '@state/actions'
 import { Attributes } from '@models'
-import initialState from '@state/initial-state'
+import defaultState from '@state/default-state'
 
 export function attributes (
-  state: Attributes | null = initialState.attributes,
+  state: Attributes | null = defaultState.attributes,
   action: Action<AttributesAction, Attributes | UpdateAttributePayload>
 ) {
   switch (action.type) {

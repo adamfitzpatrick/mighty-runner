@@ -1,4 +1,4 @@
-import { initialState } from '@state/initial-state'
+import { defaultState } from '@state/default-state'
 import { Action } from '@state/actions'
 import { GearAction } from '@state/actions/gear.actions'
 import { GearItem } from '@models'
@@ -10,7 +10,7 @@ const getGearWithReplacement = (gear: GearItem[], replacement: GearItem): GearIt
 }
 
 export function gear (
-  state: GearItem[] | null = initialState.gear,
+  state: GearItem[] | null = defaultState.gear,
   action: Action<GearAction, GearItem[] | GearItem>
 ) {
   switch (action.type) {

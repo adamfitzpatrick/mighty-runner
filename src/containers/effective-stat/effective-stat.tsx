@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import * as styles from './effective-stat.scss'
 import { useSelector } from 'react-redux'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 import { Effect } from '@models'
 
 interface Props {

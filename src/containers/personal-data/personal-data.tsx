@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '@state/initial-state'
-import { PersonalData } from '@models'
+import { AppState } from '@state/default-state'
+import * as Models from '@models'
 import { setPersonalDataCreator, saveCharacterCreator } from '@state/actions'
+import Input, { InputType } from '@components/input'
 
 // TODO Add remaining personal data items
 
@@ -14,12 +15,9 @@ export default function PersonalData () {
 
   if (!personalData) { return null }
 
-  const getUpdater = (property: keyof PersonalData) => {
-    return (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPersonalData({
-        ...personalData,
-        [property]: event.target.value
-      })
+  const getUpdater = (property: keyof Models.PersonalData) => {
+    return (value: InputType) => {
+      setPersonalData({ ...personalData, [property]: value })
     }
   }
 
@@ -27,16 +25,31 @@ export default function PersonalData () {
     saveCharacter()
   }
 
+  const getInput = (field: keyof Models.PersonalData, label: string, type: InputType) => {
+    return <Input
+      type={ type }
+      key={ field }
+      label={ label }
+      value={ personalData[field] || '' }
+      onChange={ getUpdater(field) }
+      onBlur={ blurHandler }
+    />
+  }
+
   return (
-    <div>
-      <label>
-        <span>name</span>
-        <input
-          value={personalData.name}
-          onChange={getUpdater('name')}
-          onBlur={blurHandler}
-        />
-      </label>
+    <div data-testid='personal-data.container'>
+      { getInput('name', 'Name', 'text') }
+      { getInput('metatype', 'Metatype', 'text') }
+      { getInput('ethnicity', 'Ethnicity', 'text') }
+      { getInput('gender', 'Gender', 'text') }
+      { getInput('age', 'Age', 'text') }
+      { getInput('height', 'Height', 'text') }
+      { getInput('weight', 'Weight', 'text') }
+      { getInput('karma', 'Karma', 'number') }
+      { getInput('streetCred', 'Street Cred', 'number') }
+      { getInput('notoriety', 'Notoriety', 'number') }
+      { getInput('publicAwareness', 'Public Awareness', 'number') }
+      { getInput('totalKarma', 'Total Karma', 'number') }
     </div>
   )
 }

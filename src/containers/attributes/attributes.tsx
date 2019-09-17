@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import * as styles from './attributes.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 
 import * as Models from '@models'
 import { updateAttributeCreator, saveCharacterCreator, updateEffectCreator } from '@state/actions'

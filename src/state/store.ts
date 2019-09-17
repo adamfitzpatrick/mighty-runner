@@ -9,9 +9,10 @@ import {
   gear,
   effects
 } from './reducers'
-import initialState, { AppState } from './initial-state'
+import defaultState, { AppState } from './default-state'
 
-export default function configureStore (): Store<AppState> {
+export default function configureStore (initialState?: AppState): Store<AppState> {
+  initialState = initialState || defaultState
   const rootReducer = combineReducers({
     characters,
     activeCharacter,

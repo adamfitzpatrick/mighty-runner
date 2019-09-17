@@ -1,9 +1,9 @@
-import initialState from '@state/initial-state'
+import defaultState from '@state/default-state'
 import { Action, ActiveCharacterAction } from '../actions'
 import { CharacterIdentifier } from '@models'
 
 export function activeCharacter (
-  state: CharacterIdentifier | null = initialState.activeCharacter,
+  state: CharacterIdentifier | null = defaultState.activeCharacter,
   action: Action<ActiveCharacterAction, CharacterIdentifier>
 ) {
   switch (action.type) {

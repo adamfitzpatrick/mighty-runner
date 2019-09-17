@@ -1,4 +1,4 @@
-import { initialState } from '@state/initial-state'
+import { defaultState } from '@state/default-state'
 import { Action } from '@state/actions'
 import { EffectsAction } from '@state/actions/effects.actions'
 import { Effect } from '@models'
@@ -10,7 +10,7 @@ const getEffectsWithReplacement = (effects: Effect[], replacement: Effect): Effe
 }
 
 export function effects (
-  state: Effect[] | null = initialState.effects,
+  state: Effect[] | null = defaultState.effects,
   action: Action<EffectsAction, Effect[] | Effect>
 ) {
   switch (action.type) {

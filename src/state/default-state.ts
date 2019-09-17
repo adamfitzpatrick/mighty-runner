@@ -9,8 +9,7 @@ export interface AppState {
   effects: Effect[] | null
 }
 
-
-export const initialState: AppState = {
+export const defaultState: AppState = {
   characters: null,
   activeCharacter: null,
   personalData: null,
@@ -19,4 +18,4 @@ export const initialState: AppState = {
   effects: null
 }
 
-export default initialState
+export default defaultState

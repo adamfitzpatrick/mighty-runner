@@ -1,6 +1,6 @@
-import { Effectable } from '.'
+import { Stat } from '.'
 
-export interface Attribute extends Effectable {
+export interface Attribute extends Stat {
   shortName: string
   maximum: number
   value: {

@@ -2,7 +2,7 @@ import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
 import ApiService from '@services/api-service'
 import { Action, CharactersAction, ActiveCharacterAction, PersonalDataAction, AttributesAction } from '../actions'
 import { Character } from '@models'
-import { AppState } from '@state/initial-state'
+import { AppState } from '@state/default-state'
 import { EffectsAction } from '@state/actions/effects.actions'
 import { GearAction } from '@state/actions/gear.actions'
 

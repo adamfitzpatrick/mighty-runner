@@ -1,9 +1,9 @@
-import initialState, { AppState } from '@state/initial-state'
+import defaultState, { AppState } from '@state/default-state'
 import { Character } from '@models'
 import { CharactersAction, Action } from '@state/actions'
 
 export function characters (
-  state: Character[] | null = initialState.characters,
+  state: Character[] | null = defaultState.characters,
   action: Action<CharactersAction, Character[]>
 ) {
   switch (action.type) {

@@ -1,9 +1,9 @@
-import initialState from '../initial-state'
+import defaultState from '../default-state'
 import { PersonalData } from '@models'
 import { Action, PersonalDataAction } from '../actions'
 
 export function personalData (
-  state: PersonalData | null = initialState.personalData,
+  state: PersonalData | null = defaultState.personalData,
   action: Action<PersonalDataAction, PersonalData>
 ) {
   switch (action.type) {

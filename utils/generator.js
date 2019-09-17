@@ -29,6 +29,7 @@ export default function ${thing} (props: Props) {
 `
 
 const thingTestTs = `import * as React from 'react'
+import * as ReactTestUtils from 'react-dom/test-utils'
 import * as renderer from 'react-test-renderer'
 import ${thing} from '.'
 
