@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input component render correctly 1`] = `"<label><span>label</span><input data-testid=\\"label.input.component\\" type=\\"text\\" value=\\"value\\"></label>"`;
+exports[`Input component should render correctly 1`] = `"<label><span>label</span><input data-testid=\\"label.input.component\\" type=\\"text\\" value=\\"value\\"></label>"`;
+
+exports[`Input component should render without a blur prop 1`] = `"<label><span>label</span><input data-testid=\\"label.input.component\\" type=\\"text\\" value=\\"value\\"></label>"`;

@@ -7,7 +7,7 @@ import GearItem, { GearItemEditRender } from '@components/gear-item'
 import * as Models from '@models'
 import EditItem from '@components/edit-item'
 import { updateGearCreator } from '@state/actions/gear.actions'
-import { saveCharacterCreator, updateEffectCreator } from '@state/actions'
+import { saveCharacterCreator } from '@state/actions'
 
 interface State {
   itemToEdit: Models.GearItem | null

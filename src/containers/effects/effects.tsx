@@ -6,57 +6,71 @@ import { AppState } from '@state/default-state'
 import Effect from '@components/effect'
 import { updateEffectCreator, saveCharacterCreator } from '@state/actions'
 import * as Models from '@models'
-import { AnyAction } from 'redux'
 
-interface EffectsBaseProps {
-  effects: Models.Effect[]
-}
-
-function EffectsBase ({ effects }: EffectsBaseProps) {
-  const dispatch = useDispatch()
-  const updateEffect = updateEffectCreator(dispatch)
-  const saveCharacter = saveCharacterCreator(dispatch)
-
-  const onToggle = (effect: Models.Effect) => {
-    updateEffect(effect)
-    saveCharacter()
-  }
-
-  return (
-    <div>
-      { effects.map(effect => <Effect key={effect.id} effect={effect} onToggle={onToggle} />) }
-    </div>
-  )
-}
-
-interface EffectsProps {
-  effectIds: string[]
-}
-
-export default function Effects (props?: EffectsProps) {
-  let effects = useSelector((state: AppState) => state.effects)
-
-  if (!effects) { return null }
-
-  if (props) {
-    effects = effects.filter(effect => props.effectIds.indexOf(effect.id) !== -1)
-  }
-
-  return <EffectsBase effects={effects} />
+interface EffectsByIdProps {
+  ids: string[]
 }
 
 interface EffectsByTargetProps {
   target: string[]
 }
 
-export function EffectsByTarget ({ target }: EffectsByTargetProps) {
-  let effects = useSelector((state: AppState) => state.effects)
+function getStateManagers () {
+  const dispatch = useDispatch()
+  return {
+    updateEffect: updateEffectCreator(dispatch),
+    saveCharacter: saveCharacterCreator(dispatch)
+  }
+}
 
+export function EffectsById (props: EffectsByIdProps) {
+  const { updateEffect, saveCharacter } = getStateManagers()
+
+  let effects = useSelector((state: AppState) => state.effects)
   if (!effects) { return null }
 
-  effects = effects.filter(effect => {
+  const relevantEffects = effects.filter(effect => props.ids.indexOf(effect.id) !== -1)
+  return <React.Fragment>
+    {
+      relevantEffects.map(effect => {
+        return (
+          <Effect
+            key={ effect.id }
+            effect={ effect }
+            onChange={ updateEffect }
+            onBlur={ saveCharacter }
+          />
+        )
+      })
+    }
+  </React.Fragment>
+}
+
+export function EffectsByTarget ({ target }: EffectsByTargetProps) {
+  const { updateEffect, saveCharacter } = getStateManagers()
+  const updater = (effect: Models.Effect) => {
+    updateEffect(effect)
+    saveCharacter()
+  }
+
+  let effects = useSelector((state: AppState) => state.effects)
+  if (!effects) { return null }
+
+  const relevantEffects = effects.filter(effect => {
     return effect.target.every((element, index) => element === target[index])
   })
 
-  return <EffectsBase effects={effects} />
+  return <React.Fragment>
+    {
+      relevantEffects.map(effect => {
+        return (
+          <Effect
+            key={ effect.id }
+            effect={ effect }
+            onToggle={ updater }
+          />
+        )
+      })
+    }
+  </React.Fragment>
 }

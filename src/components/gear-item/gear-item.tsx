@@ -3,7 +3,7 @@ import * as React from 'react'
 import * as styles from './gear-item.scss'
 import * as Models from '@models'
 import { EditItemRenderProp } from '@components/edit-item'
-import Effects from '@containers/effects'
+import { Effects } from '@containers/effects'
 
 interface Props {
   item: Models.GearItem

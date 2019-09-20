@@ -29,8 +29,8 @@ export default function ${thing} (props: Props) {
 `
 
 const thingTestTs = `import * as React from 'react'
-import * as ReactTestUtils from 'react-dom/test-utils'
-import * as renderer from 'react-test-renderer'
+import { cleanup, render } from '@testing-library/react'
+import { renderWithRedux, RenderWithRedux } from '../../../utils/testing-render-with-redux'
 import ${thing} from '.'
 
 describe('${thing} ${ container ? 'container' : 'component'}', () => {

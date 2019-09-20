@@ -7,7 +7,7 @@ describe('Input component', () => {
   let change: { (value: string | number | boolean): void }
   let blur: { (): void }
 
-  function renderComponent (type?: 'text' | 'checkbox' | 'number') {
+  function renderComponent (type?: 'text' | 'checkbox' | 'number', noBlur?: boolean) {
     type = type || 'text'
     return render(
       <Input
@@ -15,7 +15,7 @@ describe('Input component', () => {
         label='label'
         value={ type === 'checkbox' ? false : 'value' }
         onChange={ change }
-        onBlur={ blur }
+        onBlur={ noBlur ? undefined : blur }
       />
     )
   }
@@ -24,9 +24,15 @@ describe('Input component', () => {
     blur = jest.fn()
   })
 
-  test('render correctly', () => {
+  test('should render correctly', () => {
     const { container } = renderComponent()
     expect(container.innerHTML).toMatchSnapshot()
+  })
+
+  test('should render without a blur prop', () => {
+    const { container, getByTestId } = renderComponent('text', true)
+    expect(container.innerHTML).toMatchSnapshot()
+    fireEvent.blur(getByTestId('label.input.component'))
   })
 
   test('should handle a checkbox input change', () => {

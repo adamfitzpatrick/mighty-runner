@@ -9,10 +9,11 @@ interface Props {
   value: string | number | boolean
   type: InputType
   onChange: (value: string | number | boolean) => void
-  onBlur: () => void
+  onBlur?: () => void
 }
 
 export default function Input ({ label, value, type, onChange, onBlur }: Props) {
+  onBlur = onBlur || (() => { /* no-op */ })
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (type === 'checkbox') {
       onChange(event.target.checked)

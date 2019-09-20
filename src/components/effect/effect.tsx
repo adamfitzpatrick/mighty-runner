@@ -3,29 +3,93 @@ import * as React from 'react'
 import * as styles from './effect.scss'
 import { useSelector } from 'react-redux'
 
-import { Effect } from '@models'
+import * as Models from '@models'
+import Input from '@components/input'
+import ArrayInput from '@components/array-input'
 
-interface Props {
-  effect: Effect
-  onToggle: (effect: Effect) => void
+interface NonEditableProps {
+  effect: Models.Effect
+  onToggle: (effect: Models.Effect) => void
 }
 
-export default function Effect ({ effect, onToggle }: Props) {
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const updated = { ...effect, active: event.target.checked }
-    onToggle(updated)
+interface EditableProps {
+  effect: Models.Effect
+  onChange: (effect: Models.Effect) => void
+  onBlur: () => void
+}
+
+export default function Effect (props: NonEditableProps | EditableProps) {
+  const nonEditableProps = props as NonEditableProps
+  const editableProps = props as EditableProps
+
+  const onToggleHandler = (active: boolean) => {
+    const updated = { ...props.effect, active }
+    nonEditableProps.onToggle(updated)
   }
-  return (
-    <div>
-      <span>Name: { effect.name }</span>
-      <label>
-        Active
-        <input
+
+  const onChangeCreator = (property: keyof Models.Effect) => {
+    return (value: any) => {
+      editableProps.onChange({ ...props.effect, [property]: value })
+    }
+  }
+
+  function renderNonEditable (effect: Models.Effect) {
+    return (
+      <div data-testid='non-editable-effect.component'>
+        <span>Name: { props.effect.name }</span>
+        <Input
           type='checkbox'
-          checked={effect.active}
-          onChange={onChangeHandler}
+          label='Active'
+          value={ effect.active }
+          onChange={ onToggleHandler }
         />
-      </label>
-    </div>
-  )
+      </div>
+    )
+  }
+
+  function renderEditable (effect: Models.Effect) {
+    return (
+      <div data-testid='editable-effect.component'>
+        <Input
+          type='text'
+          label='Name'
+          value={ effect.name }
+          onChange={ onChangeCreator('name') }
+          onBlur={ editableProps.onBlur }
+        />
+        <Input
+          type='text'
+          label='Description'
+          value={ effect.description }
+          onChange={ onChangeCreator('description') }
+          onBlur={ editableProps.onBlur }
+        />
+        <ArrayInput
+          label='Target'
+          arr={ effect.target }
+          onChange={ onChangeCreator('target') }
+          onBlur={ editableProps.onBlur }
+        />
+        <Input
+          type='text'
+          label='Value'
+          value={ effect.value }
+          onChange={ onChangeCreator('value') }
+          onBlur={ editableProps.onBlur }
+        />
+        <Input
+          type='checkbox'
+          label='Active'
+          value={ effect.active }
+          onChange={ onChangeCreator('active') }
+        />
+      </div>
+    )
+  }
+
+  if (nonEditableProps.onToggle) {
+    return renderNonEditable(props.effect)
+  } else {
+    return renderEditable(props.effect)
+  }
 }

@@ -10,6 +10,7 @@ import { RouteComponentProps } from 'react-router'
 import PersonalData from '@containers/personal-data'
 import Attributes from '@containers/attributes'
 import Gear from '@containers/gear'
+import { Effects } from '@containers/effects'
 
 type CharacterFormMockProps = RouteComponentProps<{ characterId: string }>
 
@@ -279,6 +280,8 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
       <PersonalData />
       <Attributes />
       <Gear />
+      <h2>Effects</h2>
+      <Effects />
     </div>
   )
 }
