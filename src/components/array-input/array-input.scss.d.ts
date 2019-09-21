@@ -1,2 +1,2 @@
-export const arrayInput: string
-export const additionalLabel: string
+export const arrayInput: string;
+export const additionalLabel: string;

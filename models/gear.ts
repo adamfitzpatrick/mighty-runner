@@ -1,8 +1,9 @@
-export interface GearItem {
-  id: string
-  name: string
-  description: string
+import { Stat } from './stat'
+
+export interface GearItem extends Stat {
   cost: number
   availability: string
-  effects: string[]
+  value: {
+    rating: number
+  }
 }

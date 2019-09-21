@@ -55,12 +55,16 @@ export default function Attributes () {
         attribute={attributes.agility}
         edit={ editAttributeCreator('agility', attributes.agility) }
       />
-      <EditItem
-        item={state.attributeToEdit}
-        render={AttributeEditRender}
-        changeHandler={changeHandler}
-        done={finishEdit}
-      />
+      {
+        state.attributeToEdit ?
+          <EditItem
+            item={state.attributeToEdit}
+            render={AttributeEditRender}
+            changeHandler={changeHandler}
+            done={finishEdit}
+          /> :
+          null
+      }
     </div>
   )
 }

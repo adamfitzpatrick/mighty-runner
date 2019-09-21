@@ -41,7 +41,16 @@ export default function Gear () {
           />
         })
       }
-      <EditItem item={state.itemToEdit} render={GearItemEditRender} changeHandler={edit} done={done} />
+      {
+        state.itemToEdit ?
+          <EditItem
+            item={state.itemToEdit}
+            render={GearItemEditRender}
+            changeHandler={edit}
+            done={done}
+          /> :
+          null
+      }
     </div>
   )
 }
