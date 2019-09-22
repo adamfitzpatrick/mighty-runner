@@ -21,7 +21,7 @@ export default function EditItem<T extends Stat> ({ item, render, changeHandler,
   return (
     <div>
       {render(item!, changeHandler)}
-      { effects ? <EffectsById ids={ effects } /> : null }
+      { effects ? <EffectsById ids={ effects } edit /> : null }
       <Button label='Done' onClick={ done } />
     </div>
   )

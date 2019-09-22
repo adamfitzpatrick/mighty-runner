@@ -9,6 +9,7 @@ import * as Models from '@models'
 
 interface EffectsByIdProps {
   ids: string[]
+  edit?: boolean
 }
 
 interface EffectsByTargetProps {
@@ -30,17 +31,26 @@ export function EffectsById (props: EffectsByIdProps) {
   if (!effects) { return null }
 
   const relevantEffects = effects.filter(effect => props.ids.indexOf(effect.id) !== -1)
+
+  function renderEffect (effect: Models.Effect) {
+    return <Effect key={ effect.id } effect={ effect } onToggle={ updateEffect } />
+  }
+
+  function renderEffectForEdit (effect: Models.Effect) {
+    return (
+      <Effect
+        key={ effect.id }
+        effect={ effect }
+        onChange={ updateEffect }
+        onBlur={ saveCharacter }
+      />
+    )
+  }
+
   return <React.Fragment>
     {
       relevantEffects.map(effect => {
-        return (
-          <Effect
-            key={ effect.id }
-            effect={ effect }
-            onChange={ updateEffect }
-            onBlur={ saveCharacter }
-          />
-        )
+        return (props.edit ? renderEffectForEdit : renderEffect).call(this, effect)
       })
     }
   </React.Fragment>

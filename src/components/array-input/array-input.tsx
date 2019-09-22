@@ -4,12 +4,17 @@ import * as shortId from 'shortid'
 import * as styles from './array-input.scss'
 
 type ArrayAsInput = (string | number)[]
+type KeyedArray = [ string, (string | number) ][]
 
 interface Props {
   label: string
   arr: ArrayAsInput
   onChange: (arr: ArrayAsInput) => void
   onBlur: () => void
+}
+
+interface State {
+  keyedArray: KeyedArray
 }
 
 export default function ArrayInput ({ label, arr, onChange, onBlur }: Props) {
@@ -20,8 +25,12 @@ export default function ArrayInput ({ label, arr, onChange, onBlur }: Props) {
   }
 
   const additionalElementRender = (value: string | number, index: number) => {
+    // Note that using the index as a key here is acceptable because the array
+    // will never be filtered or reordered within this component.  Any re-ordering
+    // or filtering will occur outside the component and will result in a re-render
+    // which would invalidate an internal key ID scheme anyway.
     return (
-      <label key={ shortId.generate() }>
+      <label key={ index }>
         <span className={styles.additionalLabel}>{ label }</span>
         <input
           data-testid={`${index + 1}.array.input`}

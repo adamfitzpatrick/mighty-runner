@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { EffectsById, EffectsByTarget } from '.'
-import { cleanup } from '@testing-library/react'
+import { cleanup, render } from '@testing-library/react'
 import { renderWithRedux, RenderWithRedux } from '../../../utils/testing-render-with-redux'
 import { Effect } from '@models'
 import { AppState } from '@state/default-state'
@@ -41,17 +41,18 @@ describe('Effects containers', () => {
   describe('EffectsById', () => {
     let sut: RenderWithRedux
 
-    beforeEach(() => {
+    it('should render correctly when not editing', () => {
       sut = renderWithRedux(<EffectsById ids={[ '1', '3' ]} />, appState)
+      expect(sut.container.innerHTML).toMatchSnapshot()
     })
 
-    it('should render correctly', () => {
+    it('should render correctly when editing', () => {
+      sut = renderWithRedux(<EffectsById ids={[ '1', '3' ]} edit />, appState)
       expect(sut.container.innerHTML).toMatchSnapshot()
       expect(sut.getAllByTestId('editable-effect.component').length).toBe(2)
     })
 
     it('should correctly handle missing data', () => {
-      cleanup()
       sut = renderWithRedux(<EffectsById ids={[ '1' ]} />, { effects: null } as AppState)
       expect(sut.container.innerHTML).toMatchSnapshot()
     })

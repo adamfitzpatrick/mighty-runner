@@ -71,7 +71,7 @@ export default function Effect (props: NonEditableProps | EditableProps) {
           onBlur={ editableProps.onBlur }
         />
         <Input
-          type='text'
+          type='number'
           label='Value'
           value={ effect.value }
           onChange={ onChangeCreator('value') }
