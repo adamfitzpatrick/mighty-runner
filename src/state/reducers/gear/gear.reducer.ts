@@ -9,6 +9,15 @@ const getGearWithReplacement = (gear: GearItem[], replacement: GearItem): GearIt
   return updatedArray
 }
 
+const getGearWithRemoval = (gear: GearItem[], remove: GearItem): GearItem[] => {
+  const updatedArray = [ ...gear ]
+  const index = updatedArray.findIndex(item => item.id === remove.id)
+  if (index >= 0) {
+    updatedArray.splice(index, 1)
+  }
+  return updatedArray
+}
+
 export function gear (
   state: GearItem[] | null = defaultState.gear,
   action: Action<GearAction, GearItem[] | GearItem>
@@ -17,11 +26,11 @@ export function gear (
     case GearAction.SET_GEAR:
       return action.payload as GearItem[]
     case GearAction.UPDATE_GEAR:
-      if (state) {
-        return getGearWithReplacement(state, action.payload as GearItem)
-      }
-      return state
-    default:
-      return state
+      return getGearWithReplacement(state!, action.payload as GearItem)
+    case GearAction.ADD_GEAR:
+      return [ ...state!, action.payload as GearItem ]
+    case GearAction.REMOVE_GEAR:
+      return getGearWithRemoval(state!, action.payload as GearItem)
   }
+  return state
 }

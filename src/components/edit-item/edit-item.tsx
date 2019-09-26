@@ -13,16 +13,20 @@ interface Props<T extends Stat> {
   item: T | null
   render: EditItemRenderProp<T>
   changeHandler: (item: T) => void
-  done: () => void
+  done: () => void,
+  cancel?: () => void
 }
 
-export default function EditItem<T extends Stat> ({ item, render, changeHandler, done }: Props<T>) {
+export default function EditItem<T extends Stat> (
+  { item, render, changeHandler, done, cancel }: Props<T>
+) {
   const effects = item!.effects
   return (
     <div data-testid={`${item!.name}.edit-item.component`}>
       {render(item!, changeHandler)}
       { effects ? <EffectsById ids={ effects } edit /> : null }
       <Button label='Done' onClick={ done } />
+      { cancel ? <Button label='Cancel' onClick={ cancel } /> : null }
     </div>
   )
 }
