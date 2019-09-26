@@ -19,7 +19,7 @@ interface Props<T extends Stat> {
 export default function EditItem<T extends Stat> ({ item, render, changeHandler, done }: Props<T>) {
   const effects = item!.effects
   return (
-    <div>
+    <div data-testid={`${item!.name}.edit-item.component`}>
       {render(item!, changeHandler)}
       { effects ? <EffectsById ids={ effects } edit /> : null }
       <Button label='Done' onClick={ done } />

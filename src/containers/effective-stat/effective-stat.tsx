@@ -21,5 +21,11 @@ export default function EffectiveStat ({ baseValue, target }: Props) {
     })
     .reduce((sum, effect) => sum + effect.value, 0)
 
-  return <span>{ baseValue + modifier }</span>
+  return (
+    <span
+      data-testid={`${target.join('.')}.effective-stat.container`}
+    >
+      { baseValue + modifier }
+    </span>
+  )
 }

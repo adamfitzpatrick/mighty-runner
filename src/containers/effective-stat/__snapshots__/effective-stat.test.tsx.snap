@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EffectiveStat container should not throw an error if the state is missing 1`] = `""`;
+
+exports[`EffectiveStat container should render correctly 1`] = `"<span data-testid=\\"a.b.effective-stat.container\\">3</span>"`;

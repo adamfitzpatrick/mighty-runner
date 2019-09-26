@@ -14,12 +14,6 @@ interface State {
   attributeToEdit: Models.Attribute | null
 }
 
-function effectFilterer (targetAttribute: string) {
-  return (effect: Models.Effect) => {
-    return effect.target[0] === 'attributes' && effect.target[1] === targetAttribute
-  }
-}
-
 export default function Attributes () {
   const attributes = useSelector((state: AppState) => state.attributes)
 
@@ -52,8 +46,36 @@ export default function Attributes () {
     <div>
       <h2>Attributes</h2>
       <Attribute
-        attribute={attributes.agility}
+        attribute={ attributes.body }
+        edit={ editAttributeCreator('body', attributes.body) }
+      />
+      <Attribute
+        attribute={ attributes.agility }
         edit={ editAttributeCreator('agility', attributes.agility) }
+      />
+      <Attribute
+        attribute={ attributes.reaction }
+        edit={ editAttributeCreator('reaction', attributes.reaction) }
+      />
+      <Attribute
+        attribute={ attributes.strength }
+        edit={ editAttributeCreator('strength', attributes.strength) }
+      />
+      <Attribute
+        attribute={ attributes.willpower }
+        edit={ editAttributeCreator('willpower', attributes.willpower) }
+      />
+      <Attribute
+        attribute={ attributes.logic }
+        edit={ editAttributeCreator('logic', attributes.logic) }
+      />
+      <Attribute
+        attribute={ attributes.intuition }
+        edit={ editAttributeCreator('intuition', attributes.intuition) }
+      />
+      <Attribute
+        attribute={ attributes.charisma }
+        edit={ editAttributeCreator('charisma', attributes.charisma) }
       />
       {
         state.attributeToEdit ?
