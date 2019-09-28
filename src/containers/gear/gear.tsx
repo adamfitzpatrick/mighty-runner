@@ -8,7 +8,7 @@ import { AppState } from '@state/default-state'
 import GearItem, { GearItemEditRender } from '@components/gear-item'
 import * as Models from '@models'
 import EditItem from '@components/edit-item'
-import { updateGearCreator, addGearCreator } from '@state/actions/gear.actions'
+import { updateGearCreator, addGearCreator, removeGearCreator } from '@state/actions/gear.actions'
 import { saveCharacterCreator } from '@state/actions'
 import AddItem from '@components/add-item'
 import Button from '@components/button'
@@ -40,6 +40,7 @@ export default function Gear () {
   const dispatch = useDispatch()
   const updateGear = updateGearCreator(dispatch)
   const addGear = addGearCreator(dispatch)
+  const removeGear = removeGearCreator(dispatch)
   const saveCharacter = saveCharacterCreator(dispatch)
   const [state, setState] = React.useState({ itemToEdit: null, addingItem: null } as State)
 
@@ -49,6 +50,17 @@ export default function Gear () {
     setState({ ...state, itemToEdit: item })
   }
 
+  const doneEditing = () => {
+    updateGear(state.itemToEdit!)
+    saveCharacter()
+    setState({ ...state, itemToEdit: null })
+  }
+
+  const remove = (item: Models.GearItem) => {
+    removeGear(item)
+    saveCharacter()
+  }
+
   const add = () => {
     const item = generateNewItem()
     updateAdding(item)
@@ -56,12 +68,6 @@ export default function Gear () {
 
   const updateAdding = (item: Models.GearItem) => {
     setState({ ...state, addingItem: item })
-  }
-
-  const doneEditing = () => {
-    updateGear(state.itemToEdit!)
-    saveCharacter()
-    setState({ ...state, itemToEdit: null })
   }
 
   const doneAdding = () => {
@@ -83,6 +89,7 @@ export default function Gear () {
             key={ item.id }
             item={ item }
             edit={ edit }
+            remove={ remove }
           />
         })
       }

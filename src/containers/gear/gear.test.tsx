@@ -4,6 +4,7 @@ import Gear from '.'
 import { AppState } from '@state/default-state'
 import * as Models from '@models'
 import { cleanup, fireEvent } from '@testing-library/react'
+import { gearItem } from '@components/gear-item/gear-item.scss'
 
 describe('Gear container', () => {
   let appState: AppState
@@ -68,6 +69,20 @@ describe('Gear container', () => {
       const dispatches = sut.dispatchSpy.mock.calls.map(call => call[0])
       expect(dispatches[0].type).toEqual('UPDATE_GEAR')
       expect(dispatches[1].type).toEqual('SAVE_CHARACTER')
+    })
+  })
+
+  describe('removing gear', () => {
+    test('should remove the specified gearItem', () => {
+      const remove = sut.getAllByTestId('Delete.button.component')[0]
+      fireEvent.click(remove)
+      expect(sut.dispatchSpy).toHaveBeenCalledWith({
+        payload: gear[0],
+        type: 'REMOVE_GEAR'
+      })
+      expect(sut.dispatchSpy).toHaveBeenCalledWith({
+        type: 'SAVE_CHARACTER'
+      })
     })
   })
 

@@ -10,9 +10,10 @@ import Input from '@components/input'
 interface Props {
   item: Models.GearItem
   edit: (item: Models.GearItem) => void
+  remove: (item: Models.GearItem) => void
 }
 
-export default function GearItem ({ item, edit }: Props) {
+export default function GearItem ({ item, edit, remove }: Props) {
   return (
     <div data-testid={ `${item.name}.gear-item.component` }>
       <h3>{ item.name }</h3>
@@ -23,6 +24,7 @@ export default function GearItem ({ item, edit }: Props) {
       <div>Effects:</div>
       <EffectsById ids={ item.effects! } />
       <Button label='Edit' onClick={ () => edit(item) } />
+      <Button label='Delete' onClick={ () => remove(item) } />
     </div>
   )
 }

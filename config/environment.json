@@ -3,6 +3,6 @@
         "API_HOST": ""
     },
     "development": {
-        "API_HOST": "https://nhu08qps74.execute-api.us-west-2.amazonaws.com/dev"
+        "API_HOST": "https://0jymsrd4a9.execute-api.us-west-2.amazonaws.com/dev"
     }
 }

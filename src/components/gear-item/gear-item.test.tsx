@@ -4,7 +4,6 @@ import { renderWithRedux, RenderWithRedux } from '../../../utils/testing-render-
 import GearItem, { GearItemEditRender } from '.'
 import * as Models from '@models'
 import { AppState } from '@state/default-state'
-import EditItem from '@components/edit-item'
 
 describe('GearItem', () => {
   let appState: AppState
@@ -40,10 +39,12 @@ describe('GearItem', () => {
   describe('display component', () => {
     let sut: RenderWithRedux
     let editSpy: jest.Mock<Models.GearItem>
+    let removeSpy: jest.Mock<Models.GearItem>
 
     beforeEach(() => {
       editSpy = jest.fn()
-      sut = renderWithRedux(<GearItem item={ gearItem } edit={ editSpy } />, appState)
+      removeSpy = jest.fn()
+      sut = renderWithRedux(<GearItem item={ gearItem } edit={ editSpy } remove={ removeSpy }/>, appState)
     })
 
     test('should render correctly', () => {
@@ -54,6 +55,12 @@ describe('GearItem', () => {
       const button = sut.getByTestId('Edit.button.component')
       fireEvent.click(button)
       expect(editSpy).toHaveBeenCalled()
+    })
+
+    test('should remove the item', () => {
+      const button = sut.getByTestId('Delete.button.component')
+      fireEvent.click(button)
+      expect(removeSpy).toHaveBeenCalledWith(gearItem)
     })
   })
 
