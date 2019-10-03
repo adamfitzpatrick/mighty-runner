@@ -1,5 +1,5 @@
 import { gear as gearReducer } from './gear.reducer'
-import { GearAction, Action } from '@state/actions'
+import { GearAction } from '@state/actions'
 import { GearItem } from '@models'
 
 describe('gear reducer', () => {

@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Effect component with edit capability should render correctly 1`] = `"<div data-testid=\\"editable-effect.component\\"><label><span>Name</span><input data-testid=\\"Name.input.component\\" type=\\"text\\" value=\\"n\\"></label><label><span>Description</span><input data-testid=\\"Description.input.component\\" type=\\"text\\" value=\\"d\\"></label><label>Target<input data-testid=\\"0.array.input\\" type=\\"text\\" value=\\"a\\"></label><label><span class=\\"additionalLabel\\">Target</span><input data-testid=\\"1.array.input\\" type=\\"text\\" value=\\"b\\"></label><label><span>Value</span><input data-testid=\\"Value.input.component\\" type=\\"text\\" value=\\"1\\"></label><label><span>Active</span><input data-testid=\\"Active.input.component\\" type=\\"checkbox\\" value=\\"\\" checked=\\"\\"></label></div>"`;
-
-exports[`Effect component with no edit capability should render correctly 1`] = `"<div data-testid=\\"non-editable-effect.component\\"><span>Name: n</span><label><span>Active</span><input data-testid=\\"Active.input.component\\" type=\\"checkbox\\" value=\\"\\" checked=\\"\\"></label></div>"`;

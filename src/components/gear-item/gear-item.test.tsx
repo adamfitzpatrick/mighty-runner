@@ -52,13 +52,13 @@ describe('GearItem', () => {
     })
 
     test('should call the edit function when the edit button is clicked', () => {
-      const button = sut.getByTestId('Edit.button.component')
+      const button = sut.getByTestId('Edit Gear Item.button.component')
       fireEvent.click(button)
       expect(editSpy).toHaveBeenCalled()
     })
 
     test('should remove the item', () => {
-      const button = sut.getByTestId('Delete.button.component')
+      const button = sut.getByTestId('Delete Gear Item.button.component')
       fireEvent.click(button)
       expect(removeSpy).toHaveBeenCalledWith(gearItem)
     })

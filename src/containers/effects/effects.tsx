@@ -4,7 +4,7 @@ import * as styles from './effects.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '@state/default-state'
 import Effect from '@components/effect'
-import { updateEffectCreator, saveCharacterCreator } from '@state/actions'
+import { updateEffectCreator, saveCharacterCreator, removeEffectCreator } from '@state/actions'
 import * as Models from '@models'
 
 interface EffectsByIdProps {
@@ -20,12 +20,13 @@ function getStateManagers () {
   const dispatch = useDispatch()
   return {
     updateEffect: updateEffectCreator(dispatch),
+    removeEffect: removeEffectCreator(dispatch),
     saveCharacter: saveCharacterCreator(dispatch)
   }
 }
 
 export function EffectsById (props: EffectsByIdProps) {
-  const { updateEffect, saveCharacter } = getStateManagers()
+  const { updateEffect, removeEffect, saveCharacter } = getStateManagers()
 
   let effects = useSelector((state: AppState) => state.effects)
   if (!effects) { return null }
@@ -33,7 +34,11 @@ export function EffectsById (props: EffectsByIdProps) {
   const relevantEffects = effects.filter(effect => props.ids.indexOf(effect.id) !== -1)
 
   function renderEffect (effect: Models.Effect) {
-    return <Effect key={ effect.id } effect={ effect } onToggle={ updateEffect } />
+    return <Effect
+      key={ effect.id }
+      effect={ effect }
+      onToggle={ updateEffect }
+    />
   }
 
   function renderEffectForEdit (effect: Models.Effect) {
@@ -42,6 +47,7 @@ export function EffectsById (props: EffectsByIdProps) {
         key={ effect.id }
         effect={ effect }
         onChange={ updateEffect }
+        onRemove={ removeEffect }
         onBlur={ saveCharacter }
       />
     )

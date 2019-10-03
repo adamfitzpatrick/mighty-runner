@@ -43,7 +43,7 @@ describe('Effects containers', () => {
 
     it('should render correctly when not editing', () => {
       sut = renderWithRedux(<EffectsById ids={[ '1', '3' ]} />, appState)
-      expect(sut.container.innerHTML).toMatchSnapshot()
+      expect(sut.getAllByTestId('non-editable-effect.component').length).toBeGreaterThan(1)
     })
 
     it('should render correctly when editing', () => {
@@ -54,7 +54,17 @@ describe('Effects containers', () => {
 
     it('should correctly handle missing data', () => {
       sut = renderWithRedux(<EffectsById ids={[ '1' ]} />, { effects: null } as AppState)
-      expect(sut.container.innerHTML).toMatchSnapshot()
+      expect(sut.container.innerHTML).toBe('')
+    })
+
+    it('should dispatch an action to remove the effect when a delete button is clicked', () => {
+      sut = renderWithRedux(<EffectsById ids={[ '1' ]} edit />, appState)
+      const button = sut.getByTestId('Delete Effect.button.component')
+      fireEvent.click(button)
+      expect(sut.dispatchSpy).toHaveBeenCalledWith({
+        payload: effects[0],
+        type: 'REMOVE_EFFECT'
+      })
     })
   })
 
@@ -66,7 +76,6 @@ describe('Effects containers', () => {
     })
 
     it('should render correctly', () => {
-      expect(sut.container.innerHTML).toMatchSnapshot()
       expect(sut.getAllByTestId('non-editable-effect.component').length).toBe(1)
     })
 
@@ -89,7 +98,7 @@ describe('Effects containers', () => {
     it('should correctly handle missing data', () => {
       cleanup()
       sut = renderWithRedux(<EffectsByTarget target={[ 'a', 'b' ]} />, { effects: null } as AppState)
-      expect(sut.container.innerHTML).toMatchSnapshot()
+      expect(sut.container.innerHTML).toBe('')
     })
   })
 })

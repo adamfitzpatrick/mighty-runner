@@ -103,7 +103,7 @@ export default function Gear () {
           /> :
           null
       }
-      <Button label={ 'Add' } onClick={ add } />
+      <Button label={ 'Add Gear' } onClick={ add } />
       {
         state.addingItem ?
           <AddItem

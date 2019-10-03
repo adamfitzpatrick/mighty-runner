@@ -1,6 +1,7 @@
 import { createStore, Store, combineReducers, applyMiddleware } from 'redux'
 import logger from './middleware/logger'
 import persistenceMiddleware from './middleware/persistence.middleware'
+import cleanUpEffectsMiddleware from './middleware/clean-up-effects'
 import {
   characters,
   activeCharacter,
@@ -25,6 +26,6 @@ export default function configureStore (initialState?: AppState): Store<AppState
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(persistenceMiddleware, logger)
+    applyMiddleware(cleanUpEffectsMiddleware, persistenceMiddleware, logger)
   )
 }

@@ -23,8 +23,8 @@ export default function GearItem ({ item, edit, remove }: Props) {
       <div>Availability: { item.availability }</div>
       <div>Effects:</div>
       <EffectsById ids={ item.effects! } />
-      <Button label='Edit' onClick={ () => edit(item) } />
-      <Button label='Delete' onClick={ () => remove(item) } />
+      <Button label='Edit Gear Item' onClick={ () => edit(item) } />
+      <Button label='Delete Gear Item' onClick={ () => remove(item) } />
     </div>
   )
 }

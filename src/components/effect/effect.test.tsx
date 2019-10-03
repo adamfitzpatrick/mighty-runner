@@ -8,6 +8,7 @@ describe('Effect component', () => {
   let toggleSpy: jest.Mock<Models.Effect>
   let changeSpy: jest.Mock<Models.Effect>
   let blurSpy: jest.Mock<Models.Effect>
+  let removeSpy: jest.Mock<Models.Effect>
   let sut: RenderResult
 
   beforeEach(() => {
@@ -22,15 +23,19 @@ describe('Effect component', () => {
     toggleSpy = jest.fn()
     changeSpy = jest.fn()
     blurSpy = jest.fn()
+    removeSpy = jest.fn()
   })
 
   describe('with no edit capability', () => {
     beforeEach(() => {
-      sut = render(<Effect effect={ effect } onToggle={ toggleSpy } />)
+      sut = render(<Effect
+        effect={ effect }
+        onToggle={ toggleSpy }
+      />)
     })
 
     test('should render correctly', () => {
-      expect(sut.container.innerHTML).toMatchSnapshot()
+      expect(() => sut.getByTestId('non-editable-effect.component')).not.toThrow()
     })
 
     test('should call onToggle method when active checkbox is clicked', () => {
@@ -51,13 +56,14 @@ describe('Effect component', () => {
         <Effect
           effect={ effect }
           onChange={ changeSpy }
+          onRemove={ removeSpy }
           onBlur={ blurSpy }
         />
       )
     })
 
     test('should render correctly', () => {
-      expect(sut.container.innerHTML).toMatchSnapshot()
+      expect(() => sut.getByTestId('editable-effect.component')).not.toThrow()
     })
 
     test('should call the onChange method when a field is modified', () => {
@@ -66,6 +72,12 @@ describe('Effect component', () => {
       fireEvent.change(input, event)
       effect.name = 'changed'
       expect(changeSpy).toHaveBeenCalledWith(effect)
+    })
+
+    test('should call onRemove method when Delete button is clicked', () => {
+      const button = sut.getByTestId('Delete Effect.button.component')
+      fireEvent.click(button)
+      expect(removeSpy).toHaveBeenCalledWith(effect)
     })
 
     test('should call the onBlur method when an input field is blurred', () => {

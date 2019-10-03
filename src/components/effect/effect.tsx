@@ -5,6 +5,7 @@ import * as styles from './effect.scss'
 import * as Models from '@models'
 import Input from '@components/input'
 import ArrayInput from '@components/array-input'
+import Button from '@components/button'
 
 interface NonEditableProps {
   effect: Models.Effect
@@ -14,6 +15,7 @@ interface NonEditableProps {
 interface EditableProps {
   effect: Models.Effect
   onChange: (effect: Models.Effect) => void
+  onRemove: (effect: Models.Effect) => void
   onBlur: () => void
 }
 
@@ -81,6 +83,10 @@ export default function Effect (props: NonEditableProps | EditableProps) {
           label='Active'
           value={ effect.active }
           onChange={ onChangeCreator('active') }
+        />
+        <Button
+          label='Delete Effect'
+          onClick={() => editableProps.onRemove(effect)}
         />
       </div>
     )

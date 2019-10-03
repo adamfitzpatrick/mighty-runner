@@ -9,6 +9,15 @@ const getEffectsWithReplacement = (effects: Effect[], replacement: Effect): Effe
   return updatedArray
 }
 
+const getEffectsWithRemoval = (effects: Effect[], removal: Effect): Effect[] => {
+  const updatedArray = [ ...effects ]
+  const index = updatedArray.findIndex(effect => effect.id === removal.id)
+  if (index >= 0) {
+    updatedArray.splice(index, 1)
+  }
+  return updatedArray
+}
+
 export function effects (
   state: Effect[] | null = defaultState.effects,
   action: Action<EffectsAction, Effect[] | Effect>
@@ -17,11 +26,11 @@ export function effects (
     case EffectsAction.SET_EFFECTS:
       return action.payload as Effect[]
     case EffectsAction.UPDATE_EFFECT:
-      if (state) {
-        return getEffectsWithReplacement(state, action.payload as Effect)
-      }
-      return state
-    default:
-      return state
+      return getEffectsWithReplacement(state!, action.payload as Effect)
+    case EffectsAction.ADD_EFFECT:
+      return [ ...state!, action.payload as Effect ]
+    case EffectsAction.REMOVE_EFFECT:
+      return getEffectsWithRemoval(state!, action.payload as Effect)
   }
+  return state
 }

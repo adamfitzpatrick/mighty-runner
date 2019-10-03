@@ -49,7 +49,7 @@ describe('Gear container', () => {
 
   describe('editing gear', () => {
     beforeEach(() => {
-      const edit = sut.getByTestId('Edit.button.component')
+      const edit = sut.getByTestId('Edit Gear Item.button.component')
       fireEvent.click(edit)
     })
 
@@ -74,7 +74,7 @@ describe('Gear container', () => {
 
   describe('removing gear', () => {
     test('should remove the specified gearItem', () => {
-      const remove = sut.getAllByTestId('Delete.button.component')[0]
+      const remove = sut.getAllByTestId('Delete Gear Item.button.component')[0]
       fireEvent.click(remove)
       expect(sut.dispatchSpy).toHaveBeenCalledWith({
         payload: gear[0],
@@ -88,7 +88,7 @@ describe('Gear container', () => {
 
   describe('adding gear', () => {
     beforeEach(() => {
-      const add = sut.getByTestId('Add.button.component')
+      const add = sut.getByTestId('Add Gear.button.component')
       fireEvent.click(add)
     })
 
