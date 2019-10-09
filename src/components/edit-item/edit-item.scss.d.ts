@@ -1,1 +1,1 @@
-export const editItem: string
+export const editItem: string;

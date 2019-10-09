@@ -9,7 +9,7 @@ describe('clean-up-effects', () => {
   let api: MiddlewareAPI
   let sut: (next: Dispatch<AnyAction>) => (action: AnyAction) => void
   let originatingAction: ReduxAction<ActiveCharacterAction>
-  let next: jest.Mock<AnyAction>
+  let next: Dispatch<AnyAction>
 
   beforeEach(() => {
     appState = {
@@ -25,7 +25,7 @@ describe('clean-up-effects', () => {
     } as MiddlewareAPI
     sut = cleanUpEffectsMiddleware(api)
     originatingAction = { type: ActiveCharacterAction.SAVE_CHARACTER }
-    next = jest.fn()
+    next = jest.fn() as Dispatch<AnyAction>
   })
 
   describe('when ActiveCharacterAction.SAVE_CHARACTER is dispatched', () => {

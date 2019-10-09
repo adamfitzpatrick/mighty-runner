@@ -5,7 +5,7 @@ import { Stat } from '@models'
 import EditItem, { EditItemRenderProp } from '@components/edit-item'
 
 interface Props<T extends Stat> {
-  item: T | null
+  item: T
   render: EditItemRenderProp<T>
   changeHandler: (item: T) => void
   done: () => void,

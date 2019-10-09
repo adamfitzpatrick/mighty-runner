@@ -1,1 +1,1 @@
-export const gear: string
+export const gear: string;

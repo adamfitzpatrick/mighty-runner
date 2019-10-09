@@ -16,7 +16,7 @@ interface Props {
 export default function Attribute ({ attribute, edit }: Props) {
 
   return (
-    <div>
+    <div className={styles.attribute}>
       <div>
         <h3>{ attribute.name } ({ attribute.shortName })</h3>
         <div>

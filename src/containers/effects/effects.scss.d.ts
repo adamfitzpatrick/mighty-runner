@@ -1,1 +1,1 @@
-export const effects: string
+export const effects: string;

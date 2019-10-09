@@ -43,7 +43,7 @@ export default function Attributes () {
   }
 
   return (
-    <div>
+    <div className={styles.attributes}>
       <h2>Attributes</h2>
       <Attribute
         attribute={ attributes.body }

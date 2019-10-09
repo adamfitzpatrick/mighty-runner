@@ -1,1 +1,1 @@
-export const attributes: string
+export const attributes: string;

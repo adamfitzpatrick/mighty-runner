@@ -19,7 +19,7 @@ describe('effects reducer', () => {
   })
 
   describe('with undefined state', () => {
-    it('should accept an undefined state and return a null one', () => {
+    test('should accept an undefined state and return a null one', () => {
       const action = {
         type: 'NOT_AN_ACTION' as EffectsAction,
         payload: effect
@@ -29,7 +29,7 @@ describe('effects reducer', () => {
   })
 
   describe('SET_EFFECTS', () => {
-    it('should set the effects state', () => {
+    test('should set the effects state', () => {
       const action = {
         type: EffectsAction.SET_EFFECTS,
         payload: [ effect ]
@@ -39,7 +39,7 @@ describe('effects reducer', () => {
   })
 
   describe('UPDATE_EFFECT', () => {
-    it('should return the state with the payload effect replaced', () => {
+    test('should return the state with the payload effect replaced', () => {
       const otherEffect = { ...effect }
       otherEffect.id = '2'
       state = [ { ...effect }, otherEffect ]
@@ -53,7 +53,7 @@ describe('effects reducer', () => {
   })
 
   describe('ADD_EFFECT', () => {
-    it('should return the state with the payload appended', () => {
+    test('should return the state with the payload appended', () => {
       const newEffect = { ...effect }
       newEffect.id = '2'
       state = [ effect ]
@@ -66,7 +66,7 @@ describe('effects reducer', () => {
   })
 
   describe('REMOVE_EFFECT', () => {
-    it('should return the state with the payload effect remove', () => {
+    test('should return the state with the payload effect remove', () => {
       const otherEffect = { ...effect }
       otherEffect.id = '2'
       state = [ { ...effect }, otherEffect ]
@@ -77,7 +77,7 @@ describe('effects reducer', () => {
       expect(effectReducer(state, action)).toEqual([ otherEffect ])
     })
 
-    it('should return the state unchanged if a matching effect is not found', () => {
+    test('should return the state unchanged if a matching effect is not found', () => {
       const otherEffect = { ...effect }
       otherEffect.id = '2'
       state = [ { ...effect }, otherEffect ]

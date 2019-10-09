@@ -74,16 +74,43 @@ describe('Effect component', () => {
       expect(changeSpy).toHaveBeenCalledWith(effect)
     })
 
+    test('should call the onChange method with a new target array when the target array is added to', () => {
+      fireEvent.click(sut.getByTestId('Add Element.button.component'))
+      expect(changeSpy).toHaveBeenCalledWith(expect.objectContaining({
+        target: [ 'a', 'b', '' ]
+      }))
+    })
+
     test('should call onRemove method when Delete button is clicked', () => {
       const button = sut.getByTestId('Delete Effect.button.component')
       fireEvent.click(button)
       expect(removeSpy).toHaveBeenCalledWith(effect)
     })
 
+    test('should not render the delete button when onRemove is not provided', () => {
+      cleanup()
+      sut = render(<Effect
+        effect={effect}
+        onChange={changeSpy}
+        onBlur={blurSpy}
+      />)
+      expect(sut.queryByTestId('Delete Effect.button.component')).toBeNull()
+    })
+
     test('should call the onBlur method when an input field is blurred', () => {
       const input = sut.getByTestId('Name.input.component')
       fireEvent.blur(input)
       expect(blurSpy).toHaveBeenCalled()
+    })
+
+    test('should gracefully handle a missing onBlur prop', () => {
+      cleanup()
+      sut = render(<Effect
+        effect={effect}
+        onChange={changeSpy}
+      />)
+      const input = sut.getByTestId('Name.input.component')
+      fireEvent.blur(input)
     })
   })
 })

@@ -15,7 +15,7 @@ interface Props {
 
 export default function GearItem ({ item, edit, remove }: Props) {
   return (
-    <div data-testid={ `${item.name}.gear-item.component` }>
+    <div data-testid={ `${item.name}.gear-item.component` } className={styles.gearItem}>
       <h3>{ item.name }</h3>
       <div>Description: { item.description }</div>
       <div>Cost: { item.cost }</div>

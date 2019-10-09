@@ -5,6 +5,8 @@ import * as Models from '@models'
 import { setPersonalDataCreator, saveCharacterCreator } from '@state/actions'
 import Input, { InputType } from '@components/input'
 
+import * as styles from './personal-data.scss'
+
 // TODO Add remaining personal data items
 
 export default function PersonalData () {
@@ -37,7 +39,7 @@ export default function PersonalData () {
   }
 
   return (
-    <div data-testid='personal-data.container'>
+    <div data-testid='personal-data.container' className={styles.personalData}>
       { getInput('name', 'Name', 'text') }
       { getInput('metatype', 'Metatype', 'text') }
       { getInput('ethnicity', 'Ethnicity', 'text') }

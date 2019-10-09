@@ -1,92 +1,21 @@
 import * as React from 'react'
+import { v4 } from 'uuid'
 
 import * as styles from './effects.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '@state/default-state'
 import Effect from '@components/effect'
-import { updateEffectCreator, saveCharacterCreator, removeEffectCreator } from '@state/actions'
-import * as Models from '@models'
+import { updateEffectCreator, saveCharacterCreator, removeEffectCreator, addEffectCreator } from '@state/actions'
 
-interface EffectsByIdProps {
-  ids: string[]
-  edit?: boolean
-}
-
-interface EffectsByTargetProps {
-  target: string[]
-}
-
-function getStateManagers () {
+export function getApplicationStateManagers () {
   const dispatch = useDispatch()
   return {
     updateEffect: updateEffectCreator(dispatch),
+    addEffect: addEffectCreator(dispatch),
     removeEffect: removeEffectCreator(dispatch),
     saveCharacter: saveCharacterCreator(dispatch)
   }
 }
 
-export function EffectsById (props: EffectsByIdProps) {
-  const { updateEffect, removeEffect, saveCharacter } = getStateManagers()
-
-  let effects = useSelector((state: AppState) => state.effects)
-  if (!effects) { return null }
-
-  const relevantEffects = effects.filter(effect => props.ids.indexOf(effect.id) !== -1)
-
-  function renderEffect (effect: Models.Effect) {
-    return <Effect
-      key={ effect.id }
-      effect={ effect }
-      onToggle={ updateEffect }
-    />
-  }
-
-  function renderEffectForEdit (effect: Models.Effect) {
-    return (
-      <Effect
-        key={ effect.id }
-        effect={ effect }
-        onChange={ updateEffect }
-        onRemove={ removeEffect }
-        onBlur={ saveCharacter }
-      />
-    )
-  }
-
-  return <React.Fragment>
-    {
-      relevantEffects.map(effect => {
-        return (props.edit ? renderEffectForEdit : renderEffect).call(this, effect)
-      })
-    }
-  </React.Fragment>
-}
-
-export function EffectsByTarget ({ target }: EffectsByTargetProps) {
-  const { updateEffect, saveCharacter } = getStateManagers()
-  const updater = (effect: Models.Effect) => {
-    updateEffect(effect)
-    saveCharacter()
-  }
-
-  let effects = useSelector((state: AppState) => state.effects)
-  if (!effects) { return null }
-
-  const relevantEffects = effects.filter(effect => {
-    return effect.target.every((element, index) => element === target[index])
-  })
-
-  return <React.Fragment>
-    {
-      relevantEffects.map(effect => {
-        return (
-          <Effect
-            key={ effect.id }
-            effect={ effect }
-            onToggle={ updater }
-          />
-        )
-      })
-    }
-  </React.Fragment>
-}
+export { default as EffectsById } from './effects-by-id'
+export { default as EffectsByTarget } from './effects-by-target'

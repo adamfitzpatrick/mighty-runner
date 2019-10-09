@@ -53,7 +53,7 @@ describe('EditItem component', () => {
   })
 
   test('should render correctly', () => {
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.container.innerHTML).toContain('edit-item')
   })
 
   test('should pass on the change handler from the parent component', () => {
@@ -75,7 +75,7 @@ describe('EditItem component', () => {
       changeHandler={ changeSpy }
       done={ doneSpy }
     />, appState)
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.queryByTestId('Cancel.button.component')).toBeNull()
   })
 
   test('should call cancel when the cancel button is clicked', () => {
@@ -87,13 +87,34 @@ describe('EditItem component', () => {
   test('should render correctly when item has no related effects', () => {
     cleanup()
     delete item.effects
-    let noEffects = render(<EditItem
+    let noEffects = renderWithRedux(<EditItem
       item={ item }
       render={ renderFunc }
       changeHandler={ changeSpy }
       done={ doneSpy }
       cancel={ cancelSpy }
-    />)
-    expect(noEffects.container.innerHTML).toMatchSnapshot()
+    />, appState)
+    expect(noEffects.container.innerHTML).not.toContain('effect.component')
+  })
+
+  test('should append added effect ids to the provided stat and call the change handler', () => {
+    fireEvent.click(sut.getByTestId('Add Effect.button.component'))
+    fireEvent.click(sut.getByTestId('Done Adding Effect.button.component'))
+    expect(changeSpy.mock.calls[0][0].effects).toHaveProperty('length', 2)
+  })
+
+  test('should create an effects array when one does not already exist', () => {
+    cleanup()
+    delete item.effects
+    sut = renderWithRedux(<EditItem
+      item={ item }
+      render={ renderFunc }
+      changeHandler={ changeSpy }
+      done={ doneSpy }
+      cancel={ cancelSpy }
+    />, appState)
+    fireEvent.click(sut.getByTestId('Add Effect.button.component'))
+    fireEvent.click(sut.getByTestId('Done Adding Effect.button.component'))
+    expect(changeSpy.mock.calls[0][0].effects).toHaveProperty('length', 1)
   })
 })

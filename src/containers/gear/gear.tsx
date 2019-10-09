@@ -81,7 +81,7 @@ export default function Gear () {
   }
 
   return (
-    <div>
+    <div className={styles.gear}>
       <h2>Gear</h2>
       {
         gear.map(item => {

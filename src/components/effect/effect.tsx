@@ -6,6 +6,7 @@ import * as Models from '@models'
 import Input from '@components/input'
 import ArrayInput from '@components/array-input'
 import Button from '@components/button'
+import { array } from 'prop-types'
 
 interface NonEditableProps {
   effect: Models.Effect
@@ -15,8 +16,8 @@ interface NonEditableProps {
 interface EditableProps {
   effect: Models.Effect
   onChange: (effect: Models.Effect) => void
-  onRemove: (effect: Models.Effect) => void
-  onBlur: () => void
+  onRemove?: (effect: Models.Effect) => void
+  onBlur?: () => void
 }
 
 export default function Effect (props: NonEditableProps | EditableProps) {
@@ -34,6 +35,12 @@ export default function Effect (props: NonEditableProps | EditableProps) {
     }
   }
 
+  const onTargetAdd = () => {
+    const target = props.effect.target.concat('')
+    const updated = { ...props.effect, target }
+    editableProps.onChange(updated)
+  }
+
   function renderNonEditable (effect: Models.Effect) {
     return (
       <div data-testid='non-editable-effect.component'>
@@ -49,6 +56,10 @@ export default function Effect (props: NonEditableProps | EditableProps) {
   }
 
   function renderEditable (effect: Models.Effect) {
+    const handleBlur = () => {
+      editableProps.onBlur && editableProps.onBlur()
+    }
+
     return (
       <div data-testid='editable-effect.component'>
         <Input
@@ -56,27 +67,28 @@ export default function Effect (props: NonEditableProps | EditableProps) {
           label='Name'
           value={ effect.name }
           onChange={ onChangeCreator('name') }
-          onBlur={ editableProps.onBlur }
+          onBlur={ handleBlur }
         />
         <Input
           type='text'
           label='Description'
           value={ effect.description }
           onChange={ onChangeCreator('description') }
-          onBlur={ editableProps.onBlur }
+          onBlur={ handleBlur }
         />
         <ArrayInput
           label='Target'
           arr={ effect.target }
           onChange={ onChangeCreator('target') }
-          onBlur={ editableProps.onBlur }
+          onAdd={onTargetAdd}
+          onBlur={ handleBlur }
         />
         <Input
           type='number'
           label='Value'
           value={ effect.value }
           onChange={ onChangeCreator('value') }
-          onBlur={ editableProps.onBlur }
+          onBlur={ handleBlur }
         />
         <Input
           type='checkbox'
@@ -84,10 +96,14 @@ export default function Effect (props: NonEditableProps | EditableProps) {
           value={ effect.active }
           onChange={ onChangeCreator('active') }
         />
-        <Button
-          label='Delete Effect'
-          onClick={() => editableProps.onRemove(effect)}
-        />
+        {
+          editableProps.onRemove ?
+          <Button
+            label='Delete Effect'
+            onClick={() => editableProps.onRemove!(effect)}
+          /> :
+          null
+        }
       </div>
     )
   }

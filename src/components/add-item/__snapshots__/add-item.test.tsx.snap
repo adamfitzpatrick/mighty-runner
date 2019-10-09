@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddItem component should render correctly 1`] = `"<div data-testid=\\"n.edit-item.component\\"><div>ok</div><button data-testid=\\"Done.button.component\\">Done</button><button data-testid=\\"Cancel.button.component\\">Cancel</button></div>"`;
+exports[`AddItem component should render correctly 1`] = `"<div data-testid=\\"n.edit-item.component\\" class=\\"editItem\\"><div>ok</div><button data-testid=\\"Done.button.component\\">Done</button><button data-testid=\\"Cancel.button.component\\">Cancel</button></div>"`;
