@@ -43,7 +43,8 @@ describe('middleware utility', () => {
       const appState = {
         characters: [ character ],
         activeCharacter,
-        ...character
+        ...character,
+        apiError: false
       }
       expect(assembleCharacter(appState)).toEqual(character)
     })

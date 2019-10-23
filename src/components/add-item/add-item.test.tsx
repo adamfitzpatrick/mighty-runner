@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Models from '@models'
-import { cleanup, render, RenderResult } from '@testing-library/react'
+import { RenderResult } from '@testing-library/react'
 import AddItem from '.'
 import { renderWithRedux } from '../../../utils/testing-render-with-redux'
 import { AppState } from '@state/default-state'

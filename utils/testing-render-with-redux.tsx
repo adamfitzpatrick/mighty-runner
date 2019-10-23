@@ -25,7 +25,8 @@ const reducer = combineReducers({
   personalData: (state: Models.PersonalData | null = null) => state,
   attributes: (state: Models.Attributes | null = null) => state,
   gear: (state: Models.GearItem[] | null = null) => state,
-  effects: (state: Models.Effect[] | null = null) => state
+  effects: (state: Models.Effect[] | null = null) => state,
+  apiError: (state: boolean = false) => state
 })
 
 const getSpyMiddleware = (dispatchSpy: jest.Mock<Dispatch<AnyAction>>) => () => {

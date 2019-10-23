@@ -3,10 +3,8 @@ import { CharacterIdentifier } from '@models'
 
 export enum ActiveCharacterAction {
   LOAD_CHARACTER = 'LOAD_CHARACTER',
-  LOAD_CHARACTER_FAILURE = 'LOAD_CHARACTER_FAILURE',
   SET_ACTIVE_CHARACTER = 'SET_ACTIVE_CHARACTER',
-  SAVE_CHARACTER = 'SAVE_CHARACTER',
-  SAVE_CHARACTER_FAILURE = 'SAVE_CHARACTER_FAILURE'
+  SAVE_CHARACTER = 'SAVE_CHARACTER'
 }
 
 export const setActiveCharacterCreator = (dispatch: Dispatch<Action<ActiveCharacterAction>>) => {

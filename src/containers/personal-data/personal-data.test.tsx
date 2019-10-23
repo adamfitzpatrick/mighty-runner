@@ -33,7 +33,8 @@ describe('PersonalData container', () => {
       personalData,
       attributes: null,
       gear: null,
-      effects: null
+      effects: null,
+      apiError: false
     }
     sut = renderWithRedux(<PersonalData />, appState)
   })

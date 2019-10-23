@@ -7,6 +7,7 @@ export interface AppState {
   attributes: Attributes | null
   gear: GearItem[] | null
   effects: Effect[] | null
+  apiError: boolean
 }
 
 export const defaultState: AppState = {
@@ -15,7 +16,8 @@ export const defaultState: AppState = {
   personalData: null,
   attributes: null,
   gear: null,
-  effects: null
+  effects: null,
+  apiError: false
 }
 
 export default defaultState

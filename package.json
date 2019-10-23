@@ -82,6 +82,7 @@
     "globals": []
   },
   "dependencies": {
+    "@types/rewire": "^2.5.28",
     "chai": "^4.2.0"
   },
   "jest": {

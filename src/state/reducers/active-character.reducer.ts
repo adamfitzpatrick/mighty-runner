@@ -8,7 +8,6 @@ export function activeCharacter (
 ) {
   switch (action.type) {
     case ActiveCharacterAction.SET_ACTIVE_CHARACTER:
-    case ActiveCharacterAction.SAVE_CHARACTER_FAILURE:
       return action.payload
     case ActiveCharacterAction.SAVE_CHARACTER:
     default:

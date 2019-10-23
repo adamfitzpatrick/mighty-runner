@@ -10,7 +10,6 @@ export function characters (
     case CharactersAction.SET_CHARACTERS:
       return action.payload
     case CharactersAction.LOAD_CHARACTERS:
-    case CharactersAction.LOAD_CHARACTERS_FAILURE:
     default:
       return state
   }

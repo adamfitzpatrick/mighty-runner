@@ -1,19 +1,19 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
 import ApiService from '@services/api-service'
-import { Action, CharactersAction, ActiveCharacterAction } from '../actions'
+import { Action, CharactersAction, ActiveCharacterAction, ApiErrorAction } from '../../actions'
 import { Character } from '@models'
-import { assembleCharacter, flattenCharacter } from './middleware-utility'
+import { assembleCharacter, flattenCharacter } from '../middleware-utility'
 
 function loadCharacters () {
-  return (dispatch: Dispatch<Action<CharactersAction, Character[]>>) => {
+  return (dispatch: Dispatch<AnyAction>) => {
     ApiService.getCharacterList()
       .then(characters => {
         dispatch({
           type: CharactersAction.SET_CHARACTERS,
           payload: characters
         })
-      }, err => {
-        console.log(err)
+      }, () => {
+        dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
   }
 }
@@ -23,20 +23,17 @@ function loadCharacter (characterId: string) {
     ApiService.getCharacter(characterId)
       .then(character => {
         flattenCharacter(character, dispatch)
-      }, err => {
-        console.log(err)
+      }, () => {
+        dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
   }
 }
 
 function persistActiveCharacter (character: Character) {
   return (dispatch: Dispatch<AnyAction>) => {
-    ApiService.putCharacter(character.id, character)
-      .then(() => {
-        flattenCharacter(character, dispatch)
-      }, err => {
-        console.log(err)
-      })
+    ApiService.putCharacter(character.id, character).catch(() => {
+      dispatch({ type: ApiErrorAction.SET_API_ERROR })
+    })
   }
 }
 

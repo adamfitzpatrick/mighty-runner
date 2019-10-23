@@ -3,7 +3,6 @@ import { Character } from '@models'
 
 export enum CharactersAction {
   LOAD_CHARACTERS = 'LOAD_CHARACTERS',
-  LOAD_CHARACTERS_FAILURE = 'LOAD_CHARACTERS_FAILURE',
   SET_CHARACTERS = 'SET_CHARACTERS'
 }
 

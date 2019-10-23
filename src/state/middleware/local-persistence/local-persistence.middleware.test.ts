@@ -32,7 +32,8 @@ describe('local-persistence middleware', () => {
       attributes: {} as Attributes,
       specialAttributes: {} as SpecialAttributes,
       gear: [] as GearItem[],
-      effects: [] as Effect[]
+      effects: [] as Effect[],
+      apiError: false
     } as AppState
     dispatchSpy = jest.fn() as TestDispatch
     api = {

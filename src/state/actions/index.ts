@@ -5,6 +5,7 @@ export * from './personal-data.actions'
 export * from './attributes.actions'
 export * from './gear.actions'
 export * from './effects.actions'
+export * from './api-error.actions'
 
 export interface ActionDispatcher<P> {
   (payload: P): void
