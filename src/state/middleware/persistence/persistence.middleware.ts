@@ -12,6 +12,7 @@ function loadCharacters () {
           type: CharactersAction.SET_CHARACTERS,
           payload: characters
         })
+        dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
       }, () => {
         dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
@@ -23,6 +24,7 @@ function loadCharacter (characterId: string) {
     ApiService.getCharacter(characterId)
       .then(character => {
         flattenCharacter(character, dispatch)
+        dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
       }, () => {
         dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
@@ -31,9 +33,11 @@ function loadCharacter (characterId: string) {
 
 function persistActiveCharacter (character: Character) {
   return (dispatch: Dispatch<AnyAction>) => {
-    ApiService.putCharacter(character.id, character).catch(() => {
-      dispatch({ type: ApiErrorAction.SET_API_ERROR })
-    })
+    ApiService.putCharacter(character.id, character)
+      .then(
+        () => dispatch({ type: ApiErrorAction.SET_API_HEALTHY }),
+        () => dispatch({ type: ApiErrorAction.SET_API_ERROR })
+      )
   }
 }
 

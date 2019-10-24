@@ -58,7 +58,6 @@ describe('persistence middleware', () => {
     }
     next = jest.fn() as Dispatch<AnyAction>
     apiServiceMock = ApiService as any as ApiServiceMock
-    apiServiceMock.putCharacter.mockResolvedValue({ message: 'accepted' })
     assembleMock = assembleCharacter as any as AssembleMock
     assembleMock.mockReturnValue(character)
     flattenMock = flattenCharacter as any as FlattenMock
@@ -66,10 +65,17 @@ describe('persistence middleware', () => {
   })
 
   describe('SAVE_CHARACTER', () => {
-    test('should call the api service to save the character', () => {
+    let promise: Promise<{ message: string }>
+
+    test('should call the api service to save the character', async () => {
+      promise = new Promise((resolve, reject) => resolve())
+      apiServiceMock.putCharacter.mockReturnValue(promise)
       const action = { type: ActiveCharacterAction.SAVE_CHARACTER }
       middleware(action)
-      expect(apiServiceMock.putCharacter).toHaveBeenCalledWith('1', character)
+      await promise.then(() => {
+        expect(apiServiceMock.putCharacter).toHaveBeenCalledWith('1', character)
+        expect(dispatchSpy).toHaveBeenCalledWith({ type: ApiErrorAction.SET_API_HEALTHY })
+      })
     })
 
     test('should dispatch an error if the call to the api service fails', async () => {
@@ -92,6 +98,7 @@ describe('persistence middleware', () => {
       expect(apiServiceMock.getCharacter).toHaveBeenCalledWith('1')
       await promise.then(() => {
         expect(flattenMock).toHaveBeenCalledWith(character, dispatchSpy)
+        expect(dispatchSpy).toHaveBeenCalledWith({ type: ApiErrorAction.SET_API_HEALTHY })
       })
     })
 
@@ -118,6 +125,7 @@ describe('persistence middleware', () => {
           type: CharactersAction.SET_CHARACTERS,
           payload: [ character ]
         })
+        expect(dispatchSpy).toHaveBeenCalledWith({ type: ApiErrorAction.SET_API_HEALTHY })
       })
     })
 

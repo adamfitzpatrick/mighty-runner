@@ -18,9 +18,9 @@ describe('api-error reducer', () => {
     })
   })
 
-  describe('RESOLVE_API_ERROR', () => {
+  describe('SET_API_HEALTHY', () => {
     test('should resolve the api error state', () => {
-      const action = { type: ApiErrorAction.RESOLVE_API_ERROR }
+      const action = { type: ApiErrorAction.SET_API_HEALTHY }
       expect(apiErrorReducer(true, action)).toBe(false)
     })
   })

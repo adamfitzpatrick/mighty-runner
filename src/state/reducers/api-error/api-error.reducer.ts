@@ -7,7 +7,7 @@ export function apiError (
 ) {
   if (action.type === ApiErrorAction.SET_API_ERROR) {
     return true
-  } else if (action.type === ApiErrorAction.RESOLVE_API_ERROR) {
+  } else if (action.type === ApiErrorAction.SET_API_HEALTHY) {
     return false
   }
   return state
