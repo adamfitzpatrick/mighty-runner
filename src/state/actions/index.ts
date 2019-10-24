@@ -1,11 +1,11 @@
 import { Action as ReduxAction } from 'redux'
-export * from './characters.actions'
-export * from './active-character.actions'
-export * from './personal-data.actions'
-export * from './attributes.actions'
-export * from './gear.actions'
-export * from './effects.actions'
-export * from './api-error.actions'
+export * from './characters'
+export * from './active-character'
+export * from './personal-data'
+export * from './attributes'
+export * from './gear'
+export * from './effects'
+export * from './api-error'
 
 export interface ActionDispatcher<P> {
   (payload: P): void

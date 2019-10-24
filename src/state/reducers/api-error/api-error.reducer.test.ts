@@ -1,5 +1,5 @@
 import { apiError as apiErrorReducer } from './api-error.reducer'
-import { ApiErrorAction } from '../../actions/api-error.actions'
+import { ApiErrorAction } from '@state/actions'
 
 describe('api-error reducer', () => {
   describe('with undefined state', () => {

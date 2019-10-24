@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux'
-import { Action } from '.'
+import { Action } from '..'
 import { Attributes, Attribute } from '@models'
 
 export interface UpdateAttributePayload {

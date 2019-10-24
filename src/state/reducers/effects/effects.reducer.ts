@@ -1,6 +1,6 @@
 import { defaultState } from '@state/default-state'
 import { Action } from '@state/actions'
-import { EffectsAction } from '@state/actions/effects.actions'
+import { EffectsAction } from '@state/actions/effects'
 import { Effect } from '@models'
 
 const getEffectsWithReplacement = (effects: Effect[], replacement: Effect): Effect[] => {

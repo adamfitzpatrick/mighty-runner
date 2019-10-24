@@ -26,7 +26,7 @@ describe('AddItem component', () => {
     }
     changeSpy = jest.fn()
     renderFunc = (item: Models.Stat, changeHandler: (item: Models.Stat) => void): JSX.Element => {
-      passedObjects = { item, changeHandler}
+      passedObjects = { item, changeHandler }
       return <div>ok</div>
     }
     sut = renderWithRedux(<AddItem

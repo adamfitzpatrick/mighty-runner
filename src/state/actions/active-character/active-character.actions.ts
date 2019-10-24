@@ -2,9 +2,9 @@ import { Dispatch, Action } from 'redux'
 import { CharacterIdentifier } from '@models'
 
 export enum ActiveCharacterAction {
-  LOAD_CHARACTER = 'LOAD_CHARACTER',
   SET_ACTIVE_CHARACTER = 'SET_ACTIVE_CHARACTER',
-  SAVE_CHARACTER = 'SAVE_CHARACTER'
+  SAVE_CHARACTER = 'SAVE_CHARACTER',
+  LOAD_CHARACTER = 'LOAD_CHARACTER'
 }
 
 export const setActiveCharacterCreator = (dispatch: Dispatch<Action<ActiveCharacterAction>>) => {

@@ -6,9 +6,9 @@ export enum ApiErrorAction {
 }
 
 export const setApiErrorCreator = (dispatch: Dispatch<Action<ApiErrorAction>>) => {
-  return dispatch({ type: ApiErrorAction.SET_API_ERROR })
+  return () => dispatch({ type: ApiErrorAction.SET_API_ERROR })
 }
 
-export const setApiHealthy = (dispatch: Dispatch<Action<ApiErrorAction>>) => {
-  return dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
+export const setApiHealthyCreator = (dispatch: Dispatch<Action<ApiErrorAction>>) => {
+  return () => dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
 }

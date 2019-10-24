@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { Action } from '@state/actions'
 import { GearItem } from '@models'
-import { ActionDispatcher } from '.'
+import { ActionDispatcher } from '..'
 
 export enum GearAction {
   SET_GEAR = 'SET_GEAR',

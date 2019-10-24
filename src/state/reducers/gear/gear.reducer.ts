@@ -1,6 +1,6 @@
 import { defaultState } from '@state/default-state'
 import { Action } from '@state/actions'
-import { GearAction } from '@state/actions/gear.actions'
+import { GearAction } from '@state/actions/gear'
 import { GearItem } from '@models'
 
 const getGearWithReplacement = (gear: GearItem[], replacement: GearItem): GearItem[] => {

@@ -1,5 +1,5 @@
 import { effects as effectReducer } from './effects.reducer'
-import { EffectsAction } from '../../actions/effects.actions'
+import { EffectsAction } from '@state/actions'
 import { Effect } from '@models'
 
 describe('effects reducer', () => {
