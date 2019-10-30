@@ -9,6 +9,7 @@ const store = configureStore()
 import CharacterFormMock from '@containers/character-form-mock'
 import Bootstrap from '@containers/bootstrap'
 import Error from '@containers/error'
+import Landing from '@containers/landing'
 
 export default function App () {
   return (
@@ -16,6 +17,7 @@ export default function App () {
       <Bootstrap />
       <Error />
       <Router>
+        <Route path='/' exact component={Landing} />
         <Route path='/form/:characterId' exact component={CharacterFormMock} />
       </Router>
     </Provider>
