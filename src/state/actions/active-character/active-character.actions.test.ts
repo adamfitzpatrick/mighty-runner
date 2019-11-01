@@ -10,10 +10,17 @@ describe('active-character actions', () => {
 
   describe('setActiveCharacterCreator', () => {
     test('should return a function to dispatch the SET_ACTIVE_CHARACTER action', () => {
-      activeCharacterActions.setActiveCharacterCreator(dispatchSpy)({ id: '1', userId: '1' })
+      let payload = {
+        id: '1',
+        userId: '1',
+        created: 1,
+        updated: 1,
+        favorite: false
+      }
+      activeCharacterActions.setActiveCharacterCreator(dispatchSpy)(payload)
       expect(dispatchSpy).toHaveBeenCalledWith({
         type: activeCharacterActions.ActiveCharacterAction.SET_ACTIVE_CHARACTER,
-        payload: { id: '1', userId: '1' }
+        payload
       })
     })
   })

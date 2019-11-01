@@ -4,6 +4,9 @@ import { Character, PersonalData, Attributes, SpecialAttributes, GearItem, Effec
 const character = {
   id: '1',
   userId: 'u',
+  created: 1,
+  updated: 1,
+  favorite: false,
   personalData: {} as PersonalData,
   attributes: {} as Attributes,
   specialAttributes: {} as SpecialAttributes,

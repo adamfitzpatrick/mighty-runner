@@ -1,5 +1,5 @@
-import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction } from '@state/actions'
-import { Character } from '@models'
+import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction, Action } from '@state/actions'
+import { Character, CharacterIdentifier } from '@models'
 import { Dispatch, AnyAction } from 'redux'
 import { AppState } from '@state/default-state'
 
@@ -17,9 +17,16 @@ export function assembleCharacter (state: AppState): Character {
 }
 
 export function flattenCharacter (character: Character, dispatch: Dispatch<AnyAction>) {
-  dispatch({
+  const activeCharacterDispatcher = dispatch as Dispatch<Action<ActiveCharacterAction, CharacterIdentifier>>
+  activeCharacterDispatcher({
     type: ActiveCharacterAction.SET_ACTIVE_CHARACTER,
-    payload: { userId: character.userId, id: character.id }
+    payload: {
+      userId: character.userId,
+      id: character.id,
+      created: character.created,
+      updated: character.updated,
+      favorite: character.favorite
+    }
   })
   dispatch({
     type: PersonalDataAction.SET_PERSONAL_DATA,
