@@ -1,1 +1,1 @@
-export const landing: string
+export const landing: string;

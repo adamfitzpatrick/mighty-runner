@@ -1,0 +1,17 @@
+@import '../../assets/typography';
+@import '../../assets/layout';
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-left: 4rem;
+  margin-top: 2rem;
+
+  @media screen and (max-width: $small-viewport-width-minimum) {
+    margin: 0;
+  }
+
+  .headerText {
+    font-family: $title-font;
+  }
+}
