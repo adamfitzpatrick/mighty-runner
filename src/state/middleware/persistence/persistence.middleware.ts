@@ -1,8 +1,9 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
 import ApiService from '@services/api-service'
 import { Action, CharactersAction, ActiveCharacterAction, ApiErrorAction } from '../../actions'
-import { Character } from '@models'
+import { Character, CharacterIdentifier } from '@models'
 import { assembleCharacter, flattenCharacter } from '../middleware-utility'
+import { AppState } from '@state/default-state'
 
 function loadCharacters () {
   return (dispatch: Dispatch<AnyAction>) => {
@@ -19,11 +20,21 @@ function loadCharacters () {
   }
 }
 
-function loadCharacter (characterId: string) {
+function conditionallySetCharacter (
+  character: Character,
+  dispatch: Dispatch<AnyAction>,
+  existingCharacter: CharacterIdentifier | null
+) {
+  if (!existingCharacter || character.updated > existingCharacter.updated) {
+    flattenCharacter(character, dispatch)
+  }
+}
+
+function loadCharacter (characterId: string, existingCharacter: CharacterIdentifier | null) {
   return (dispatch: Dispatch<AnyAction>) => {
     ApiService.getCharacter(characterId)
       .then(character => {
-        flattenCharacter(character, dispatch)
+        conditionallySetCharacter(character, dispatch, existingCharacter)
         dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
       }, () => {
         dispatch({ type: ApiErrorAction.SET_API_ERROR })
@@ -41,7 +52,7 @@ function persistActiveCharacter (character: Character) {
   }
 }
 
-export default (api: MiddlewareAPI<Dispatch<AnyAction>>) => {
+export default (api: MiddlewareAPI<Dispatch<AnyAction>, AppState>) => {
   return (next: Dispatch<AnyAction>) => (action: AnyAction) => {
     switch (action.type) {
       case ActiveCharacterAction.SAVE_CHARACTER:
@@ -49,7 +60,8 @@ export default (api: MiddlewareAPI<Dispatch<AnyAction>>) => {
         persistActiveCharacter(character)(api.dispatch)
         break
       case ActiveCharacterAction.LOAD_CHARACTER:
-        loadCharacter((action as Action<ActiveCharacterAction, string>).payload)(api.dispatch)
+        const existingCharacter = api.getState().activeCharacter
+        loadCharacter((action as Action<ActiveCharacterAction, string>).payload, existingCharacter)(api.dispatch)
         break
       case CharactersAction.LOAD_CHARACTERS:
         loadCharacters()(api.dispatch)

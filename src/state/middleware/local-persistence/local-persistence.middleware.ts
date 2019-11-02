@@ -1,8 +1,9 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
 import { assembleCharacter, flattenCharacter } from '../middleware-utility'
 import { CharactersAction, ActiveCharacterAction, Action } from '@state/actions'
-import { Character } from '@models'
+import { Character, CharacterIdentifier } from '@models'
 import { unsetCharacter } from '../middleware-utility/middleware-utility'
+import { AppState } from '@state/default-state'
 
 const LOCALSTORAGE_NAMESPACE = 'mighty_runner'
 const CHARACTERS_ITEM = `${LOCALSTORAGE_NAMESPACE}_characters`
@@ -41,21 +42,24 @@ function saveCharacter (character: Character): void {
   updateLocalCharacterList(character)
 }
 
-function loadCharacter (dispatch: Dispatch<AnyAction>): void {
+function loadCharacter (dispatch: Dispatch<AnyAction>, existingActive: CharacterIdentifier | null): void {
   let character: Character | null
   try {
     character = JSON.parse(localStorage.getItem(ACTIVE_CHARACTER_ITEM)!)
   } catch (err) {
     character = null
   }
-  if (character) {
+  if (
+    character &&
+    (!existingActive || existingActive.updated < character.updated)
+  ) {
     flattenCharacter(character, dispatch)
-  } else {
+  } else if (!character) {
     unsetCharacter(dispatch)
   }
 }
 
-export default (api: MiddlewareAPI<Dispatch<AnyAction>>) => {
+export default (api: MiddlewareAPI<Dispatch<AnyAction>, AppState>) => {
   return (next: Dispatch<AnyAction>) => (action: Action<ActionsForMiddleware, PayloadsForMiddleware>) => {
     switch (action.type) {
       case CharactersAction.LOAD_CHARACTERS:
@@ -69,7 +73,7 @@ export default (api: MiddlewareAPI<Dispatch<AnyAction>>) => {
         saveCharacter(character)
         break
       case ActiveCharacterAction.LOAD_CHARACTER:
-        loadCharacter(api.dispatch)
+        loadCharacter(api.dispatch, api.getState().activeCharacter)
         break
     }
     next(action)

@@ -94,6 +94,10 @@ describe('persistence middleware', () => {
   })
 
   describe('LOAD_CHARACTER', () => {
+    beforeEach(() => {
+      delete appState.activeCharacter
+    })
+
     test('should call the api service to load the character', async () => {
       let promise = new Promise<Character>(resolve => resolve(character))
       apiServiceMock.getCharacter.mockReturnValue(promise)
@@ -113,6 +117,32 @@ describe('persistence middleware', () => {
       middleware(action)
       await promise.catch(() => {
         expect(dispatchSpy).toHaveBeenCalledWith({ type: ApiErrorAction.SET_API_ERROR })
+      })
+    })
+
+    describe('when there is an existing activeCharacter state', () => {
+      test('should set activeCharacter if the activeCharacter state is older', async () => {
+        appState.activeCharacter = { updated: 1 } as CharacterIdentifier
+        const action = { type: ActiveCharacterAction.LOAD_CHARACTER, payload: '1' }
+        character.updated = 2
+        let promise = new Promise<Character>(resolve => resolve(character))
+        apiServiceMock.getCharacter.mockReturnValue(promise)
+        middleware(action)
+        await promise.then(() => {
+          expect(flattenMock).toHaveBeenCalledWith(character, dispatchSpy)
+        })
+      })
+
+      test('should not set activeCharacter if the activeCharacter state is newer', async () => {
+        appState.activeCharacter = { updated: 2 } as CharacterIdentifier
+        const action = { type: ActiveCharacterAction.LOAD_CHARACTER, payload: '1' }
+        character.updated = 1
+        let promise = new Promise<Character>(resolve => resolve(character))
+        apiServiceMock.getCharacter.mockReturnValue(promise)
+        middleware(action)
+        await promise.then(() => {
+          expect(flattenMock).not.toHaveBeenCalledWith(character, dispatchSpy)
+        })
       })
     })
   })

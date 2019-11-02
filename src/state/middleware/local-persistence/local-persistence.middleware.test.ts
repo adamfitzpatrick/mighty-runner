@@ -35,7 +35,7 @@ describe('local-persistence middleware', () => {
         userId: 'u',
         created: 1,
         updated: 1,
-        favorite: false,
+        favorite: false
       },
       personalData: {} as PersonalData,
       attributes: {} as Attributes,
@@ -122,6 +122,10 @@ describe('local-persistence middleware', () => {
   })
 
   describe('LOAD_CHARACTER', () => {
+    beforeEach(() => {
+      appState.activeCharacter = null
+    })
+
     test('should load the current active character in local storage', () => {
       let action = { type: ActiveCharacterAction.LOAD_CHARACTER }
       localStorage.setItem('mighty_runner_active_character', JSON.stringify(character))
@@ -130,6 +134,7 @@ describe('local-persistence middleware', () => {
       expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({
         type: ActiveCharacterAction.SET_ACTIVE_CHARACTER
       }))
+      expect((dispatchSpy as jest.Mock).mock.calls[0][0].payload).not.toBeNull()
       expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({
         type: PersonalDataAction.SET_PERSONAL_DATA
       }))
@@ -195,6 +200,31 @@ describe('local-persistence middleware', () => {
         type: EffectsAction.SET_EFFECTS,
         payload: null
       }))
+    })
+
+    describe('when there is already an active character in application state', () => {
+      test('should load from localStorage when the activeCharacter state is older', () => {
+        let action = { type: ActiveCharacterAction.LOAD_CHARACTER }
+        appState.activeCharacter = { updated: 1 } as CharacterIdentifier
+        localStorage.setItem('mighty_runner_active_character', JSON.stringify({ updated: 2 }))
+        middleware(action)
+        expect(next).toHaveBeenCalledWith(action)
+        expect(dispatchSpy).toHaveBeenCalledWith({
+          type: ActiveCharacterAction.SET_ACTIVE_CHARACTER,
+          payload: { updated: 2 }
+        })
+      })
+
+      test('should not load from localStorage when the activeCharacter state is more recent', () => {
+        let action = { type: ActiveCharacterAction.LOAD_CHARACTER }
+        appState.activeCharacter = { updated: 2 } as CharacterIdentifier
+        localStorage.setItem('mighty_runner_active_character', JSON.stringify({ updated: 1 }))
+        middleware(action)
+        expect(next).toHaveBeenCalledWith(action)
+        expect(dispatchSpy).not.toHaveBeenCalledWith(expect.objectContaining({
+          type: ActiveCharacterAction.SET_ACTIVE_CHARACTER
+        }))
+      })
     })
   })
 })

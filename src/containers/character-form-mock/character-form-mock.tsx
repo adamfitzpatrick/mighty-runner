@@ -276,6 +276,10 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
         <span>id</span>
         <strong>{activeCharacter.id}</strong>
       </div>
+      <div>
+        <span>updated</span>
+        <strong>{activeCharacter.updated}</strong>
+      </div>
       <PersonalData />
       <Attributes />
       <Gear />
