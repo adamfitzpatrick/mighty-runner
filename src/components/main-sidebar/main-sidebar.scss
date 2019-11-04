@@ -1,0 +1,42 @@
+@import '../../assets/layout';
+@import '../../assets/colors';
+
+.mainSidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 20rem;
+  padding: $safari-bottom-buffer 0;
+  border-right: 1px solid $color-white;
+
+  .contentWrapper {
+    width: 75%;
+    margin: 0 12.5%;
+  }
+
+  .characters {
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid $color-accent;
+
+    .count {
+      font-size: 5rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .sublist {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+
+    .label {
+      font-size: 0.8rem;
+    }
+  }
+}
