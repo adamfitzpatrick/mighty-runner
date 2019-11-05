@@ -4,11 +4,10 @@
 .header {
   display: flex;
   align-items: center;
-  margin-left: 4rem;
-  padding-top: 2rem;
 
-  @media screen and (max-width: $small-viewport-width-minimum) {
-    margin: 0;
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    margin-left: 4rem;
+    padding-top: 2rem;
   }
 
   .headerText {

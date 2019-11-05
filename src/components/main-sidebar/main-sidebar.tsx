@@ -10,16 +10,11 @@ interface Props {
   recent: Character[]
 }
 
+function getRecentList (recent: Character[]) {
+  return recent.map(character => <div key={character.id}>{character.personalData.name}</div>)
+}
+
 export default function MainSidebar (props: Props) {
-  let favorite = { personalData: { name: 'Favorite' } } as Character
-  let newest = { personalData: { name: 'Newest' } } as Character
-  let recent = [
-    favorite,
-    newest,
-    { personalData: { name: 'This One' } },
-    { personalData: { name: 'That One' } },
-    { personalData: { name: 'T\'Other One' } }
-  ]
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.contentWrapper}>
@@ -28,12 +23,16 @@ export default function MainSidebar (props: Props) {
           characters
         </span>
         <div className={styles.sublist}>
-          <span className={styles.label}>Favorite</span>
-          {favorite.personalData.name}
+          <div className={styles.label}>Favorite</div>
+          <div>{props.favorite.personalData.name}</div>
         </div>
         <div className={styles.sublist}>
-          <span className={styles.label}>Newest</span>
-          {newest.personalData.name}
+          <div className={styles.label}>Newest</div>
+          <div>{props.newest.personalData.name}</div>
+        </div>
+        <div className={styles.sublist}>
+          <div className={styles.label}>Recent</div>
+          {getRecentList(props.recent)}
         </div>
       </div>
     </div>
