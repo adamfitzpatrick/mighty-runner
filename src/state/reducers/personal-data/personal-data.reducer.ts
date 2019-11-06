@@ -1,6 +1,6 @@
-import defaultState from '../default-state'
+import defaultState from '../../default-state'
 import { PersonalData } from '@models'
-import { Action, PersonalDataAction } from '../actions'
+import { Action, PersonalDataAction } from '../../actions'
 
 export function personalData (
   state: PersonalData | null = defaultState.personalData,

@@ -34,7 +34,7 @@ describe('middleware utility', () => {
     specialAttributes = {} as SpecialAttributes
     gear = [] as GearItem[]
     effects = [] as Effect[]
-    character = { ...activeCharacter, personalData, attributes, specialAttributes, gear, effects }
+    character = { ...activeCharacter, personalData, attributes, specialAttributes, gear, effects } as Character
     dispatchSpy = jest.fn()
   })
 

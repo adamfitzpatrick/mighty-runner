@@ -12,7 +12,7 @@ const character = {
   specialAttributes: {} as SpecialAttributes,
   gear: [] as GearItem[],
   effects: [] as Effect[]
-}
+} as Character
 
 function getCharacterList (): Promise<Character[]> {
   return new Promise<Character[]>(resolve => {

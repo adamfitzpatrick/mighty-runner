@@ -8,6 +8,7 @@ export function assembleCharacter (state: AppState): Character {
   const character = state.characters!.find(char => char.id === state.activeCharacter!.id)!
   return {
     ...state.activeCharacter!,
+    pic: state.pic!,
     personalData: state.personalData!,
     attributes: state.attributes!,
     specialAttributes: character.specialAttributes,

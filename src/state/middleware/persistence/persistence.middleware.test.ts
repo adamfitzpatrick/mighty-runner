@@ -7,7 +7,7 @@ import { Dispatch, AnyAction, MiddlewareAPI } from 'redux'
 
 import sut from './persistence.middleware'
 import { AppState } from '@state/default-state'
-import { PersonalData, Attributes, GearItem, Effect, Character, SpecialAttributes, CharacterIdentifier } from '@models'
+import { PersonalData, Attributes, GearItem, Effect, Character, SpecialAttributes, CharacterIdentifier, Pic } from '@models'
 import { CharactersAction, ActiveCharacterAction, ApiErrorAction } from '@state/actions'
 import { number } from 'prop-types'
 
@@ -44,10 +44,11 @@ describe('persistence middleware', () => {
       specialAttributes: {} as SpecialAttributes,
       gear: [] as GearItem[],
       effects: [] as Effect[]
-    }
+    } as Character
     appState = {
       characters: [ character ],
       activeCharacter: { id: '1', userId: 'u' } as CharacterIdentifier,
+      pic: {} as Pic,
       personalData: {} as PersonalData,
       attributes: {} as Attributes,
       specialAttributes: {} as SpecialAttributes,

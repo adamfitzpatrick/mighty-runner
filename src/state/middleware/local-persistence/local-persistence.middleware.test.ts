@@ -2,7 +2,7 @@ import { Dispatch, AnyAction, MiddlewareAPI } from 'redux'
 import sut from './local-persistence.middleware'
 import { CharactersAction, ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction } from '@state/actions'
 import { AppState } from '@state/default-state'
-import { PersonalData, Attributes, GearItem, Effect, Character, SpecialAttributes, CharacterIdentifier } from '@models'
+import { PersonalData, Attributes, GearItem, Effect, Character, SpecialAttributes, CharacterIdentifier, Pic } from '@models'
 
 type TestDispatch = Dispatch<AnyAction>
 type TestApi = MiddlewareAPI<TestDispatch>
@@ -22,12 +22,13 @@ describe('local-persistence middleware', () => {
       created: 1,
       updated: 1,
       favorite: false,
+      pic: {} as Pic,
       personalData: {} as PersonalData,
       attributes: {} as Attributes,
       specialAttributes: {} as SpecialAttributes,
       gear: [] as GearItem[],
       effects: [] as Effect[]
-    }
+    } as Character
     appState = {
       characters: [ character ],
       activeCharacter: {
@@ -37,6 +38,7 @@ describe('local-persistence middleware', () => {
         updated: 1,
         favorite: false
       },
+      pic: {} as Pic,
       personalData: {} as PersonalData,
       attributes: {} as Attributes,
       specialAttributes: {} as SpecialAttributes,

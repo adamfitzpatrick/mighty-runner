@@ -22,6 +22,7 @@ export type RenderWithRedux =
 const reducer = combineReducers({
   characters: (state: Models.Character[] | null = null) => state,
   activeCharacter: (state: Models.CharacterIdentifier | null = null) => state,
+  pic: (state: Models.Pic | null = null) => state,
   personalData: (state: Models.PersonalData | null = null) => state,
   attributes: (state: Models.Attributes | null = null) => state,
   gear: (state: Models.GearItem[] | null = null) => state,

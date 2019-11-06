@@ -7,6 +7,7 @@ import persistenceMiddleware from './middleware/persistence/persistence.middlewa
 import {
   characters,
   activeCharacter,
+  pic,
   personalData,
   attributes,
   gear,
@@ -19,6 +20,7 @@ export default function configureStore (initialState?: AppState): Store<AppState
   initialState = initialState || defaultState
   const rootReducer = combineReducers({
     characters,
+    pic,
     activeCharacter,
     personalData,
     attributes,

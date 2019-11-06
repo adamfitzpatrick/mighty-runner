@@ -1,4 +1,4 @@
-import { Effect, Attributes, SpecialAttributes, PersonalData, GearItem } from '.'
+import { Effect, Attributes, SpecialAttributes, PersonalData, GearItem, Pic } from '.'
 
 export class CharacterIdentifier {
   userId: string
@@ -9,6 +9,7 @@ export class CharacterIdentifier {
 }
 
 export class Character extends CharacterIdentifier {
+  pic: Pic
   personalData: PersonalData
   attributes: Attributes
   specialAttributes: SpecialAttributes

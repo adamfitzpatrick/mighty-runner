@@ -1,6 +1,7 @@
 import { Action as ReduxAction } from 'redux'
 export * from './characters'
 export * from './active-character'
+export * from './pic'
 export * from './personal-data'
 export * from './attributes'
 export * from './gear'

@@ -30,6 +30,7 @@ describe('PersonalData container', () => {
     appState = {
       characters: null,
       activeCharacter: null,
+      pic: null,
       personalData,
       attributes: null,
       gear: null,
