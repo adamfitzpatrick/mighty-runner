@@ -1,0 +1,52 @@
+@import '../../assets/colors';
+@import '../../assets/layout';
+
+$clipping-width: 200px;
+$clipping-height: calc(#{$hex-image-aspect-ratio} * #{$clipping-width});
+$drag-box-side: 300px;
+
+.picSelectorWrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparentize($color-black, 0.1);
+}
+
+.picSelector {
+  display: block;
+  background-color: $color-darkest;
+  width: 75vw;
+  height: 75vh;
+  min-height: 530px;
+  min-width: 800px;
+}
+
+.picSelectorInner {
+  display: flex;
+  justify-content: space-around;
+}
+
+.thumbnail {
+  position: relative;
+  width: $drag-box-side;
+  height: $drag-box-side;
+  background: darken($color-darkest, 2%);
+  border: 1px solid $color-black;
+  overflow: hidden;
+}
+
+.thumbHexWrapper {
+  position: absolute;
+  top: calc((#{$drag-box-side} - #{$clipping-height}) / 2);
+  left: calc((#{$drag-box-side} - #{$clipping-width}) / 2);
+  pointer-events: none;
+}
+
+.thumbImageWrapper {
+  position: absolute;
+}

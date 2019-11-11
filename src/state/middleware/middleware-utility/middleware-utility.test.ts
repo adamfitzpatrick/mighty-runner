@@ -8,7 +8,12 @@ import {
   Character
 } from '@models'
 import { Dispatch, AnyAction } from 'redux'
-import { assembleCharacter, flattenCharacter, unsetCharacter } from './middleware-utility'
+import {
+  assembleCharacter,
+  flattenCharacter,
+  unsetCharacter,
+  conditionallySetCharacter
+} from './middleware-utility'
 import {
   ActiveCharacterAction,
   PersonalDataAction,
@@ -99,6 +104,27 @@ describe('middleware utility', () => {
         type: EffectsAction.SET_EFFECTS,
         payload: null
       })
+    })
+  })
+
+  describe('conditionallySetCharacter', () => {
+    test('should set the active character if there is no existing active character', () => {
+      conditionallySetCharacter({} as Character, dispatchSpy, null)
+      expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({
+        type: ActiveCharacterAction.SET_ACTIVE_CHARACTER
+      }))
+    })
+
+    test('should set the active character if the new character is more recent than an existing one', () => {
+      conditionallySetCharacter({ updated: 1 } as Character, dispatchSpy, { updated: 0 } as CharacterIdentifier)
+      expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({
+        type: ActiveCharacterAction.SET_ACTIVE_CHARACTER
+      }))
+    })
+
+    test('should not set the active character if the existing character is more recent', () => {
+      conditionallySetCharacter({ updated: 0 } as Character, dispatchSpy, { updated: 1 } as CharacterIdentifier)
+      expect(dispatchSpy).not.toHaveBeenCalled()
     })
   })
 })

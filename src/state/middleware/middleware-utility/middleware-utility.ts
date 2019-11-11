@@ -1,4 +1,4 @@
-import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction, Action } from '@state/actions'
+import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction, Action, PicAction } from '@state/actions'
 import { Character, CharacterIdentifier } from '@models'
 import { Dispatch, AnyAction } from 'redux'
 import { AppState } from '@state/default-state'
@@ -28,6 +28,10 @@ export function flattenCharacter (character: Character, dispatch: Dispatch<AnyAc
       updated: character.updated,
       favorite: character.favorite
     }
+  })
+  dispatch({
+    type: PicAction.SET_PIC,
+    payload: character.pic
   })
   dispatch({
     type: PersonalDataAction.SET_PERSONAL_DATA,
@@ -68,4 +72,14 @@ export function unsetCharacter (dispatch: Dispatch<AnyAction>) {
     type: EffectsAction.SET_EFFECTS,
     payload: null
   })
+}
+
+export function conditionallySetCharacter (
+  character: Character,
+  dispatch: Dispatch<AnyAction>,
+  existingCharacter: CharacterIdentifier | null
+) {
+  if (!existingCharacter || character.updated > existingCharacter.updated) {
+    flattenCharacter(character, dispatch)
+  }
 }
