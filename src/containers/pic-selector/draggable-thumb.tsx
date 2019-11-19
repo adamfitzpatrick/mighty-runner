@@ -45,6 +45,7 @@ export default function DraggableThumb ({ url, currentTransform, onTransformUpda
 
   function calculateTransform (): ImageTransform {
     return {
+      ...currentTransform,
       x: currentTransform.x + state.incrementalVector.x,
       y: currentTransform.y + state.incrementalVector.y,
       scale: 1

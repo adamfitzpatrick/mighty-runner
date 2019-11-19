@@ -1,0 +1,14 @@
+.showStat {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.value {
+  font-size: 1.4rem;
+}

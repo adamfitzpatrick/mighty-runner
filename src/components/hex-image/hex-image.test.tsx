@@ -16,7 +16,9 @@ describe('HexImage component', () => {
       thumbnailTransform: {
         x: 0,
         y: 0,
-        scale: 1
+        scale: 1,
+        originalHeight: 100,
+        originalWidth: 100
       },
       fullTransform: {
         x: 1,
@@ -28,20 +30,10 @@ describe('HexImage component', () => {
       'stroke-width=\"10px\" clip-path=\"url(#hex-clip-path)\">'
     gradientNode = '<use xlink:href=\"#hex\" fill=\"url(#gradient)\"></use>'
   })
-  test('should render a full pic using the full pic transform', () => {
-    sut = render(<HexImage pic={pic} />)
-    const imageNode = '<image xlink:href=\"pic\" filter=\"\" width=\"200\" height=\"131\" ' +
-      'clip-path=\"url(#hex-clip-path)\" webkit-clip-path=\"url(#hex-clip-path)\" ' +
-      'class=\"clippedHexImage\" x=\"1\" y=\"1\"></image>'
-    expect(sut.container.innerHTML).toContain('<svg viewBox=\"0 0 100 118\" class=\"hexImage\">')
-    expect(sut.container.innerHTML).toContain(imageNode)
-    expect(sut.container.innerHTML).not.toContain(deathNode)
-    expect(sut.container.innerHTML).not.toContain(gradientNode)
-  })
 
   test('should render a thumbnail pic using the thumbnail transform', () => {
     sut = render(<HexImage pic={pic} thumb />)
-    const imageNode = '<image xlink:href=\"thumb\" filter=\"\" width=\"100\" height=\"131\" ' +
+    const imageNode = '<image xlink:href=\"thumb\" filter=\"\" width=\"50\" height=\"50\" ' +
       'clip-path=\"url(#hex-clip-path)\" webkit-clip-path=\"url(#hex-clip-path)\" ' +
       'class=\"clippedHexImage\" x=\"0\" y=\"0\"></image>'
     expect(sut.container.innerHTML).toContain(imageNode)
@@ -57,7 +49,7 @@ describe('HexImage component', () => {
   test('should render with a specified image width', () => {
     sut = render(<HexImage pic={pic} width='200px' />)
     expect(sut.container.innerHTML).toContain(
-      '<svg viewBox=\"0 0 100 118\" class=\"hexImage\" style=\"width: 200px;\">'
+      '<svg viewBox=\"0 0 100 118\" class=\"hexImage\" style=\"width: 200px;\"'
     )
   })
 

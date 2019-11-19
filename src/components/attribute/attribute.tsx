@@ -23,8 +23,7 @@ export default function Attribute ({ attribute, edit }: Props) {
           <span>
             Effective Value:
             <EffectiveStat
-              baseValue={ attribute.value.chargen + attribute.value.initial }
-              target={ attribute.asEffectTarget }
+              stat={attribute}
             />
           </span>
           <Button

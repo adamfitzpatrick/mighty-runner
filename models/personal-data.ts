@@ -1,5 +1,7 @@
 export interface PersonalData {
   name: string
+  role: string
+  description: string
   metatype: string
   ethnicity: string
   gender: string
@@ -11,4 +13,6 @@ export interface PersonalData {
   notoriety: number
   publicAwareness: number
   totalKarma: number
+  nuyen: number
+  lifestyle: string
 }

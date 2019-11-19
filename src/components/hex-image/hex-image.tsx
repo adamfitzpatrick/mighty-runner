@@ -6,6 +6,8 @@ import { Pic } from '@models'
 export const STANDARD_PIXEL_WIDTH = 200
 export const STANDARD_PIXEL_HEIGHT = 236
 export const ASPECT_RATIO = STANDARD_PIXEL_HEIGHT / STANDARD_PIXEL_WIDTH
+const VIEWBOX_WIDTH = 100
+const VIEWBOX_HEIGHT = 118
 
 export interface HexImageProps {
   showGradient?: boolean
@@ -16,15 +18,13 @@ export interface HexImageProps {
 }
 
 function getTransform (pic: Pic, isThumb?: boolean) {
-  let scale = pic.fullTransform.scale
-  let x = pic.fullTransform.x
-  let y = pic.fullTransform.y
-  if (isThumb) {
-    scale = pic.thumbnailTransform.scale
-    x = pic.thumbnailTransform.x
-    y = pic.thumbnailTransform.y
-  }
-  return { scale, x, y }
+  const width = VIEWBOX_WIDTH * pic.thumbnailTransform.scale *
+    pic.thumbnailTransform.originalWidth! / STANDARD_PIXEL_WIDTH
+  const height = VIEWBOX_HEIGHT * pic.thumbnailTransform.scale *
+    pic.thumbnailTransform.originalHeight! / STANDARD_PIXEL_HEIGHT
+  const x = pic.thumbnailTransform.x * VIEWBOX_WIDTH / STANDARD_PIXEL_WIDTH
+  const y = pic.thumbnailTransform.y * VIEWBOX_HEIGHT / STANDARD_PIXEL_HEIGHT
+  return { width, height, x, y }
 }
 
 function selectUrl (pic: Pic, isThumb?: boolean) {
@@ -42,8 +42,8 @@ function renderImage (pic?: Pic, isThumb?: boolean, dead?: boolean) {
     return <image
       xlinkHref={url}
       filter={ dead ? 'url(#grayscale)' : '' }
-      width={100 * (transform.scale)}
-      height={131}
+      width={transform.width}
+      height={transform.height}
       clipPath='url(#hex-clip-path)'
       webkit-clip-path='url(#hex-clip-path)'
       className={styles.clippedHexImage}
@@ -73,7 +73,12 @@ function renderDead () {
 export default function HexImage (props: HexImageProps) {
   const style = props.width ? { width: props.width } : undefined
   return (
-    <svg viewBox='0 0 100 118' className={styles.hexImage} style={style}>
+    <svg
+      viewBox='0 0 100 118'
+      className={styles.hexImage}
+      style={style}
+      data-testid='hex-image.component'
+    >
       <defs>
         <radialGradient id='gradient'>
           <stop offset='10%' stopColor='#ffffff' stopOpacity='0'/>

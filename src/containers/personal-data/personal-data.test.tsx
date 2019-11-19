@@ -15,6 +15,8 @@ describe('PersonalData container', () => {
   beforeEach(() => {
     personalData = {
       name: 'n',
+      role: 'r',
+      description: 'd',
       metatype: 'm',
       ethnicity: 'e',
       age: 32,
@@ -25,7 +27,9 @@ describe('PersonalData container', () => {
       notoriety: 2,
       streetCred: 3,
       publicAwareness: 4,
-      totalKarma: 5
+      totalKarma: 5,
+      nuyen: 10000,
+      lifestyle: 'Low'
     }
     appState = {
       characters: null,
@@ -41,13 +45,13 @@ describe('PersonalData container', () => {
   })
 
   test('should render correctly', () => {
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.container.innerHTML).toContain('<div data-testid=\"personal-data.container\"')
   })
 
   test('should render correctly when there is no personal data to show', () => {
     appState.personalData = null
     sut = renderWithRedux(<PersonalData />, appState)
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.container.innerHTML).toBe('')
   })
 
   test('should render with an empty string in place of an undefined data field', () => {

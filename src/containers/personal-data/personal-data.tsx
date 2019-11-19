@@ -41,6 +41,8 @@ export default function PersonalData () {
   return (
     <div data-testid='personal-data.container' className={styles.personalData}>
       { getInput('name', 'Name', 'text') }
+      { getInput('role', 'Role', 'text') }
+      { getInput('description', 'Description', 'text')}
       { getInput('metatype', 'Metatype', 'text') }
       { getInput('ethnicity', 'Ethnicity', 'text') }
       { getInput('gender', 'Gender', 'text') }

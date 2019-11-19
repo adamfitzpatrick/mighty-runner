@@ -7,10 +7,18 @@ import { cleanup } from '@testing-library/react'
 
 describe('EffectiveStat container', () => {
   let appState: AppState
+  let stat: Models.Stat
   let effects: Models.Effect[]
   let sut: RenderWithRedux
 
   beforeEach(() => {
+    stat = {
+      id: '1',
+      value: {
+        thing: 1
+      },
+      asEffectTarget: [ 'a', 'b' ]
+    } as any as Models.Stat
     effects = [{
       id: '1',
       name: 'n',
@@ -22,18 +30,18 @@ describe('EffectiveStat container', () => {
     appState = {
       effects
     } as AppState
-    sut = renderWithRedux(<EffectiveStat target={[ 'a', 'b' ]} baseValue={1} />, appState)
+    sut = renderWithRedux(<EffectiveStat stat={stat} />, appState)
   })
 
   test('should render correctly', () => {
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.container.innerHTML).toContain('<span data-testid=\"a.b.effective-stat.container\"')
   })
 
   test('should not throw an error if the state is missing', () => {
     cleanup()
     delete appState.effects
-    sut = renderWithRedux(<EffectiveStat target={[ 'a', 'b' ]} baseValue={1} />, appState)
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    sut = renderWithRedux(<EffectiveStat stat={stat} />, appState)
+    expect(sut.container.innerHTML).toBe('')
   })
 
   test('should display the effective value correctly', () => {

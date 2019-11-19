@@ -49,11 +49,16 @@ export default function PicSelector ({ afterSave }: PicSelectorProps) {
   const pic = useSelector((appState: AppState) => appState.pic)
   const setPic = setPicCreator(dispatch)
   const saveCharacter = saveCharacterCreator(dispatch)
+  let imageSizeReference: HTMLElement
 
   const [ state, setState ] = React.useState<PicSelectorState>({
     pic: pic || generatePic(),
     useFullPicForThumbnail: false
   } as PicSelectorState)
+
+  React.useEffect(() => {
+    setOriginalDimensions()
+  }, [state.pic.thumbUrl])
 
   function toggleThumbUrl () {
     setState(lastState => ({
@@ -106,7 +111,22 @@ export default function PicSelector ({ afterSave }: PicSelectorProps) {
     }
   }
 
+  function setOriginalDimensions () {
+    setState(lastState => {
+      const h = imageSizeReference.offsetHeight || lastState.pic.thumbnailTransform.originalHeight
+      const w = imageSizeReference.offsetWidth || lastState.pic.thumbnailTransform.originalWidth
+      const updated = clonePic(lastState.pic)
+      updated.thumbnailTransform.originalHeight = h
+      updated.thumbnailTransform.originalWidth = w
+      return {
+        pic: updated,
+        useFullPicForThumbnail: lastState.useFullPicForThumbnail
+      }
+    })
+  }
+
   function save () {
+    setOriginalDimensions()
     setPic(state.pic)
     saveCharacter()
     afterSave()
@@ -166,6 +186,11 @@ export default function PicSelector ({ afterSave }: PicSelectorProps) {
             <div>
               {getThumbnailInputNode()}
             </div>
+            <img
+              style={{ opacity: 0, position: 'fixed', pointerEvents: 'none' }}
+              src={state.pic.thumbUrl}
+              ref={elem => imageSizeReference = elem!}
+            />
             <div>
               <Button label='+' onClick={scaleHandler(1)} />
               <Button label='-' onClick={scaleHandler(-1)} />

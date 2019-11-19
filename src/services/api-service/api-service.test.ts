@@ -1,4 +1,4 @@
-import ApiService from './api-service'
+import ApiService from '../api-service'
 import * as jestFetchMock from 'jest-fetch-mock'
 import { Character } from '@models'
 

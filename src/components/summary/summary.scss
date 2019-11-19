@@ -1,0 +1,73 @@
+@import '../../assets/colors';
+@import '../../assets/layout';
+
+@mixin summaryComponent {
+  width: 100%;
+  background-color: $background-highlight;
+  border-radius: $default-border-radius;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+
+.summary {
+  display: block;
+  width: 25rem;
+  height: 100vh;
+  padding: 8rem 2rem 0;
+  box-sizing: border-box;
+}
+
+.pic {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.brief {
+  margin: 0;
+  font-size: 0.7rem;
+}
+
+.name {
+  margin: 0 0 2rem;
+}
+
+.chart {
+  height: 10rem;
+}
+
+.additionalDataBlock {
+  @include summaryComponent;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 0.25rem;
+
+  .stat {
+    grid-column-end: span 2;
+  }
+
+  .stat2 {
+    grid-column-end: span 3;
+  }
+
+  .divider {
+    grid-column-end: span 2;
+    border-bottom: 1px solid $color-white;
+    align-self: center;
+    margin-top: 1rem;
+  }
+
+  .label {
+    grid-column-end: span 2;
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+.levelingBlock {
+  @include summaryComponent;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.25rem;
+}
