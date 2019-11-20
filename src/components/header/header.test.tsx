@@ -15,4 +15,9 @@ describe('Header component', () => {
     sut = render(<Header text='Provided text' />)
     expect(sut.container.innerHTML).toContain('<h1 class=\"headerText\">Provided text</h1>')
   })
+
+  test('should render a static header when static prop is true', () => {
+    sut = render(<Header static />)
+    expect(sut.container.innerHTML).toContain('<header class=\"header static\"')
+  })
 })
