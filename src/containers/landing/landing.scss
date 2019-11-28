@@ -1,8 +1,26 @@
+@import '../../assets/layout';
+
 .landing {
   position: relative;
-  display: block;
+  display: flex;
 }
 
 .summaryList {
-  display: flex;
+  margin-top: 7rem;
+  height: calc(100vh - 7rem);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: flex;
+    margin-top: 0;
+    overflow-x: scroll;
+    height: auto;
+    width: calc(100vw - 20rem);
+  }
+
+  @media screen and (min-width: $medium-viewport-width-minimum) and (min-height: $short-viewport-maximum) {
+    overflow-y: hidden;
+  }
 }

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classnames from 'classnames'
 
 import * as styles from './chart.scss'
 
@@ -6,13 +7,14 @@ export type DataPoint = [string, number]
 
 interface ChartProps {
   data: DataPoint[]
+  bare?: boolean
 }
 
 interface ChartState {
   ready: boolean
 }
 
-export default function Chart ({ data }: ChartProps) {
+export default function Chart ({ data, bare }: ChartProps) {
   let maxVal: number = data.reduce((running: number, datum: DataPoint) => {
     return Math.max(datum[1], running)
   }, 0)
@@ -31,7 +33,10 @@ export default function Chart ({ data }: ChartProps) {
   }
 
   return (
-    <div className={styles.chart}>
+    <div className={classnames(
+      styles.chart,
+      { [styles.bare]: bare }
+    )}>
       { data.map(getDataPoint) }
     </div>
   )

@@ -77,6 +77,10 @@ export default function Attributes () {
         attribute={ attributes.charisma }
         edit={ editAttributeCreator('charisma', attributes.charisma) }
       />
+      <Attribute
+        attribute={ attributes.essence }
+        edit={ editAttributeCreator('essence', attributes.essence) }
+      />
       {
         state.attributeToEdit ?
           <EditItem

@@ -24,4 +24,10 @@ describe('Summary component', () => {
     sut = render(<Summary character={character} />)
     expect(sut.container.innerHTML).toContain('<div class=\"label\">M/R</div><div class=\"value\">5</div>')
   })
+
+  test('should display smaller thumbnail on small screens', () => {
+    (global as any).innerWidth = 700
+    sut = render(<Summary character={character} />)
+    expect(sut.container.innerHTML).toContain('style=\"width: 8rem;\"')
+  })
 })

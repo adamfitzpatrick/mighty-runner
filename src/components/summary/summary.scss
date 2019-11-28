@@ -11,16 +11,65 @@
 }
 
 .summary {
-  display: block;
-  width: 25rem;
-  height: 100vh;
-  padding: 8rem 2rem 0;
-  box-sizing: border-box;
+
+  padding: 0 2rem;
+
+  .contentWrapper {
+    display: flex;
+
+    @media screen and (max-height: $short-viewport-maximum) and (min-width: $medium-viewport-width-minimum) {
+      margin-top: 130px; // value for clearance below header
+    }
+  }
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 25rem;
+    height: 100vh;
+    padding: 0 2rem 2vh;
+    box-sizing: border-box;
+
+    .contentWrapper {
+      display: flex;
+      flex-direction: column;
+      height: 70%;
+      min-height: calc(0.75 * #{$large-viewport-width-minimum});
+      justify-content: space-between;
+    }
+  }
+
+  @media screen and (max-height: $short-viewport-maximum) {
+    justify-content: flex-start;
+  }
+
+  @media screen and (min-height: $large-viewport-width-minimum) {
+    padding-bottom: 5vh;
+  }
+}
+
+.id {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  width: 100%;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: block;
+  }
 }
 
 .pic {
   text-align: center;
+  margin-right: 1rem;
   margin-bottom: 1rem;
+}
+
+.smallBlock {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .brief {
@@ -29,18 +78,41 @@
 }
 
 .name {
-  margin: 0 0 2rem;
+  margin: 0;
+}
+
+.smallData {
+  height: 7rem;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: none;
+  }
+}
+
+.description {
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: none;
+  }
 }
 
 .chart {
-  height: 10rem;
+  display: none;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    display: block;
+    height: 10rem;
+  }
 }
 
 .additionalDataBlock {
-  @include summaryComponent;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  row-gap: 0.25rem;
+  display: none;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    @include summaryComponent;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: 0.25rem;
+  }
 
   .stat {
     grid-column-end: span 2;
@@ -66,8 +138,17 @@
 }
 
 .levelingBlock {
-  @include summaryComponent;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr;
   row-gap: 0.25rem;
+
+  &.bare {
+    display: grid;
+    padding-top: 1rem;
+  }
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    @include summaryComponent;
+    display: grid;
+  }
 }

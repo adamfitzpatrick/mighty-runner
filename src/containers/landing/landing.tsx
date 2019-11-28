@@ -38,13 +38,13 @@ export default function Landing (props: Props) {
 
   return <div className={styles.landing}>
     <Header />
+    <MainSidebar
+      count={characters.length}
+      favorite={favorite}
+      newest={newest}
+      recent={recent}
+    />
     <div className={styles.summaryList}>
-      <MainSidebar
-        count={characters.length}
-        favorite={favorite}
-        newest={newest}
-        recent={recent}
-      />
       {getCharacterSummaries(characters)}
     </div>
   </div>

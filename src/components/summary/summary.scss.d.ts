@@ -1,7 +1,12 @@
 export const summary: string;
+export const contentWrapper: string;
+export const id: string;
 export const pic: string;
+export const smallBlock: string;
 export const brief: string;
 export const name: string;
+export const smallData: string;
+export const description: string;
 export const chart: string;
 export const additionalDataBlock: string;
 export const stat: string;
@@ -9,3 +14,4 @@ export const stat2: string;
 export const divider: string;
 export const label: string;
 export const levelingBlock: string;
+export const bare: string;
