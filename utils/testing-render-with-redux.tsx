@@ -25,6 +25,7 @@ const reducer = combineReducers({
   pic: (state: Models.Pic | null = null) => state,
   personalData: (state: Models.PersonalData | null = null) => state,
   attributes: (state: Models.Attributes | null = null) => state,
+  specialAttributes: (state: Models.SpecialAttributes | null = null) => state,
   gear: (state: Models.GearItem[] | null = null) => state,
   effects: (state: Models.Effect[] | null = null) => state,
   apiError: (state: boolean = false) => state

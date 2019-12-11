@@ -1,4 +1,4 @@
-import { Character, PersonalData, CharacterIdentifier, Attributes, Effect, GearItem, Pic } from '@models'
+import { Character, PersonalData, CharacterIdentifier, Attributes, Effect, GearItem, Pic, SpecialAttributes } from '@models'
 
 export interface AppState {
   characters: Character[] | null
@@ -6,6 +6,7 @@ export interface AppState {
   pic: Pic | null
   personalData: PersonalData | null
   attributes: Attributes | null
+  specialAttributes: SpecialAttributes | null
   gear: GearItem[] | null
   effects: Effect[] | null
   apiError: boolean
@@ -17,6 +18,7 @@ export const defaultState: AppState = {
   activeCharacter: null,
   personalData: null,
   attributes: null,
+  specialAttributes: null,
   gear: null,
   effects: null,
   apiError: false

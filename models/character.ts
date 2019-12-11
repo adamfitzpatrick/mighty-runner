@@ -1,6 +1,6 @@
 import { Effect, Attributes, SpecialAttributes, PersonalData, GearItem, Pic } from '.'
 
-export class CharacterIdentifier {
+export interface CharacterIdentifier {
   userId: string
   id: string
   created: number
@@ -8,7 +8,7 @@ export class CharacterIdentifier {
   favorite: boolean
 }
 
-export class Character extends CharacterIdentifier {
+export interface Character extends CharacterIdentifier {
   pic: Pic
   personalData: PersonalData
   attributes: Attributes

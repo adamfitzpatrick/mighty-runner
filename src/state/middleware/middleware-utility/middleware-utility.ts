@@ -1,17 +1,15 @@
-import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction, Action, PicAction } from '@state/actions'
+import { ActiveCharacterAction, PersonalDataAction, AttributesAction, GearAction, EffectsAction, Action, PicAction, SpecialAttributesAction } from '@state/actions'
 import { Character, CharacterIdentifier } from '@models'
 import { Dispatch, AnyAction } from 'redux'
 import { AppState } from '@state/default-state'
 
 export function assembleCharacter (state: AppState): Character {
-  // TODO This data needs to come from the individual character element reducers
-  const character = state.characters!.find(char => char.id === state.activeCharacter!.id)!
   return {
     ...state.activeCharacter!,
     pic: state.pic!,
     personalData: state.personalData!,
     attributes: state.attributes!,
-    specialAttributes: character.specialAttributes,
+    specialAttributes: state.specialAttributes!,
     gear: state.gear!,
     effects: state.effects!
   }
@@ -42,6 +40,10 @@ export function flattenCharacter (character: Character, dispatch: Dispatch<AnyAc
     payload: character.attributes
   })
   dispatch({
+    type: SpecialAttributesAction.SET_SPECIAL_ATTRIBUTES,
+    payload: character.specialAttributes
+  })
+  dispatch({
     type: GearAction.SET_GEAR,
     payload: character.gear
   })
@@ -62,6 +64,10 @@ export function unsetCharacter (dispatch: Dispatch<AnyAction>) {
   })
   dispatch({
     type: AttributesAction.SET_ATTRIBUTES,
+    payload: null
+  })
+  dispatch({
+    type: SpecialAttributesAction.SET_SPECIAL_ATTRIBUTES,
     payload: null
   })
   dispatch({

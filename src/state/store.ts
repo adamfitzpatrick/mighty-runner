@@ -10,6 +10,7 @@ import {
   pic,
   personalData,
   attributes,
+  specialAttributes,
   gear,
   effects,
   apiError
@@ -24,6 +25,7 @@ export default function configureStore (initialState?: AppState): Store<AppState
     activeCharacter,
     personalData,
     attributes,
+    specialAttributes,
     gear,
     effects,
     apiError

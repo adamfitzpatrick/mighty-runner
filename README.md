@@ -4,9 +4,70 @@ Web application for creating and managing Shadowrun Fifth Edition runners.
 
 ## Foundation of the Domain Object Model
 
+### Character
+
+```typescript
+interface Character {
+  userId: string
+  id: string
+  created: number
+  updated: number
+  favorite: boolean
+  pic: Pic
+  personalData: PersonalData
+  attributes: Attributes
+  specialAttributes: SpecialAttributes
+  gear: GearItem[]
+  effects: Effect[]
+}
+```
+
+```typescript
+interface Attributes {
+  body: Attribute
+  agility: Attribute
+  reaction: Attribute
+  strength: Attribute
+  willpower: Attribute
+  logic: Attribute
+  intuition: Attribute
+  charisma: Attribute
+  essence: Attribute
+}
+```
+
+```typescript
+interface SpecialAttributes {
+  edge: Attribute
+  magic: Attribute
+  resonance: Attribute
+}
+```
+
+```typescript
+interface Attribute extends Stat {
+  shortName: string
+  maximum: number
+  value: {
+    initial: number
+    chargen: number
+  }
+}
+```
+
+```typescript
+interface GearItem extends Stat {
+  cost: number
+  availability: string
+  value: {
+    rating: number
+  }
+}
+```
+
 ### Stat
 
-A **Stat** is the basic object which represents runner data that impacts game mechanics.  Simple values like a runner name, age, etc, are not considered Stats as they don't (usually) have an effect on gameplay.  However, the Agility attribute influences the dice pools a runner uses to resolve actions during play, and therefore qualifies as a Stat from the perspective of the DOM.
+A **Stat** is the basic object which represents runner data that impacts game mechanics.  Simple values like a runner name, age, etc, are not considered Stats as they don't (usually) have an effect on gameplay.  However, the Agility attribute influences the dice pools a runner uses to resolve actions during play, and therefore qualifies as a Stat from the perspective of the DOM.  The `Attribute` objects that compose `Attributes` and `Special Attributes` extend `Stat`, and `GearItem` also extends Stat.
 
 Stats incorporate several fields which describe them as well as a **value** property which dictates the Stat's impact on gameplay.  The specific components that make up a Stat's value vary among multiple different types of Stats, each of which is defined by extending the Stat interface.  Stats can also be influenced by **Effects**, and they can also carry one or more Effects that influence other Stats.
 
@@ -27,7 +88,6 @@ interface StatValue {
   [property: string]: number
 }
 ```
-
 
 ### Effect
 
@@ -72,3 +132,29 @@ A **PoolSource** describes how Stats and Effects work together to influence dice
     targetValueField?: string
 }
 ```
+
+## Application State Management
+
+Application state is maintained in memory via a Redux store, in combination with redundant persistance in a DynamoDB table backed by browser local storage.  Redux middleware provides management of persistence actions.
+
+### Persistence Model
+
+#### DynamoDB Character Table
+
+```typescript
+{
+    userId: string
+    id: string
+    data: string
+}
+```
+
+`data` is a JSON string representation of the character model.
+
+#### localStorage
+
+An array of characters is stored under the key *mighty_runner_characters* following the above Character model.  
+
+### State Action Flow
+
+

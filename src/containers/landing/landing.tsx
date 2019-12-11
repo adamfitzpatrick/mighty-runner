@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadCharactersCreator, loadCharacterCreator } from '@state/actions'
 import { AppState } from '@state/default-state'
 import Summary from '@components/summary'
-import PicSelector from '@containers/pic-selector'
+import NewCharacter from '@containers/new-character'
 
 interface Props {}
 
@@ -47,5 +47,6 @@ export default function Landing (props: Props) {
     <div className={styles.summaryList}>
       {getCharacterSummaries(characters)}
     </div>
+    <NewCharacter />
   </div>
 }

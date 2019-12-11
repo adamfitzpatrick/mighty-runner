@@ -37,6 +37,7 @@ describe('PersonalData container', () => {
       pic: null,
       personalData,
       attributes: null,
+      specialAttributes: null,
       gear: null,
       effects: null,
       apiError: false

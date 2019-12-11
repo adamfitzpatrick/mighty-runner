@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render, fireEvent, RenderResult } from '@testing-library/react'
+import { render, fireEvent, RenderResult, cleanup } from '@testing-library/react'
 import Button from '.'
 
 describe('Button component', () => {
@@ -9,12 +9,19 @@ describe('Button component', () => {
 
   beforeEach(() => {
     clickSpy = jest.fn()
-    sut = render(<Button label='label' onClick={ clickSpy } />)
+    sut = render(<Button label='label' onClick={clickSpy} />)
     button = sut.getByTestId('label.button.component') as HTMLButtonElement
   })
 
   test('should render correctly', () => {
-    expect(sut.container.innerHTML).toMatchSnapshot()
+    expect(sut.container.innerHTML).toContain('class=\"button\"')
+  })
+
+  test('should render correctly as a round icon button', () => {
+    cleanup()
+    sut = render(<Button label='add' onClick={clickSpy} roundIcon />)
+    expect(sut.container.innerHTML).toContain('class=\"button roundIcon material-icons\"')
+    expect(sut.container.innerHTML).toContain('add</button>')
   })
 
   test('should call the click handler on a click action', () => {

@@ -1,6 +1,7 @@
+jest.mock('uuid')
+import { v4 } from 'uuid'
 import * as utils from './character-utilities'
 import { character } from '../../../test-fixtures/character'
-import { Stat } from '@models'
 
 describe('character utilites', () => {
   describe('getEffectiveStat utility function', () => {
@@ -36,6 +37,18 @@ describe('character utilites', () => {
   describe('getStunConditionMonitor', () => {
     test('should return the number of boxes in the physical condition monitor', () => {
       expect(utils.getStunConditionMonitor(character)).toBe(11)
+    })
+  })
+
+  describe('generateMinimumViableCharacter', () => {
+    test('shold generate a shell which can be saved as a unique character', () => {
+      (v4 as jest.Mock).mockReturnValue('ima-fake-uuid')
+      localStorage.setItem('mighty_runner_api_access_token', 'token')
+      const mvc = utils.generateMinimumViableCharacter()
+      expect(mvc.id).toBe('ima-fake-uuid')
+      expect(mvc.userId).toBe('token')
+      expect(mvc.created).toBeTruthy()
+      expect(mvc.updated).toEqual(mvc.created)
     })
   })
 })
