@@ -155,6 +155,58 @@ Application state is maintained in memory via a Redux store, in combination with
 
 An array of characters is stored under the key *mighty_runner_characters* following the above Character model.  
 
+### Persistence Service
+
+The persistence service wraps up calls to specific APIs in order to abstract away the task of reconciling conflicts between local and cloud-based persisted data.
+
+![persistence getting data](./docs/persistence-get.png)
+
+![persistence putting data](./docs/persistence-put.png)
+
 ### State Action Flow
+
+- LOAD_CHARACTERS: Action which calls out to DynamoDB and localStorage to obtain a list of saved characters and loads the most recent characters into application memory.
+
+![LOAD_CHARACTERS action](./docs/load-characters-action.png)
+
+- LOAD_CHARACTER: Action which calls out to DynamoDB and localStorage to obtain a single save character, loading the most recent revision
+
+![LOAD_CHARACTER action](./docs/load-character-action.png)
+
+- SAVE_CHARACTER: Action which saves the flattened character model currently loaded into the application state as an assembled character model in both DynamoDB and localStorage
+
+![SAVE_CHARACTER action](./docs/save-character-action.png)
+
+In addition to the specific actions provided above, each element of the application state has actions specific to setting, updating, adding, and/or removing data as applicable:
+
+- personalData:
+  - SET_PERSONAL_DATA
+- pic
+  - SET_PIC
+- attributes:
+  - SET_ATTRIBUTES
+  - UPDATE_ATTRIBUTE
+- specialAttributes:
+  - SET_ATTRIBUTES
+  - UPDATE_ATTRIBUTE
+- gear:
+  - SET_GEAR
+  - UPDATE_GEAR
+  - ADD_GEAR
+  - REMOVE_GEAR
+- effects:
+  - SET_EFFECTS
+  - UPDATE_EFFECT
+  - ADD_EFFECT
+  - REMOVE_EFFECT
+- apiError (not included in character model):
+  - SET_API_ERROR
+  - SET_API_HEALTH
+
+Additionally, all actions which modify the in-memory application state for a component of the character model trigger an asynchronous call to persist data to the backend.  Middleware applied to the Redux store determines which actions will trigger LOAD_CHARACTER, LOAD_CHARACTERS and SAVE_CHARACTER actions.  SAVE_CHARACTER actions are never dispatched directly from a component or container.
+
+
+
+
 
 
