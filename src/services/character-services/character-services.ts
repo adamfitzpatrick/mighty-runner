@@ -2,7 +2,7 @@ import { v4 } from 'uuid'
 
 import { Effect, Character, Stat } from '@models'
 import { getNonViableCharacterShell } from '@assets/non-viable-character-shell'
-import ApiService from '@services/api-service'
+import { TOKEN_LOCAL_STORAGE_KEY } from '@services/remote-api-service'
 
 export function getEffectiveValue (stat: Stat, effects: Effect[]): number {
   const baseValue = Object.keys(stat.value).reduce((accum: number, part: string) => accum + stat.value[part], 0)
@@ -51,7 +51,7 @@ export function getStunConditionMonitor (character: Character): number {
 export function generateMinimumViableCharacter (): Character {
   const mvc = getNonViableCharacterShell()
   mvc.id = v4()
-  mvc.userId = localStorage.getItem(ApiService.TOKEN_LOCAL_STORAGE_KEY)!
+  mvc.userId = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY)!
   const now = new Date().getDate()
   mvc.created = now
   mvc.updated = now

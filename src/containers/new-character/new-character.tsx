@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import * as styles from './new-character.scss'
 import Button from '@components/button'
 import { flattenCharacter } from '@state/middleware/middleware-utility'
-import { generateMinimumViableCharacter } from '@services/character-utilities'
+import { generateMinimumViableCharacter } from '@services/character-services'
 
 export default function NewCharacter () {
   const dispatch = useDispatch()

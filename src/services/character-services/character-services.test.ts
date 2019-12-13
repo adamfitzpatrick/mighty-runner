@@ -1,6 +1,6 @@
 jest.mock('uuid')
 import { v4 } from 'uuid'
-import * as utils from './character-utilities'
+import * as utils from './character-services'
 import { character } from '../../../test-fixtures/character'
 
 describe('character utilites', () => {

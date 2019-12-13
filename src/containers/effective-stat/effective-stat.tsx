@@ -4,7 +4,7 @@ import * as styles from './effective-stat.scss'
 import { useSelector } from 'react-redux'
 import { AppState } from '@state/default-state'
 import { Effect, Stat } from '@models'
-import { getEffectiveValue } from '@services/character-utilities'
+import { getEffectiveValue } from '@services/character-services'
 
 interface Props {
   stat: Stat

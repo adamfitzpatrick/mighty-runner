@@ -1,5 +1,5 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
-import ApiService from '@services/api-service'
+import * as RemoteApiService from '@services/remote-api-service'
 import { Action, CharactersAction, ActiveCharacterAction, ApiErrorAction } from '../../actions'
 import { Character, CharacterIdentifier } from '@models'
 import { assembleCharacter, flattenCharacter } from '../middleware-utility'
@@ -7,7 +7,7 @@ import { AppState } from '@state/default-state'
 
 function loadCharacters () {
   return (dispatch: Dispatch<AnyAction>) => {
-    ApiService.getCharacterList()
+    RemoteApiService.getCharacterList()
       .then(characters => {
         dispatch({
           type: CharactersAction.SET_CHARACTERS,
@@ -32,7 +32,7 @@ function conditionallySetCharacter (
 
 function loadCharacter (characterId: string, existingCharacter: CharacterIdentifier | null) {
   return (dispatch: Dispatch<AnyAction>) => {
-    ApiService.getCharacter(characterId)
+    RemoteApiService.getCharacter(characterId)
       .then(character => {
         conditionallySetCharacter(character, dispatch, existingCharacter)
         dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
@@ -44,7 +44,7 @@ function loadCharacter (characterId: string, existingCharacter: CharacterIdentif
 
 function persistActiveCharacter (character: Character) {
   return (dispatch: Dispatch<AnyAction>) => {
-    ApiService.putCharacter(character.id, character)
+    RemoteApiService.putCharacter(character.id, character)
       .then(
         () => dispatch({ type: ApiErrorAction.SET_API_HEALTHY }),
         () => dispatch({ type: ApiErrorAction.SET_API_ERROR })

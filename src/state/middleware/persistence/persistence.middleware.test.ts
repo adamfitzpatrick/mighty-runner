@@ -1,5 +1,11 @@
-import ApiService from '@services/api-service'
-jest.mock('@services/api-service')
+jest.mock('@services/remote-api-service', () => ({
+  TOKEN_LOCAL_STORAGE_KEY: 'token-key',
+  URL: 'url',
+  getCharacterList: jest.fn(),
+  getCharacter: jest.fn(),
+  putCharacter: jest.fn()
+}))
+import * as RemoteApiService from '@services/remote-api-service'
 import { flattenCharacter, assembleCharacter } from '@state/middleware/middleware-utility'
 jest.mock('@state/middleware/middleware-utility')
 
@@ -9,7 +15,6 @@ import sut from './persistence.middleware'
 import { AppState } from '@state/default-state'
 import { PersonalData, Attributes, GearItem, Effect, Character, SpecialAttributes, CharacterIdentifier, Pic } from '@models'
 import { CharactersAction, ActiveCharacterAction, ApiErrorAction } from '@state/actions'
-import { number } from 'prop-types'
 
 type TestDispatch = Dispatch<AnyAction>
 type TestApi = MiddlewareAPI<TestDispatch>
@@ -18,7 +23,7 @@ interface ApiServiceMock {
   getCharacter: jest.Mock<Promise<Character>>,
   putCharacter: jest.Mock<Promise<{ message: string }>>
 }
-type FlattenMock = jest.Mock<undefined>
+type FlattenMock = jest.Mock<void>
 type AssembleMock = jest.Mock<Character>
 
 describe('persistence middleware', () => {
@@ -62,7 +67,7 @@ describe('persistence middleware', () => {
       dispatch: dispatchSpy
     }
     next = jest.fn() as Dispatch<AnyAction>
-    apiServiceMock = ApiService as any as ApiServiceMock
+    apiServiceMock = RemoteApiService as any as ApiServiceMock
     assembleMock = assembleCharacter as any as AssembleMock
     assembleMock.mockReturnValue(character)
     flattenMock = flattenCharacter as any as FlattenMock

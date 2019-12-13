@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import * as styles from './summary.scss'
 import { Character, Stat } from '@models'
-import * as utils from '@services/character-utilities'
+import * as utils from '@services/character-services'
 import ShowStat from '@components/show-stat'
 
 interface AdditionalDataBlockProps {
