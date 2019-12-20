@@ -1,5 +1,5 @@
 import { MiddlewareAPI, Dispatch, AnyAction } from 'redux'
-import * as RemoteApiService from '@services/remote-api-service'
+import * as PersistenceMediator from '@services/persistence-mediator-service'
 import { Action, CharactersAction, ActiveCharacterAction, ApiErrorAction } from '../../actions'
 import { Character, CharacterIdentifier } from '@models'
 import { assembleCharacter, flattenCharacter } from '../middleware-utility'
@@ -7,36 +7,31 @@ import { AppState } from '@state/default-state'
 
 function loadCharacters () {
   return (dispatch: Dispatch<AnyAction>) => {
-    RemoteApiService.getCharacterList()
+    PersistenceMediator.getCharacterList()
       .then(characters => {
         dispatch({
           type: CharactersAction.SET_CHARACTERS,
           payload: characters
         })
         dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
-      }, () => {
+      }, (err: PersistenceMediator.PersistenceError) => {
+        dispatch({
+          type: CharactersAction.SET_CHARACTERS,
+          payload: err.fallback as Character[]
+        })
         dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
   }
 }
 
-function conditionallySetCharacter (
-  character: Character,
-  dispatch: Dispatch<AnyAction>,
-  existingCharacter: CharacterIdentifier | null
-) {
-  if (!existingCharacter || character.updated > existingCharacter.updated) {
-    flattenCharacter(character, dispatch)
-  }
-}
-
-function loadCharacter (characterId: string, existingCharacter: CharacterIdentifier | null) {
+function loadCharacter (characterId: string) {
   return (dispatch: Dispatch<AnyAction>) => {
-    RemoteApiService.getCharacter(characterId)
-      .then(character => {
-        conditionallySetCharacter(character, dispatch, existingCharacter)
+    PersistenceMediator.getCharacter(characterId)
+      .then((character: Character) => {
+        flattenCharacter(character, dispatch)
         dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
-      }, () => {
+      }, (err: PersistenceMediator.PersistenceError) => {
+        flattenCharacter(err.fallback as Character, dispatch)
         dispatch({ type: ApiErrorAction.SET_API_ERROR })
       })
   }
@@ -44,10 +39,16 @@ function loadCharacter (characterId: string, existingCharacter: CharacterIdentif
 
 function persistActiveCharacter (character: Character) {
   return (dispatch: Dispatch<AnyAction>) => {
-    RemoteApiService.putCharacter(character.id, character)
+    PersistenceMediator.putCharacter(character)
       .then(
-        () => dispatch({ type: ApiErrorAction.SET_API_HEALTHY }),
-        () => dispatch({ type: ApiErrorAction.SET_API_ERROR })
+        () => {
+          dispatch({ type: ApiErrorAction.SET_API_HEALTHY })
+          dispatch({ type: CharactersAction.LOAD_CHARACTERS })
+        },
+        () => {
+          dispatch({ type: ApiErrorAction.SET_API_ERROR })
+          dispatch({ type: CharactersAction.LOAD_CHARACTERS })
+        }
       )
   }
 }
@@ -60,8 +61,7 @@ export default (api: MiddlewareAPI<Dispatch<AnyAction>, AppState>) => {
         persistActiveCharacter(character)(api.dispatch)
         break
       case ActiveCharacterAction.LOAD_CHARACTER:
-        const existingCharacter = api.getState().activeCharacter
-        loadCharacter((action as Action<ActiveCharacterAction, string>).payload, existingCharacter)(api.dispatch)
+        loadCharacter((action as Action<ActiveCharacterAction, string>).payload)(api.dispatch)
         break
       case CharactersAction.LOAD_CHARACTERS:
         loadCharacters()(api.dispatch)

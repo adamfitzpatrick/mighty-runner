@@ -1,7 +1,6 @@
 import { Character } from '@models'
 import * as RemoteApiService from '@services/remote-api-service'
 import * as LocalApiService from '@services/local-api-service'
-import { AcceptedMessage } from '@services/remote-api-service'
 
 export interface PersistenceError {
   status: number
@@ -59,7 +58,7 @@ export const getCharacter = async (id: string): Promise<Character | PersistenceE
   }
 }
 
-export const putCharacter = async (character: Character): Promise<AcceptedMessage | PersistenceError> => {
+export const putCharacter = async (character: Character): Promise<RemoteApiService.AcceptedMessage | PersistenceError> => {
   LocalApiService.putCharacter(character.id, character)
   try {
     return await RemoteApiService.putCharacter(character.id, character)

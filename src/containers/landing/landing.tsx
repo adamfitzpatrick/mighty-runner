@@ -19,7 +19,6 @@ function getCharacterSummaries (characters: Character[]) {
 export default function Landing (props: Props) {
   const dispatch = useDispatch()
   const characters = useSelector((state: AppState) => state.characters)
-  loadCharacterCreator(dispatch)('1')
 
   if (!characters) {
     loadCharactersCreator(dispatch)()

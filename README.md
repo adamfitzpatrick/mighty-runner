@@ -91,7 +91,7 @@ interface StatValue {
 
 ### Effect
 
-An **Effect** describes how one runner Stat can influence another.  For example, the muscle enhancement cyberware modifies a runner's agility attribute.  The cyberware would be entered as a **Gear** object which extends Stat.  An Effect would be added describing the effect that the cyberware has on the agility Stat, which a target that matches the **asEffectTarget** field in the Stat.  When the effective value of the agility Stat is calculated, it includes the value of the cyberware effect.  Effects can be marked as active or not to reflect equipment that can be turned off or destroyed as well as situational modifiers.  Additionally, Effects can target a specific field within the stat's value property or the overall value sum.
+An **Effect** describes how one runner Stat can influence another.  For example, the muscle enhancement cyberware modifies a runner's agility attribute.  The cyberware would be entered as a **Gear** object which extends Stat.  An Effect would be added describing the effect that the cyberware has on the agility Stat, with a target that matches the **asEffectTarget** field in the Stat.  When the effective value of the agility Stat is calculated, it includes the value of the cyberware effect.  Effects can be marked as active or not to reflect equipment that can be turned off or destroyed as well as situational modifiers.  Additionally, Effects can target a specific field within the stat's value property or the overall value sum.
 
 ```typescript
 {
@@ -187,7 +187,7 @@ In addition to the specific actions provided above, each element of the applicat
   - SET_ATTRIBUTES
   - UPDATE_ATTRIBUTE
 - specialAttributes:
-  - SET_ATTRIBUTES
+  - SET_SPECIAL_ATTRIBUTES
   - UPDATE_ATTRIBUTE
 - gear:
   - SET_GEAR

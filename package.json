@@ -83,6 +83,7 @@
     "globals": []
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "@types/rewire": "^2.5.28",
     "chai": "^4.2.0"
   },
