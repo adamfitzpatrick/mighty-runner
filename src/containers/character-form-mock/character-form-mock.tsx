@@ -7,7 +7,7 @@ import { AppState } from '@state/default-state'
 import { loadCharacterCreator } from '@state/actions'
 import { RouteComponentProps } from 'react-router'
 
-import PersonalData from '@containers/personal-data'
+import { PersonalDataMock } from '@containers'
 import Attributes from '@containers/attributes'
 import Gear from '@containers/gear'
 
@@ -65,7 +65,7 @@ export default function CharacterFormMock (props: CharacterFormMockProps) {
         <span>updated</span>
         <strong>{activeCharacter.updated}</strong>
       </div>
-      <PersonalData />
+      <PersonalDataMock />
       <Attributes />
       <Gear />
     </div>

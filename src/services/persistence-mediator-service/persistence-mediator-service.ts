@@ -32,10 +32,10 @@ function getLocalsArray (locals: LocalApiService.CharactersMap): Character[] {
 }
 
 function handleError (err: any, fallback?: Character | Character[] | null) {
-  return {
+  return Promise.reject({
     status: err.status,
     fallback
-  }
+  })
 }
 
 export const getCharacterList = async (): Promise<Character[] | PersistenceError> => {

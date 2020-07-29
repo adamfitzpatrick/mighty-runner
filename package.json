@@ -100,6 +100,7 @@
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/__mocks__/style-mock.ts",
       "@(assets|components|containers|services|state)/(.*)": "<rootDir>/src/$1/$2",
+      "@(assets|components|containers|services|state)": "<rootDir>/src/$1",
       "@models": "<rootDir>/models/"
     },
     "coverageThreshold": {

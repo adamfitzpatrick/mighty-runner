@@ -14,6 +14,7 @@ import { PersistenceError } from './persistence-mediator-service'
 
 describe('persistence mediator service', () => {
   let localCharacters: CharactersMap
+  let localCharacterArray: Character[]
   let remoteCharacters: Character[]
   let remoteApiMock: typeof remoteApiMockProvider
 
@@ -30,6 +31,7 @@ describe('persistence mediator service', () => {
         favorite: false
       } as Character
     } as CharactersMap
+    localCharacterArray = Object.keys(localCharacters).map(key => localCharacters[key])
     remoteCharacters = [{
       id: '1',
       updated: 0,
@@ -54,9 +56,10 @@ describe('persistence mediator service', () => {
     test('should return the local data as an error if the remote api returns an error', async () => {
       remoteApiMock.getCharacterList.mockRejectedValue({ status: 500 })
       return PersistenceMediatorService.getCharacterList()
+        .then(() => expect('Promise should not have been resolved').toBe(''))
         .catch((data: PersistenceError) => {
           expect(data.status).toBe(500)
-          expect(data.fallback).toEqual(localCharacters)
+          expect(data.fallback).toEqual(localCharacterArray)
         })
     })
 
@@ -109,6 +112,7 @@ describe('persistence mediator service', () => {
     test('should return the local response and error information if the remote api returns an error', async () => {
       remoteApiMock.getCharacter.mockRejectedValue({ status: 500 })
       return PersistenceMediatorService.getCharacter('2')
+        .then(() => expect('Promise should not have been resolved').toBe(''))
         .catch((data: PersistenceError) => {
           expect(data.status).toBe(500)
           expect(data.fallback).toEqual(localCharacters['2'])
@@ -137,6 +141,7 @@ describe('persistence mediator service', () => {
     test('should save to localStorage and return an error if the remote api is not available', async () => {
       remoteApiMock.putCharacter.mockRejectedValue({ status: 500 })
       return PersistenceMediatorService.putCharacter(updatedLocalCharacters['3'])
+        .then(() => expect('Promise should not have been fulfilled').toBe(''))
         .catch(() => {
           expect(remoteApiMock.putCharacter).toHaveBeenCalledWith('3', updatedLocalCharacters['3'])
           expect(localStorage.getItem('mighty_runner_characters')).toEqual(JSON.stringify(updatedLocalCharacters))

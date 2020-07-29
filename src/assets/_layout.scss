@@ -13,8 +13,6 @@ $safari-bottom-buffer: 112px;
 $default-border-radius: 0.5rem;
 $focus-indicator-shift: -0.25rem;
 
-$hex-image-aspect-ratio: 1.18;
-
 @mixin focusIndicator {
   /* width, height, border-radius and other rules will need to be specified on the implementing selector. */
   position: absolute;

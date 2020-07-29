@@ -8,6 +8,7 @@
             "@assets/*": [ "./src/assets/*" ],
             "@components/*": [ "./src/components/*" ],
             "@containers/*": [ "./src/containers/*" ],
+            "@containers": [ "./src/containers" ],
             "@routes/*": [ "./src/routes/*" ],
             "@services/*": [ "./src/services/*" ],
             "@state/*": [ "./src/state/*" ],

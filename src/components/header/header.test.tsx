@@ -15,4 +15,9 @@ describe('Header component', () => {
     sut = render(<Header text='Provided text' />)
     expect(sut.container.innerHTML).toContain('<h1 class=\"headerText\">Provided text</h1>')
   })
+
+  test('should render without positioning when static', () => {
+    sut = render(<Header notPositioned={true} />)
+    expect(sut.container.innerHTML).toContain('<header class=\"header static\"')
+  })
 })

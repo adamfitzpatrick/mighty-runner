@@ -6,10 +6,49 @@ import { setPersonalDataCreator, saveCharacterCreator } from '@state/actions'
 import Input, { InputType } from '@components/input'
 
 import * as styles from './personal-data.scss'
+import ShowStat from '@components/show-stat'
 
-// TODO Add remaining personal data items
+export function PersonalData () {
+  const personalData = useSelector<AppState, Models.PersonalData>(state => state.personalData!)
 
-export default function PersonalData () {
+  if (!personalData) { return null }
+
+  return (
+    <React.Fragment>
+      <p className={styles.description}>{personalData.description}</p>
+      <div className={styles.data}>
+        <ShowStat value={personalData.metatype} label='metatype' classes={styles.stat} />
+        <ShowStat value={personalData.ethnicity} label='ethnicity' classes={styles.stat} />
+        <ShowStat value={personalData.age} label='age' classes={styles.stat} />
+        <ShowStat value={personalData.gender} label='gender' classes={styles.stat} />
+        <ShowStat value={personalData.streetCred} label='street cred' classes={styles.stat} />
+        <ShowStat value={personalData.notoriety} label='notoriety' classes={styles.stat} />
+        <ShowStat
+          value={personalData.publicAwareness}
+          label='public awareness'
+          classes={[styles.stat, styles.span2]}
+        />
+        <ShowStat
+          value={personalData.karma}
+          label='karma'
+          classes={styles.stat}
+        />
+        <ShowStat
+          value={personalData.totalKarma}
+          label='Total Karma'
+          classes={styles.stat}
+        />
+        <ShowStat
+          value={personalData.nuyen}
+          label='Nuyen'
+          classes={[styles.stat, styles.span2]}
+        />
+      </div>
+    </React.Fragment>
+  )
+}
+
+export function PersonalDataMock () {
   const personalData = useSelector((state: AppState) => state.personalData)
   const dispatch = useDispatch()
   const setPersonalData = setPersonalDataCreator(dispatch)

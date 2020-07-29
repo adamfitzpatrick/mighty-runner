@@ -1,0 +1,13 @@
+@import '../../assets/layout';
+
+.detail {
+  display: block;
+
+  @media screen and (min-width: $medium-viewport-width-minimum) {
+    margin: 4rem;
+  }
+}
+
+.personalData {
+  display: grid;
+}

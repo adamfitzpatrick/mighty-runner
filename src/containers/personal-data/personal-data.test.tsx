@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { cleanup, fireEvent } from '@testing-library/react'
 import { renderWithRedux, RenderWithRedux } from '../../../utils/testing-render-with-redux'
 import * as Models from '@models'
-import PersonalData from '.'
+import { PersonalDataMock } from './personal-data'
 import { AppState } from '@state/default-state'
 
 describe('PersonalData container', () => {
@@ -42,7 +42,7 @@ describe('PersonalData container', () => {
       effects: null,
       apiError: false
     }
-    sut = renderWithRedux(<PersonalData />, appState)
+    sut = renderWithRedux(<PersonalDataMock />, appState)
   })
 
   test('should render correctly', () => {
@@ -51,14 +51,14 @@ describe('PersonalData container', () => {
 
   test('should render correctly when there is no personal data to show', () => {
     appState.personalData = null
-    sut = renderWithRedux(<PersonalData />, appState)
+    sut = renderWithRedux(<PersonalDataMock />, appState)
     expect(sut.container.innerHTML).toBe('')
   })
 
   test('should render with an empty string in place of an undefined data field', () => {
     delete appState.personalData!.name
     cleanup()
-    sut = renderWithRedux(<PersonalData />, appState)
+    sut = renderWithRedux(<PersonalDataMock />, appState)
     expect((sut.getByTestId('Name.input.component')as HTMLInputElement).value).toEqual('')
   })
 
